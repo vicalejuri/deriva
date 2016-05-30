@@ -1,7 +1,25 @@
+@font-face {
+  font-family: "Droid Sans Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/assets/droid-sans.ttf") format("truetype");
+  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
 /* Base Application Styles */
 body {
-  color: #fff;
-  background: #222;
+  color: rgb(178,178,178);
+  background: #000;
+  font-family: 'Droid Sans Mono', monospace;
+  font-size: 12px;
+}
+
+#app {
+  width: 100%;
+  display: flex;
+}
+#app > div {
+  margin: 0px auto;
 }
 
 .index img {

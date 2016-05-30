@@ -33,10 +33,18 @@ module.exports = {
       actions: `${defaultSettings.srcPath}/actions/`,
       components: `${defaultSettings.srcPath}/components/`,
       sources: `${defaultSettings.srcPath}/sources/`,
+      assets: `${defaultSettings.srcPath}/assets/`,
       stores: `${defaultSettings.srcPath}/stores/`,
       styles: `${defaultSettings.srcPath}/styles/`,
       config: `${defaultSettings.srcPath}/config/` + process.env.REACT_WEBPACK_ENV
     }
+  },
+  postcss: function() {
+    return [
+      require('autoprefixer')({
+        browsers: ['last 2 versions', 'ie >= 8']
+      })
+    ];
   },
   module: {}
 };
