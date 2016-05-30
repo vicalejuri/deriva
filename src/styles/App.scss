@@ -26,7 +26,7 @@ a {
 /*
  * Forms
  */
-textarea, input[type="password"], input[type="text"] {
+textarea, input[type="email"], input[type="password"], input[type="text"] {
   border: 1px solid #474747;
   color: #b2b2b2;
   background-color: #242424;
@@ -50,71 +50,6 @@ textarea, input[type="password"], input[type="text"] {
 }
 
 
-
-
-
-/*
- * header-nav
- *
- */
-.header-nav {
-  z-index: 1000;
-  width: 100%;
-  margin: 0px;
-  padding: 0px;
-  height: 44px;
-  display: inline-block;
-  border-bottom: 1px solid #474747;
-}
-
-.header-nav .logo {
-  float: left;
-  left: 0;
-  height: 43px;
-}
-
-.header-nav .logo h1 {
-  margin-left: 0;
-  white-space: nowrap;
-  display: inline-block;
-  margin: 0px;
-  padding: 10px;
-  height: 42px;
-  color: #7f7f7f;
-  border-right: 1px solid #242424;
-}
-
-.header-nav .nav {
-  width: 50%;
-  display: flex;
-  flex-direction: row-reverse;
-  float: right;
-  height: 100%;
-}
-.header-nav .nav a {
-  padding: 10px;
-  border: 1px solid #242424;
-  border-top: 0px solid #474747; border-bottom: 1px solid #474747;
-  height: 44px;
-
-  &.popover-active {
-    border-bottom: 1px solid #000;
-  }
-  &.active {
-    background-color: #fff;
-    color: #000;
-  }
-}
-
-.header-nav .menu-popover {
-  position: absolute;
-  right: 0px;
-  top: 44px;
-  visibility: hidden;
-}
-.header-nav .menu-popover.active {
-  visibility: visible;
-}
 
 
 .index img {

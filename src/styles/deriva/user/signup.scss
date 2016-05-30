@@ -1,41 +1,40 @@
 .signup-component {
 
   background-color: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
   min-width: 300px;
   max-width: 40%;
   padding: 10px 30px 20px 30px;
   margin: 40px auto 30px auto;
   border: 1px solid #474747;
+
+  > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > div {
+        flex: auto;
+        margin: 0px auto;
+        margin-bottom: 10px;
+
+        display: flex;
+
+        &.title , &.terms { display: block; }
+        &.terms { margin-top: 20px; }
+    }
+
+    > div.submit {
+      align-self: center;
+    }
+
+  }
 }
-
-.signup-component > div {
-  flex: auto;
-  margin: 0px auto;
-  margin-bottom: 10px;
-
-  display: flex;
-}
-
-
-.signup-component > div.title ,
-.signup-component > div.terms {
-  display: block;
-}
-.signup-component > div.terms {
-  margin-top: 20px;
-}
-
 
 .signup-component input[type="text"],
-.signup-component input[type="password"] {
+.signup-component input[type="password"],
+.signup-component input[type="email"] {
   width: 300px;
-}
-.signup-component > div.submit {
-  align-self: center;
 }
 .signup-component input[type="submit"] {
   background: #37a893;
@@ -49,5 +48,23 @@
 
   &:hover {
     background-color: #47c893;
+  }
+}
+
+
+
+/*
+ * Sign up success / error
+ */
+.signup-component.failed {
+  form > div.terms {
+    color: #f00;
+  }
+}
+
+
+.signup-component.success {
+  form > div.terms {
+    color: #0fb3d0;
   }
 }

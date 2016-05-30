@@ -1,9 +1,8 @@
 .login-component {
 
-  background-color: transparent;
+  background-color: #000;
   display: flex;
   flex-direction: column;
-
   min-width: 280px;
   padding: 10px;
   margin: 0px auto;
@@ -44,5 +43,24 @@
   cursor: pointer;
   &:hover {
     background-color: #47c893;
+  }
+}
+
+
+
+
+/*
+ * Login failed
+ */
+.login-component.failed {
+  > div.message {
+    color: #f00;
+  }
+}
+
+
+.login-component.success {
+  > div.message {
+    color: #0fb3d0;
   }
 }
