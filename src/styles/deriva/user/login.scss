@@ -1,0 +1,48 @@
+.login-component {
+
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+
+  min-width: 280px;
+  padding: 10px;
+  margin: 0px auto;
+  border: 1px solid #474747;
+  border-top: 0px;
+}
+
+.login-component > div {
+  flex: auto;
+  margin: 0px auto;
+  margin-top: 10px;
+
+  display: flex;
+
+  &:first-child { margin-top: 0px; }
+}
+
+.login-component > div > label {
+  min-width: 100;
+}
+
+
+.login-component input[type="text"],
+.login-component input[type="password"] {
+  width: 200px;
+}
+.login-component > div.submit {
+  align-self: center;
+}
+.login-component input[type="submit"] {
+  background: #37a893;
+  color: #efefef;
+  justify-content: center;
+  margin-right: 10px;
+  padding: 5px;
+  outline-width: 0px;
+  border: 0px;
+  cursor: pointer;
+  &:hover {
+    background-color: #47c893;
+  }
+}

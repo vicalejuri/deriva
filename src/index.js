@@ -16,11 +16,14 @@ import App , {DefaultComponent} from 'components/Main';
 import WatchDoc from 'components/deriva/WatchDoc.js';
 import ListDoc from 'components/deriva/ListDoc.js';
 
+import SignupComponent from 'components/deriva/user/signup.js';
+
 try {
 ReactDOM.render( (<Router history={browserHistory}>
 <Route path="/" component={App}>
   <Route path="/list" component={ListDoc} />
   <Route path="/watch/:docId" component={WatchDoc} />
+  <Route path="/signup" component={SignupComponent} />
   <Route path="*" component={DefaultComponent} />
 </Route>
 </Router>

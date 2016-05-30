@@ -1,0 +1,134 @@
+@font-face {
+  font-family: "Droid Sans Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/assets/droid-sans.ttf") format("truetype");
+  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+/* Base Application Styles */
+* { box-sizing: border-box; }
+body {
+  color: rgb(178,178,178);
+  background: #000;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: 'Droid Sans Mono', monospace;
+  font-size: 12px;
+}
+
+a {
+  font-weight: bold;
+  color: #fff;
+}
+
+
+/*
+ * Forms
+ */
+textarea, input[type="password"], input[type="text"] {
+  border: 1px solid #474747;
+  color: #b2b2b2;
+  background-color: #242424;
+  border-radius: 0;
+  text-rendering: optimizeLegibility;
+  padding: 5px;
+  outline-width: 2px;
+}
+
+
+
+
+
+#app {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+}
+.canvas {
+  overflow: hidden;
+}
+
+
+
+
+
+/*
+ * header-nav
+ *
+ */
+.header-nav {
+  z-index: 1000;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  height: 44px;
+  display: inline-block;
+  border-bottom: 1px solid #474747;
+}
+
+.header-nav .logo {
+  float: left;
+  left: 0;
+  height: 43px;
+}
+
+.header-nav .logo h1 {
+  margin-left: 0;
+  white-space: nowrap;
+  display: inline-block;
+  margin: 0px;
+  padding: 10px;
+  height: 42px;
+  color: #7f7f7f;
+  border-right: 1px solid #242424;
+}
+
+.header-nav .nav {
+  width: 50%;
+  display: flex;
+  flex-direction: row-reverse;
+  float: right;
+  height: 100%;
+}
+.header-nav .nav a {
+  padding: 10px;
+  border: 1px solid #242424;
+  border-top: 0px solid #474747; border-bottom: 1px solid #474747;
+  height: 44px;
+
+  &.popover-active {
+    border-bottom: 1px solid #000;
+  }
+  &.active {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+.header-nav .menu-popover {
+  position: absolute;
+  right: 0px;
+  top: 44px;
+  visibility: hidden;
+}
+.header-nav .menu-popover.active {
+  visibility: visible;
+}
+
+
+.index img {
+  margin: 40px auto;
+  border-radius: 4px;
+  display: block;
+  background: #fff;
+}
+
+.index .notice {
+  margin: 20px auto;
+  padding: 15px 0;
+  text-align: center;
+  border: 1px solid #000;
+  border-width: 1px 0;
+  background: #666;
+}
