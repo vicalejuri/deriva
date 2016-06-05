@@ -6,10 +6,10 @@ import React from 'react';
 import classNames from 'classnames';
 
 /* App */
-import WatchDoc from 'components/deriva/WatchDoc.js';
-import ListDoc from 'components/deriva/ListDoc.js';
+import WatchDoc from 'components/deriva/docs/WatchDoc.js';
+import ListDoc from 'components/deriva/docs/ListDoc.js';
+import UploadDoc from 'components/deriva/docs/UploadDoc.js';
 import LoginComponent from 'components/deriva/user/login.js';
-
 /*
  * The header with support for popover
  */

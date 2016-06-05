@@ -11,7 +11,7 @@ require('styles/deriva/user/login.scss');
 
 let LoginComponent = React.createClass({
   getInitialState() {
-    return { 'success': false, 'failed': false, 'message': ''}
+    return { 'success': false, 'failed': false, 'message': false}
   },
 
   login() {

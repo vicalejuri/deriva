@@ -1,0 +1,7 @@
+deriva
+======
+
+	We use parse backend server (https://github.com/ParsePlatform/Parse-Server), so dont
+	forget to start it before.
+
+	$ parse-server ./cfg/parse.json

@@ -11,7 +11,7 @@ require('styles/deriva/user/signup.scss');
 
 let SignupComponent = React.createClass({
   getInitialState() {
-    return { success: false, failed: false, message: ''}
+    return { success: false, failed: false, message: false}
   },
 
   signUp(ev) {

@@ -4,9 +4,9 @@ import _ from 'lodash';
 import React from 'react';
 import Parse from 'parse';
 
-import Player from './player/Player';
+import Player from '../player/Player';
 
-require('styles/deriva/Watch.scss');
+require('styles/deriva/docs/Watch.scss');
 
 let WatchComponent = React.createClass({
   propTypes: {

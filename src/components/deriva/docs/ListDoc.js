@@ -5,7 +5,7 @@ import Parse from 'parse';
 
 import {  Link } from 'react-router';
 
-require('styles/deriva/List.scss');
+require('styles/deriva/docs/List.scss');
 
 let ListComponent = React.createClass({
   getInitialState() {

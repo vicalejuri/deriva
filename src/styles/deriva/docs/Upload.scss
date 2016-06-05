@@ -1,0 +1,88 @@
+/* upload css */
+.upload-component {
+
+  background-color: #000;
+
+  min-width: 300px;
+  max-width: 80%;
+  padding: 10px 30px 20px 30px;
+  margin: 40px auto 30px auto;
+  border: 1px solid #474747;
+
+  > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > div {
+        flex: auto;
+        margin: 0px auto;
+        margin-bottom: 10px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        &.url {
+          input[type="button"] {
+            background: #37a893;
+            color: #efefef;
+            justify-content: center;
+            margin-right: 10px;
+            padding: 5px;
+            outline-width: 0px;
+            border: 0px;
+            cursor: pointer;
+          }
+        }
+
+        label {
+          min-width: 50px;
+        }
+        &.terms { margin-top: 20px; }
+    }
+
+    > div.submit {
+      align-self: center;
+    }
+
+  }
+
+  input[type="text"], {
+    min-width: 300px;
+    width: 80%;
+  }
+  input[type="submit"] {
+    background: #37a893;
+    color: #efefef;
+    justify-content: center;
+    margin-right: 10px;
+    padding: 5px;
+    outline-width: 0px;
+    border: 0px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #47c893;
+    }
+  }
+}
+
+
+
+/*
+ * Sign up success / error
+ */
+.upload-component.failed {
+  form > div.terms {
+    color: #f00;
+  }
+}
+
+
+.upload-component.success {
+  form > div.terms {
+    color: #0fb3d0;
+  }
+}

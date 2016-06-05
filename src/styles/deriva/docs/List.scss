@@ -1,0 +1,19 @@
+.list-page {
+  width: 100%;
+  text-align: center;
+}
+
+.list-component {
+  min-width: 300px;
+  max-width: 40%;
+
+  margin: 40px auto;
+  border: 1px solid #474747;
+
+  th , td {
+    padding: 10px;
+    border-right: 1px solid #474747;
+
+    &:last-child { border-right: 0; }
+  }
+}

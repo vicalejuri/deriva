@@ -20,9 +20,6 @@ export let DefaultComponent = React.createClass({
 
 /* App */
 import HeaderComponent from 'components/Header.js';
-import WatchDoc from 'components/deriva/WatchDoc.js';
-import ListDoc from 'components/deriva/ListDoc.js';
-import LoginComponent from 'components/deriva/user/login.js';
 
 let AppComponent = React.createClass({
   render() {

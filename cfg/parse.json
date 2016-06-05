@@ -1,4 +1,6 @@
 {
   "appId": "aderiva",
-  "masterKey": "6f55b57313cab06adf14de757d2549e4"
+  "masterKey": "6f55b57313cab06adf14de757d2549e4",
+  "cloud": "./parse-cloud/main.js",
+  "serverURL": "http://localhost:1337/parse"
 }
