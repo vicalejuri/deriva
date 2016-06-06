@@ -76,6 +76,7 @@
     "parse": "^1.8.5",
     "parse-server": "^2.2.10",
     "pouchdb": "^5.3.2",
+    "pouchdb-authentication": "^0.5.1",
     "react": "^15.1.0",
     "react-dom": "^15.0.0",
     "react-redux": "^4.4.5",

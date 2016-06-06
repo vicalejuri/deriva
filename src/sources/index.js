@@ -1,7 +1,7 @@
-import Documentary from './docs.js';
+import { Doc , Channel } from './docs.js';
 
 let dataSources = {};
 
-dataSources.Documentary = Documentary;
+dataSources.Doc = Doc;
 
 export default dataSources;

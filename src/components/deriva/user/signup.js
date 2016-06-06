@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import Parse from 'parse';
 
 import {  Link } from 'react-router';
 import _ from 'lodash';
@@ -18,29 +17,30 @@ let SignupComponent = React.createClass({
     // cancel form submission
     ev.preventDefault();
 
-    let credentials = {email: this.refs.email.value,
-                       username: this.refs.username.value,
+    let credentials = {username: this.refs.username.value,
                        password: this.refs.password.value }
-    let user = new Parse.User();
-    _.forEach(credentials, (v,k) => {
-      console.log(k," = ", v);
-      user.set( k , v );
-    });
+    let metadata = {email: this.refs.email.value};
+    console.log('signup ', credentials )
 
-    user.signUp( null, {
-      success: (user) => {
-        this.setState({success: true, failed: false,
-                       message: `Welcome ${ user.get('username') }`});
-        // dispatch('signedup', this.state )
-        console.log("Sign up successfully!")
-      },
-      error: (e) => {
-        this.setState({success: false, failed: true,
-                        message: (e.message || "Permission DENIED. Youre not allowed.")});
-        console.error("signup", e.code, e.message);
-      }
-    });
+    window.remote_db.signup(credentials.username, credentials.password, {metadata},
+       (err, response) => {
+         if(err){
+           let usernameConflict = (err.name === 'conflict');
+           let invalidUsername = (err.name === 'forbidden');
 
+           let msg = (usernameConflict ? 'Username already taken' :
+                      invalidUsername ? 'Invalid username' :
+                      'Cosmic rays are too strong!');
+
+          console.log('signup','error',err);
+           this.setState({success: false, failed: true, message: msg});
+         } else {
+           console.log('signup','success');
+           this.setState({success: true, failed: false, message:
+                          `Welcome ${credentials.username}`});
+           // todo: Dispatch login
+         }
+    });
   },
 
 

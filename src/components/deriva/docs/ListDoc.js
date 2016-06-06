@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Parse from 'parse';
+import _ from 'lodash'
 
 import {  Link } from 'react-router';
 
@@ -13,17 +13,19 @@ let ListComponent = React.createClass({
   },
 
   componentDidMount() {
-    console.log("list query");
-    (new Parse.Query('Documentary')).find().then( (results) => {
-      console.log(`Fetched : ${results.length} `);
-      this.setDocuments( results );
-    }, (e) => {
-      console.error(e);
-      this.setState({error: true});
+    window.remote_db.query( 'docs/by_id', {include_docs: true})
+    .then( (result) => {
+      let docs = _.map(result.rows, (v,k) => {
+        return v.doc;
+      });
+      this.setDocuments(docs);
+    }).catch(function (err) {
+      // handle any errors
     });
   },
 
   setDocuments(docs) {
+    console.log(docs);
     this.setState({docs});
   },
 
@@ -39,9 +41,9 @@ let ListComponent = React.createClass({
               <tbody>
                 {this.state.docs.map( (doc, i) =>
                   <tr>
-                  <td><Link to={`/watch/${doc.id}`} >{doc.id}</Link></td>
-                  <td>{doc.get('title')}</td>
-                  <td>{doc.get('url')}</td>
+                  <td><Link to={`/watch/${doc._id}`} >{doc._id}</Link></td>
+                  <td>{doc.data.title}</td>
+                  <td>{doc.data.url}</td>
                   </tr>
                 )}
               </tbody>

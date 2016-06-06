@@ -40,6 +40,13 @@
         label {
           min-width: 50px;
         }
+
+        &.embed-preview {
+          > div {
+            width: 100%
+          }
+        }
+
         &.terms { margin-top: 20px; }
     }
 

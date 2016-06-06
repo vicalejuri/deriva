@@ -2,7 +2,7 @@
 
 import _ from 'lodash';
 import React from 'react';
-import Parse from 'parse';
+// import Parse from 'parse';
 
 import Player from '../player/Player';
 
@@ -15,30 +15,31 @@ let WatchComponent = React.createClass({
 
   getInitialState() {
     let docId =  (this.props.docId || this.props.params.docId || 0);
-    return { docId , documentary: {}}
-  },
-
-  getDefaultProps() {
-    return {
-      error: false,
-      loaded: false
-    };
+    return { docId , doc: {}, error: false, loaded: false}
   },
 
   componentDidMount() {
-    (new Parse.Query('Documentary')).get(this.state.docId).then( (doc) => {
-      console.log(`Fetched doc: ${doc.id} `,  doc.attributes );
-      let newProps = _.extend( {documentary: doc.attributes }, {loaded: true});
-      this.setDocumentary( newProps );
-    }, (e) => {
-      console.error(e);
+    window.remote_db.get(this.state.docId)
+    .then( (doc) => {
+      //this.setDocumentary( doc )
+      //this.setState({loaded: true});
+    }).catch( (err) => {
+      console.error(err);
       this.setState({error: true});
     });
+    // (new Parse.Query('Documentary')).get(this.state.docId).then( (doc) => {
+    //   console.log(`Fetched doc: ${doc.id} `,  doc.attributes );
+    //   let newProps = _.extend( {documentary: doc.attributes }, {loaded: true});
+    //   this.setDocumentary( newProps );
+    // }, (e) => {
+    //   console.error(e);
+    //   this.setState({error: true});
+    // });
   },
 
   setDocumentary(doc) {
+    console.log(doc);
     this.setState(doc);
-    this.setProps({loaded: true});
   },
 
   render() {
@@ -54,10 +55,10 @@ let WatchComponent = React.createClass({
     let WatchComponent = (
       <div>
           <header>
-            <h1>{this.state.docId} - {this.state.documentary.title}</h1>
+            <h1>{this.state.docId} - {this.state.doc.data.title}</h1>
           </header>
-          <Player url={this.state.documentary.url}
-                  html={this.state.documentary.html} />
+          <Player url={this.state.doc.data.url}
+                  html={this.state.doc.data.html} />
           <section className="comments">
             Comments:
           </section>

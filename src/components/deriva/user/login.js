@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import Parse from 'parse';
 
 import {  Link } from 'react-router';
 
@@ -18,18 +17,18 @@ let LoginComponent = React.createClass({
     let credentials = {u: this.refs.username.value, p: this.refs.password.value};
     console.log("login", credentials.u, credentials.p);
 
-    Parse.User.logIn( credentials.u , credentials.p , {
-      success: (user) => {
-        // do stuff
-        this.setState({success: true, failed: false,
-                       message: `Hello ${user.get('username')}`});
-        // dispatch 'loggedin'
-      },
-      error: (user,error) => {
-        this.setState({failed: true, message: error.message});
-        console.error(error.code, error.message);
-      }
+    window.remote_db.login( credentials.u, credentials.p,
+      (err, response) => {
+        if(err){
+          console.log('login','error',err);
+          this.setState({success: false, failed: true,
+                         message: err.message});
+        } else {
+          this.setState({success: true, failed: false,
+                         message: `Hello ${response.name}`});
+        }
     });
+
   },
 
   render() {
@@ -47,8 +46,7 @@ let LoginComponent = React.createClass({
              <div className="submit">
               <input type="submit" ref="submit" ref="submit" value="Acessar >" onClick={this.login}/>
              </div>
-            </div>
-    );
+            </div>);
   }
 });
 
