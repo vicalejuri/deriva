@@ -2,7 +2,6 @@
 
 import _ from 'lodash';
 import React from 'react';
-// import Parse from 'parse';
 
 import Player from '../player/Player';
 
@@ -43,14 +42,27 @@ let WatchComponent = React.createClass({
     </div>);
 
     let WatchComponent = () => {
-      console.log(this.state);
       return (<div>
           <header>
-            <h1>{this.state.docId} - {this.state.doc.data.title}</h1>
+            <h1>{this.state.doc.data.title}</h1>
           </header>
           <Player url={this.state.doc.data.url}
                   html={this.state.doc.data.oembed.html} />
-
+          <section className="info">
+            <nav className="nav-group">
+              <a className="nav-group-item active">
+                Title
+                <span className="icon icon-home"></span>
+              </a>
+              <span className="nav-group-item">
+                URL
+              </span>
+            </nav>
+            <div className="group">
+              <div>{this.state.doc.data.title}</div>
+              <div>{this.state.doc.data.url}</div>
+            </div>
+          </section>
       </div>);
     };
 

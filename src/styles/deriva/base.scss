@@ -8,6 +8,10 @@
 
     transition: all $timing ease-in-out;
 }
+.subarea {
+  background-color: $toolbar-border-color;
+  color: $default-color;
+}
 
 
 @font-face {

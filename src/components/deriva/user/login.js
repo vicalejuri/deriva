@@ -1,16 +1,12 @@
-'use strict';
-
-import React from 'react';
+import React , {PropTypes} from 'react';
 
 import {  Link } from 'react-router';
-
 import classNames from 'classnames';
 
 require('styles/deriva/user/login.scss');
-
 let LoginComponent = React.createClass({
-  getInitialState() {
-    return { 'success': false, 'failed': false, 'message': false}
+  propTypes: {
+    user: PropTypes.object.isRequired
   },
 
   login(ev) {
@@ -18,8 +14,9 @@ let LoginComponent = React.createClass({
     console.log("login", credentials.u, credentials.p);
 
     ev.preventDefault();
-
-    window.remote_db.login( credentials.u, credentials.p,
+    debugger;
+    this.props.actions.login(credentials);
+    /*
       (err, response) => {
         if(err){
           console.log('login','error',err);
@@ -31,15 +28,15 @@ let LoginComponent = React.createClass({
                          message: `Hello ${response.name}`});
         }
     });
-
+    */
   },
 
   render() {
-    let login_failed = this.state.failed;
-    let login_success = this.state.success;
+    let login_failed = this.props.user.error;
+    let login_success = this.props.user.authenticated;
     let login_classes = {'success': login_success, 'failed': login_failed};
     return (<form className={classNames('login-component box',login_classes)} onSubmit={this.login}>
-             <div className="message">{this.state.message}</div>
+             <div className="message">{this.props.user.message}</div>
              <div className="form-group">
                   <input type="text" ref="username" className="form-control" id="username" placeholder="Usuário"/>
              </div>
@@ -56,8 +53,19 @@ let LoginComponent = React.createClass({
 
 LoginComponent.displayName = 'Deriva.user.LoginComponent';
 
-// Uncomment properties you need
-// WatchComponent.propTypes = {};
-// WatchComponent.defaultProps = {};
+
+// Connect to redux store
+import * as allActions from 'actions'
+import { bindActionCreators } from 'redux'
+
+import { connect } from 'react-redux'
+import { login as Login } from 'actions';
+
+LoginComponent = connect( (state) => {
+  return {user: state.user}
+}, (dispatch) => {
+  return { actions: bindActionCreators(allActions, dispatch) }
+})(LoginComponent);
+
 
 export default LoginComponent;

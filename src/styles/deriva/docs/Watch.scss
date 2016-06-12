@@ -4,6 +4,32 @@
 .watch-component {
   min-width: 300px;
   max-width: 80%;
-  padding: $padding $padding-more;
   margin: $padding-more auto;
+  padding: 0;
+
+  header, section {
+    padding: $padding $padding-more;
+  }
+
+  .info {
+    padding: 0;
+    background: #000;
+    color: #fff;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+
+    .nav-group {
+      width: 20%;
+      background-color: $chrome-color;
+    }
+
+    .group {
+      width: 80%;
+
+      div {
+        padding: 2px 10px 2px 25px;
+      }
+    }
+  }
 }

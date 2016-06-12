@@ -33,6 +33,7 @@ module.exports = {
     alias: {
       libs: `${defaultSettings.srcPath}/libs/`,
       actions: `${defaultSettings.srcPath}/actions/`,
+      reducers: `${defaultSettings.srcPath}/reducers/`,
       components: `${defaultSettings.srcPath}/components/`,
       models: `${defaultSettings.srcPath}/models/`,
       assets: `${defaultSettings.srcPath}/assets/`,

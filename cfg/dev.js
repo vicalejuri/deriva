@@ -9,14 +9,16 @@ let defaultSettings = require('./defaults');
 let BowerWebpackPlugin = require('bower-webpack-plugin');
 
 let config = Object.assign({}, baseConfig, {
-  entry: [
-    'webpack-dev-server/client?http://127.0.0.1:' + defaultSettings.port,
-    'webpack/hot/only-dev-server',
-    './src/index'
-  ],
+  entry: {
+    'app': ['webpack-dev-server/client?http://127.0.0.1:' + defaultSettings.port,
+            'webpack/hot/only-dev-server',
+            './src/index'],
+    'vendor': ['lodash','react','pouchdb','webtorrent']
+  },
   cache: true,
   devtool: 'eval-source-map',
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin("vendor","vendor.bundle.js"),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new BowerWebpackPlugin({
