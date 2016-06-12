@@ -2,6 +2,11 @@
 const path = require('path');
 const srcPath = path.join(__dirname, '/../src');
 const dfltPort = 8000;
+
+var webpack = require('webpack');
+var postcssImport = require('postcss-import');
+var autoPrefixer = require('autoprefixer');
+
 function getDefaultModules() {
   return {
     preLoaders: [{
@@ -11,27 +16,27 @@ function getDefaultModules() {
       }],
     loaders: [
       {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
         test: /\.css$/,
-        loader: 'style-loader!css-loader!postcss-loader'
+        loader: 'style-loader!css-loader!postcss-loader?sourceMap'
       },
       {
         test: /\.sass/,
-        loader: 'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+        loader: 'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&indentedSyntax&sourceMap'
       },
       {
         test: /\.scss/,
-        loader: 'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded'
+        loader: 'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&sourceMap'
       },
       {
-        test: /\.less/,
-        loader: 'style-loader!css-loader!postcss-loader!less-loader'
+          test   : /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+          loader : 'file-loader'
       },
       {
-        test: /\.styl/,
-        loader: 'style-loader!css-loader!postcss-loader!stylus-loader'
-      },
-      {
-        test: /\.(png|jpg|gif|woff|woff2)$/,
+        test: /\.(png|jpg|gif)$/,
         loader: 'url-loader?limit=8192'
       },
       {
@@ -47,6 +52,7 @@ module.exports = {
   port: dfltPort,
   getDefaultModules: getDefaultModules,
   postcss: function () {
-    return [];
+    return [postcssImport({ addDependencyTo: webpack}),
+            autoprefixer({   browsers: ['last 2 versions', 'ie >= 8' ]}) ]
   }
 };

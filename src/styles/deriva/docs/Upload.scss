@@ -1,13 +1,13 @@
+@import "~styles/photon/variables.scss";
+
 /* upload css */
 .upload-component {
 
-  background-color: #000;
-
-  min-width: 300px;
+  min-width: 400px;
   max-width: 80%;
-  padding: 10px 30px 20px 30px;
-  margin: 40px auto 30px auto;
-  border: 1px solid #474747;
+  width: 60%;
+  padding: $padding $padding-more;
+  margin: $padding-more auto;
 
   > form {
     display: flex;
@@ -29,9 +29,9 @@
             background: #37a893;
             color: #efefef;
             justify-content: center;
-            margin-right: 10px;
             padding: 5px;
             outline-width: 0px;
+            margin: 0px $padding;
             border: 0px;
             cursor: pointer;
           }
@@ -58,13 +58,12 @@
 
   input[type="text"], {
     min-width: 300px;
-    width: 80%;
+    width: 300%;
   }
   input[type="submit"] {
     background: #37a893;
     color: #efefef;
     justify-content: center;
-    margin-right: 10px;
     padding: 5px;
     outline-width: 0px;
     border: 0px;
@@ -92,4 +91,26 @@
   form > div.terms {
     color: #0fb3d0;
   }
+}
+
+
+
+
+
+
+/*
+ * media queries
+ */
+@media (max-width: 460px) {
+
+.upload-component {
+  min-width: 360px;
+
+  input[type="text"], {
+    min-width: auto;
+  }
+}
+
+
+
 }

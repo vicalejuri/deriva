@@ -7,11 +7,11 @@ import {  Link } from 'react-router';
 import classNames from 'classnames';
 
 import utils from 'utils/index.js';
-import dataModels from 'models/index.js';
+import dataSources from 'sources/index.js';
 
 require('styles/deriva/docs/Upload.scss');
 
-let UploadComponent = React.createClass({
+let ProfileComponent = React.createClass({
   getInitialState() {
     return { success: false, failed: false, message: false,
              url: false,
@@ -50,7 +50,7 @@ let UploadComponent = React.createClass({
                      provider_name: this.state.oembed.provider_name,
                      oembed: this.state.oembed }
 
-    let doc = new dataModels.Doc(doc_props);
+    let doc = new dataSources.Doc(doc_props);
     window.remote_db.put( doc ).then( () => {
       console.log('uploaddoc',doc._id, 'OK');
       this.setState({success: true, failed: false,
@@ -69,7 +69,7 @@ let UploadComponent = React.createClass({
             { this.state.oembed ? (
               <div className="embed-preview"
                     dangerouslySetInnerHTML={this.embed(this.state.oembed.html)} />)
-              : (<p>🎦</p>) }
+              : (<p>💢</p>) }
 
               <div className="url form-group">
                 <input type="text" className="form-control" ref="url" id="URL" placeholder="URL"/>

@@ -1,12 +1,11 @@
+@import "~styles/photon/variables.scss";
+
 .signup-component {
-
-  background-color: #000;
-
   min-width: 300px;
   max-width: 40%;
   padding: 10px 30px 20px 30px;
   margin: 40px auto 30px auto;
-  border: 1px solid #474747;
+  border: 1px solid $border-color;
 
   > form {
     display: flex;
@@ -31,9 +30,9 @@
   }
 }
 
-.signup-component input[type="text"],
-.signup-component input[type="password"],
-.signup-component input[type="email"] {
+.signup-component #username,
+.signup-component #password,
+.signup-component #email {
   width: 300px;
 }
 .signup-component input[type="submit"] {

@@ -1,0 +1,47 @@
+.torrent-component {
+  margin: 0px auto;
+  width: 540px;
+  min-height: 180px;
+
+  border: 1px solid #1b1b1b;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  transition: all 0.25s ease-out;
+
+  -webkit-perspective: 1300px;
+	perspective: 1300px;
+
+  &.loading {
+    background-image: url(/assets/components/preloader.gif);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &.loaded {
+    -webkit-transform-style: preserve-3d;
+  	transform-style: preserve-3d;
+  	-webkit-transform: translateZ(400px) translateY(300px) rotateX(-90deg);
+  	transform: translateZ(400px) translateY(300px) rotateX(-90deg);
+  	-webkit-animation: fallPerspective .8s ease-in-out forwards;
+  	animation: fallPerspective .8s ease-in-out forwards;
+
+    label.msg {
+      display: none;
+    }
+  }
+
+  &.timeout {
+    background-image: none;
+    background-color: #f00;
+  }
+
+  label.magnet, label.file {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}

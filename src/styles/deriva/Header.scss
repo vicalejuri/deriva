@@ -1,3 +1,6 @@
+@import "~styles/photon/variables.scss";
+
+$menu-height: 44px;
 /*
  * header-nav
  *
@@ -7,7 +10,7 @@
   width: 100%;
   margin: 0px;
   padding: 0px;
-  height: 44px;
+  height: $menu-height;
   display: inline-block;
   border-bottom: 1px solid #474747;
 }
@@ -23,39 +26,40 @@
   white-space: nowrap;
   display: inline-block;
   margin: 0px;
-  padding: 10px;
-  height: 42px;
-  color: #7f7f7f;
-  border-right: 1px solid #242424;
+  padding: $padding;
+  height: $menu-height - 2;
 }
 
 .header-nav .nav {
   width: 50%;
   display: flex;
+  align-items: center;
   flex-direction: row-reverse;
+  margin-right: $padding;
   float: right;
   height: 100%;
 }
 .header-nav .nav a {
   padding: 10px;
-  border: 1px solid #242424;
-  border-top: 0px solid #474747; border-bottom: 1px solid #474747;
-  height: 44px;
+  // border: 1px solid #242424;
+  // border-top: 0px solid #474747; border-bottom: 1px solid #474747;
 
   &.popover-active {
-    border-bottom: 1px solid #000;
+    // border-bottom: 1px solid #000;
   }
   &.active {
-    background-color: #fff;
-    color: #000;
+    // background-color: #fff;
+    // color: #000;
   }
 }
 
 .header-nav .menu-popover {
   position: absolute;
   right: 0px;
-  top: 44px;
+  top: $menu-height;
   visibility: hidden;
+  opacity: 0;
+  z-index: $zmenu - 1;
 }
 .header-nav .menu-popover.active {
   visibility: visible;

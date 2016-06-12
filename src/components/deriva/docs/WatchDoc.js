@@ -21,53 +21,43 @@ let WatchComponent = React.createClass({
   componentDidMount() {
     window.remote_db.get(this.state.docId)
     .then( (doc) => {
-      //this.setDocumentary( doc )
-      //this.setState({loaded: true});
+      this.setDocumentary( doc )
     }).catch( (err) => {
       console.error(err);
       this.setState({error: true});
     });
-    // (new Parse.Query('Documentary')).get(this.state.docId).then( (doc) => {
-    //   console.log(`Fetched doc: ${doc.id} `,  doc.attributes );
-    //   let newProps = _.extend( {documentary: doc.attributes }, {loaded: true});
-    //   this.setDocumentary( newProps );
-    // }, (e) => {
-    //   console.error(e);
-    //   this.setState({error: true});
-    // });
   },
 
   setDocumentary(doc) {
-    console.log(doc);
-    this.setState(doc);
+    this.setState( {doc: doc, loaded: true}  );
   },
 
   render() {
     let NotFound = (<div>
       <h1>404 - Documentary {this.state.docId} not found...</h1>
-      <p>Ops,this is a broken link... are you sure you copied the URL right?</p>
+      <p>Ops,bad bad computer...</p>
     </div>);
 
     let Loading = (<div>
       loading... {this.state.docId}
     </div>);
 
-    let WatchComponent = (
-      <div>
+    let WatchComponent = () => {
+      console.log(this.state);
+      return (<div>
           <header>
             <h1>{this.state.docId} - {this.state.doc.data.title}</h1>
           </header>
           <Player url={this.state.doc.data.url}
-                  html={this.state.doc.data.html} />
-          <section className="comments">
-            Comments:
-          </section>
-      </div>
-    );
+                  html={this.state.doc.data.oembed.html} />
 
-    return (<div className="watch-component">
+      </div>);
+    };
+
+    console.log(this.state)
+    return (<div className="watch-component box">
             {(this.state.error ? NotFound :
-              (this.state.loaded ? WatchComponent : Loading ))}
+              (this.state.loaded ? WatchComponent() : Loading ))}
             </div>
     );
   }

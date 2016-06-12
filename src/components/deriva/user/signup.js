@@ -47,24 +47,28 @@ let SignupComponent = React.createClass({
 
   render() {
     let signup_classes = {success: this.state.success, failed: this.state.failed };
-    return (<div className={classNames("signup-component", signup_classes)}>
+    return (<div className={classNames("signup-component box", signup_classes)}>
             <form onSubmit={this.signUp}>
               <div className="title">
-                <h1>$ 1/mês</h1>
-                <p>Faça uma doação</p>
+                <h1><input type="text" className="form-control" placeholder="Invite password"></input></h1>
+                <p>Paste your invite code</p>
               </div>
-              <div> <input type="email" ref="email" id="Email" placeholder="Email"/>
+              <div> <input type="email" className="form-control" ref="email" id="email" placeholder="Email"/>
               </div>
-              <div> <input type="text" ref="username" id="username" placeholder="Usuário"/>
+              <div> <input type="text" className="form-control" ref="username" id="username" placeholder="Usuário"/>
               </div>
-              <div><input type="password" ref="password" id="password" placeholder="Senha"/>
+              <div><input type="password" className="form-control" ref="password" id="password" placeholder="Senha"/>
               </div>
-              <div className="terms">
-                { this.state.message ? (<p>{this.state.message}</p>) :
-                  (<p>Eu li os  <a href="#"> Telmos de selvisso</a>.</p>) }
+              <div className="terms checkbox">
+              { this.state.message ? (<p>{this.state.message}</p>) :
+                (<label>
+                  <input type="checkbox"></input>
+                    Eu li os  <a href="#"> Telmos de selvisso</a>.
+                </label>)
+              }
               </div>
               <div className="submit">
-                <input type="submit" ref="submit" value="Criar Conta" />
+                <button ref="signup" value="Criar conta" className="btn btn-form btn-primary">Criar conta</button>
               </div>
             </form>
             </div>

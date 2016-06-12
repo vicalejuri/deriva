@@ -1,6 +1,7 @@
 'use strict';
 let path = require('path');
 let defaultSettings = require('./defaults');
+let webpack = require('webpack');
 
 // Additional npm or bower modules to include in builds
 // Add all foreign plugins you may need into this array
@@ -30,9 +31,10 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
+      libs: `${defaultSettings.srcPath}/libs/`,
       actions: `${defaultSettings.srcPath}/actions/`,
       components: `${defaultSettings.srcPath}/components/`,
-      sources: `${defaultSettings.srcPath}/sources/`,
+      models: `${defaultSettings.srcPath}/models/`,
       assets: `${defaultSettings.srcPath}/assets/`,
       stores: `${defaultSettings.srcPath}/stores/`,
       utils:  `${defaultSettings.srcPath}/utils/`,
@@ -40,12 +42,9 @@ module.exports = {
       config: `${defaultSettings.srcPath}/config/` + process.env.REACT_WEBPACK_ENV
     }
   },
-  postcss: function() {
-    return [
-      require('autoprefixer')({
-        browsers: ['last 2 versions', 'ie >= 8']
-      })
-    ];
+  target: 'web',
+  node: {
+    fs: 'empty'
   },
   module: {}
 };

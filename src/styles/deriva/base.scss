@@ -1,0 +1,40 @@
+// Photon UI KIT
+@import "~styles/photon/photon.scss";
+
+.box {
+    border-color: $border-color;
+    background-color: $chrome-color;
+    height: 100%;
+
+    transition: all $timing ease-in-out;
+}
+
+
+@font-face {
+  font-family: "Droid Sans Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/assets/droid-sans.ttf") format("truetype");
+  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+
+
+
+/* Base Application Styles */
+* { box-sizing: border-box; }
+body,.window {
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  // font-family: 'Droid Sans Mono', monospace;
+  font-size: 12px;
+}
+
+a {
+  font-weight: bold;
+  color: #000;
+}
+
+.window-content {
+  background-color: #f9cc9d;
+}

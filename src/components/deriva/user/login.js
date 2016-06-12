@@ -13,9 +13,11 @@ let LoginComponent = React.createClass({
     return { 'success': false, 'failed': false, 'message': false}
   },
 
-  login() {
+  login(ev) {
     let credentials = {u: this.refs.username.value, p: this.refs.password.value};
     console.log("login", credentials.u, credentials.p);
+
+    ev.preventDefault();
 
     window.remote_db.login( credentials.u, credentials.p,
       (err, response) => {
@@ -24,6 +26,7 @@ let LoginComponent = React.createClass({
           this.setState({success: false, failed: true,
                          message: err.message});
         } else {
+          debugger;
           this.setState({success: true, failed: false,
                          message: `Hello ${response.name}`});
         }
@@ -35,18 +38,19 @@ let LoginComponent = React.createClass({
     let login_failed = this.state.failed;
     let login_success = this.state.success;
     let login_classes = {'success': login_success, 'failed': login_failed};
-    return (<div className={classNames('login-component',login_classes)}>
-            <div className="message">{this.state.message}</div>
-             <div>
-                  <input type="text" ref="username" id="username" placeholder="Usuário"/>
+    return (<form className={classNames('login-component box',login_classes)} onSubmit={this.login}>
+             <div className="message">{this.state.message}</div>
+             <div className="form-group">
+                  <input type="text" ref="username" className="form-control" id="username" placeholder="Usuário"/>
              </div>
-             <div>
-              <input type="password" ref="password" id="password" placeholder="Senha"/>
+             <div className="form-group">
+              <input type="password" ref="password" className="form-control" id="password" placeholder="Senha"/>
              </div>
-             <div className="submit">
-              <input type="submit" ref="submit" ref="submit" value="Acessar >" onClick={this.login}/>
+             <div className="submit btn-group">
+                <button ref="signup" value="Signup" className="btn btn-form btn-positive"><a href="/signup">Signup</a></button>
+                <button type="submit" ref="submit" value="Acessar" className="btn btn-form btn-primary left" >OK</button>
              </div>
-            </div>);
+            </form>);
   }
 });
 

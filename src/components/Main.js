@@ -1,18 +1,21 @@
-require('normalize.css/normalize.css');
-require('styles/App.scss');
-
 import {  Link } from 'react-router';
 
 import React from 'react';
 import classNames from 'classnames';
 
+import TorrentComponent from 'components/deriva/player/Torrent.js';
+
 let yeomanImage = require('../assets/yeoman.png');
+require('normalize.css/normalize.css');
+require('styles/deriva/App.scss');
+
+
+
 export let DefaultComponent = React.createClass({
   render() {
     return (
       <div className="index">
-        <img src={yeomanImage} alt="Yeoman Generator" />
-        <div className="notice">Default component</div>
+        <TorrentComponent file="seila" />
       </div>
     );
   }
@@ -24,9 +27,9 @@ import HeaderComponent from 'components/Header.js';
 let AppComponent = React.createClass({
   render() {
     return (
-      <div id="app">
+      <div id="app" className="window">
         <HeaderComponent />
-        <div className="canvas">
+        <div className="window-content">
           {this.props.children}
         </div>
       </div>
