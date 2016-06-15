@@ -9,6 +9,7 @@ import WatchDoc from 'components/deriva/docs/WatchDoc.js';
 import ListDoc from 'components/deriva/docs/ListDoc.js';
 import UploadDoc from 'components/deriva/docs/UploadDoc.js';
 import LoginComponent from 'components/deriva/user/login.js';
+import ProfileComponent from 'components/deriva/user/profile.js';
 
 require('styles/deriva/Header.scss');
 
@@ -49,7 +50,6 @@ let HeaderComponent = React.createClass({
     }
 
     let uri = target.getAttribute('href');
-    console.log(target,uri);
     browserHistory.replace(uri);
   },
 
@@ -70,8 +70,8 @@ let HeaderComponent = React.createClass({
               <button className="btn btn-default" href="/list">
                 <span className="icon icon-home"></span>
               </button>
-              <button className="btn btn-default">
-                <span className="icon icon-folder"></span>
+              <button className="btn btn-default" href="/live/record">
+                <span className="icon icon-record"></span>
               </button>
               <button className="btn btn-default " href="/upload">
                 <span className="icon icon-plus" ></span>
@@ -80,8 +80,10 @@ let HeaderComponent = React.createClass({
             </div>
 
           </div>
-          <div className={classNames('anim-fadeIn',menu_popover_classes)}>
-            <LoginComponent ref="login_popover" />
+          <div onMouseLeave={this.togglePopoverLinks} className={classNames('anim-fadeIn',menu_popover_classes)}>
+          {(this.props.user.authenticated ?
+            (<ProfileComponent ref="profile_popover" />) :
+            (<LoginComponent ref="login_popover" />) )}
           </div>
 
           <div className="toolbar-actions">
@@ -91,7 +93,16 @@ let HeaderComponent = React.createClass({
   }
 });
 
-HeaderComponent.defaultProps = {
-};
+// Connect to redux store
+import * as allActions from 'actions'
+import { bindActionCreators } from 'redux'
+
+import { connect } from 'react-redux'
+
+HeaderComponent = connect( (state) => {
+  return {user: state.user}
+}, (dispatch) => {
+  return { actions: bindActionCreators(allActions, dispatch) }
+})(HeaderComponent);
 
 export default HeaderComponent;

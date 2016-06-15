@@ -14,21 +14,11 @@ let LoginComponent = React.createClass({
     console.log("login", credentials.u, credentials.p);
 
     ev.preventDefault();
-    debugger;
     this.props.actions.login(credentials);
-    /*
-      (err, response) => {
-        if(err){
-          console.log('login','error',err);
-          this.setState({success: false, failed: true,
-                         message: err.message});
-        } else {
-          debugger;
-          this.setState({success: true, failed: false,
-                         message: `Hello ${response.name}`});
-        }
-    });
-    */
+  },
+
+  componentDidMount() {
+    this.props.actions.rememberme();
   },
 
   render() {

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import WebTorrent from 'webtorrent';
 
 require('styles/deriva/player/Torrent.scss');
 

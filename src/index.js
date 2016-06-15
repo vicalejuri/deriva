@@ -2,7 +2,7 @@ import 'core-js/fn/object/assign';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-let WebTorrent = require('webtorrent/webtorrent.min.js');
+//let WebTorrent = require('webtorrent/webtorrent.min.js');
 
 import { Router, Route, Link, browserHistory } from 'react-router';
 
@@ -18,7 +18,8 @@ import WatchDoc from 'components/deriva/docs/WatchDoc.js';
 import ListDoc from 'components/deriva/docs/ListDoc.js';
 import UploadDoc from 'components/deriva/docs/UploadDoc.js';
 import SignupComponent from 'components/deriva/user/signup.js';
-
+import RecordComponent from 'components/deriva/player/Record.js'
+import LivePlayerComponent from 'components/deriva/player/LivePlayer.js'
 
 // Service worker
 if(navigator.serviceWorker){
@@ -48,7 +49,7 @@ local_db.sync( remote_db, {live: true, retry: true}).on('error', (e) => {
 
 
 // webtorrent
-let webtrrnt_client = new WebTorrent()
+// let webtrrnt_client = new WebTorrent()
 
 
 
@@ -64,6 +65,10 @@ function render(){
         <Route path="/list" component={ListDoc} />
         <Route path="/upload" component={UploadDoc} />
         <Route path="/watch/:docId" component={WatchDoc} />
+        <Route path="/live/record" component={RecordComponent} />
+        /*
+          <Route path="/live/:docId" component={LivePlayerComponent} />
+        */
         <Route path="/signup" component={SignupComponent} />
         <Route path="*" component={NotFoundComponent} />
       </Route>
@@ -81,7 +86,7 @@ window.PouchDB = PouchDB
 window.remote_db = remote_db;
 window.local_db = local_db;
 
-window.trrnt = webtrrnt_client;
+//window.trrnt = webtrrnt_client;
 
 window.React = React;
 window.ReactDOM = ReactDOM;

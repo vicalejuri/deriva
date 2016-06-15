@@ -46,8 +46,7 @@ let WatchComponent = React.createClass({
           <header>
             <h1>{this.state.doc.data.title}</h1>
           </header>
-          <Player url={this.state.doc.data.url}
-                  html={this.state.doc.data.oembed.html} />
+          <Player doc={this.state.doc.data}  />
           <section className="info">
             <nav className="nav-group">
               <a className="nav-group-item active">
@@ -57,16 +56,19 @@ let WatchComponent = React.createClass({
               <span className="nav-group-item">
                 URL
               </span>
+              <span className="nav-group-item">
+                DOC
+              </span>
             </nav>
             <div className="group">
               <div>{this.state.doc.data.title}</div>
               <div>{this.state.doc.data.url}</div>
+              <div><textarea readOnly value={JSON.stringify(this.state.doc.data)} /></div>
             </div>
           </section>
       </div>);
     };
 
-    console.log(this.state)
     return (<div className="watch-component box">
             {(this.state.error ? NotFound :
               (this.state.loaded ? WatchComponent() : Loading ))}

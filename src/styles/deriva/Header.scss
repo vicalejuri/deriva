@@ -53,14 +53,20 @@ $menu-height: 44px;
   }
 }
 
+
+/*
+ * Menu popover
+ */
 .header-nav .menu-popover {
   position: absolute;
   right: 0px;
   top: $menu-height;
   visibility: hidden;
+  pointer-events: none;
   opacity: 0;
   z-index: $zmenu - 1;
 }
 .header-nav .menu-popover.active {
+  pointer-events: all;
   visibility: visible;
 }
