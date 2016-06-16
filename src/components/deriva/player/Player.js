@@ -2,6 +2,7 @@
 
 import React from 'react';
 import plyr from 'plyr';
+import utils from 'utils';
 
 require('styles/deriva/player/Player.scss');
 require('plyr/dist/plyr.css');
@@ -34,7 +35,15 @@ let PlayerComponent = React.createClass({
   },
 
   componentDidMount(){
-    let player = plyr.setup( this.refs.player.firstChild );
+    this.player = plyr.setup( this.refs.player.firstChild , {
+      iconUrl: '/assets/plyr.svg',
+      disableContextMenu: false,
+      tooltips: { controls: true, seek: true}
+    });
+  },
+
+  componentWillUnmount () {
+    this.player.destroy();
   },
 
   render() {

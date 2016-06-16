@@ -2,7 +2,7 @@
 
 .signup-component {
   min-width: 300px;
-  max-width: 40%;
+  width: 40%;
   padding: 10px 30px 20px 30px;
   margin: 40px auto 30px auto;
   border: 1px solid $border-color;
@@ -16,6 +16,8 @@
         flex: auto;
         margin: 0px auto;
         margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
 
         display: flex;
 
@@ -24,16 +26,26 @@
     }
 
     > div.submit {
+      width: auto;
       align-self: center;
     }
 
   }
 }
 
+/*
 .signup-component #username,
 .signup-component #password,
 .signup-component #email {
-  width: 300px;
+  min-width: 300px;
+}
+*/
+.signup-component .title {
+  width: 80%;
+  #invite {
+    text-align: center;
+    font-size: 16px;
+  }
 }
 .signup-component input[type="submit"] {
   background: #37a893;
@@ -47,6 +59,20 @@
 
   &:hover {
     background-color: #47c893;
+  }
+}
+
+
+/*
+ * Invite sucess/error
+ */
+#invite {
+  &.empty {}
+  &.error {
+    background-color: #f00;
+  }
+  &.success {
+    background-color: #0f0;
   }
 }
 

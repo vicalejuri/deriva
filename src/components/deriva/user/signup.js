@@ -6,11 +6,31 @@ import {  Link } from 'react-router';
 import _ from 'lodash';
 import classNames from 'classnames';
 
+import webcrypto from 'webcrypto';
+
 require('styles/deriva/user/signup.scss');
 
 let SignupComponent = React.createClass({
   getInitialState() {
-    return { success: false, failed: false, message: false}
+    return { success: false, failed: false, message: false, invite: 'empty'}
+  },
+
+  isValidInvite( ev ){
+    ev.preventDefault();
+
+    let invite_code = this.refs.invite.value;
+
+    const hash = webcrypto.createHash('sha256');
+    hash.update( invite_code );
+    let hex_code = hash.digest('hex');
+
+    // alienação || alienacao
+    if(hex_code == "77fe165ab27d4ba9b479145402529d9816b4fc83bbace71948d656f9321ec6d6" ||
+       hex_code == "037d3826e59234c02644da2fda5eaab0da21ede8dae58282ac91bd9ff827a235" ){
+      this.setState({invite: 'success'});
+    } else {
+      this.setState({invite: 'error'})
+    }
   },
 
   signUp(ev) {
@@ -20,7 +40,6 @@ let SignupComponent = React.createClass({
     let credentials = {username: this.refs.username.value,
                        password: this.refs.password.value }
     let metadata = {email: this.refs.email.value};
-    console.log('signup ', credentials )
 
     window.remote_db.signup(credentials.username, credentials.password, {metadata},
        (err, response) => {
@@ -50,8 +69,10 @@ let SignupComponent = React.createClass({
     return (<div className={classNames("signup-component box", signup_classes)}>
             <form onSubmit={this.signUp}>
               <div className="title">
-                <h1><input type="text" className="form-control" placeholder="Invite password"></input></h1>
-                <p>Paste your invite code</p>
+                <h1>DERIVA</h1>
+                <input id="invite" ref="invite" type="text" onBlur={this.isValidInvite}
+                className={classNames("form-control", this.state.invite)} placeholder="Invite password" />
+                <p>Only invited users</p>
               </div>
               <div> <input type="email" className="form-control" ref="email" id="email" placeholder="Email"/>
               </div>
