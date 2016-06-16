@@ -1,6 +1,17 @@
 // Photon UI KIT
 @import "~styles/photon/photon.scss";
 
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700,900);
+@font-face {
+  font-family: "Droid Sans Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  src: url("/assets/droid-sans.ttf") format("truetype");
+  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+
 .box {
     border-color: $border-color;
     background-color: $chrome-color;
@@ -14,31 +25,28 @@
 }
 
 
-@font-face {
-  font-family: "Droid Sans Mono";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  src: url("/assets/droid-sans.ttf") format("truetype");
-  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
-
-
-
 
 /* Base Application Styles */
 * { box-sizing: border-box; outline: transparent; }
 body,.window {
-  font-family: 'Droid Sans Mono',monospace;
+  font-family: 'Source Sans Pro', helvetica;
   font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  // font-family: 'Droid Sans Mono', monospace;
   font-size: 12px;
+  font-weight: 300;
 }
 
 a {
+  font-family: 'Lucida Console', 'Droid Sans Mono', monospace;
   font-weight: bold;
   color: #000;
+}
+textarea , input {
+  font-family: 'Lucida Console', 'Droid Sans Mono', monospace;
+}
+input[type="button"] , button{
+  font-family: 'Source Sans Pro', helvetica;
+  font-weight: bold;
 }
 
 .window-content {

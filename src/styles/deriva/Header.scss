@@ -28,6 +28,12 @@ $menu-height: 44px;
   margin: 0px;
   padding: $padding;
   height: $menu-height - 2;
+
+  a {
+    font-family: 'Source Sans Pro', helvetica;
+    font-weight: bold;
+    text-transform: uppercase; 
+  }
 }
 
 .header-nav .nav {

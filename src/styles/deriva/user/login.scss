@@ -8,18 +8,24 @@
   margin: 0px auto;
   border: 1px solid $border-color;
   border-top: 0px;
+
+  & > div {
+    flex: auto;
+    margin: 0px auto;
+    margin-top: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:first-child { margin-top: 0px; }
+  }
+
+  & > .submit {
+    width: 50%;
+  }
 }
 
-.login-component > div {
-  flex: auto;
-  margin: 0px auto;
-  margin-top: 10px;
-
-  display: flex;
-  align-items: center;
-
-  &:first-child { margin-top: 0px; }
-}
 
 
 /*
