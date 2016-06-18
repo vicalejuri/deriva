@@ -8,25 +8,8 @@ import {  Link } from 'react-router';
 require('styles/deriva/docs/List.scss');
 
 let ListComponent = React.createClass({
-  getInitialState() {
-    return { docs: [] , error: false}
-  },
-
-  componentDidMount() {
-    window.remote_db.query( 'docs/by_id', {include_docs: true})
-    .then( (result) => {
-      let docs = _.map(result.rows, (v,k) => {
-        return v.doc;
-      });
-      this.setDocuments(docs);
-    }).catch(function (err) {
-      // handle any errors
-    });
-  },
-
-  setDocuments(docs) {
-    console.log(docs);
-    this.setState({docs});
+  componentDidMount( ) {
+    this.props.actions.list_all_docs();
   },
 
   render() {
@@ -39,11 +22,11 @@ let ListComponent = React.createClass({
                   <th>url</th>
               </tr></thead>
               <tbody>
-                {this.state.docs.map( (doc, i) =>
-                  <tr>
-                  <td><Link to={`/watch/${doc._id}`} >{doc._id}</Link></td>
-                  <td>{doc.data.title}</td>
-                  <td>{doc.data.url}</td>
+                {this.props.docs.map( (doc, i) =>
+                  <tr key={i}>
+                    <td><Link to={`/watch/${doc._id}`} >{doc._id}</Link></td>
+                    <td>{doc.data.title}</td>
+                    <td>{doc.data.url}</td>
                   </tr>
                 )}
               </tbody>
@@ -55,8 +38,18 @@ let ListComponent = React.createClass({
 
 ListComponent.displayName = 'Deriva.ListComponent';
 
-// Uncomment properties you need
-// WatchComponent.propTypes = {};
-// WatchComponent.defaultProps = {};
+// Connect to redux store
+import actions from 'actions'
+import { bindActionCreators } from 'redux'
+
+import { connect } from 'react-redux'
+
+ListComponent = connect( (state) => {
+  console.log('listComponent:connect' , state);
+  return {docs: state.docs}
+}, (dispatch) => {
+  return { actions: bindActionCreators(actions, dispatch) }
+})(ListComponent);
+
 
 export default ListComponent;

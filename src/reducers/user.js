@@ -1,6 +1,6 @@
 import {LOGIN_ERROR, LOGIN_SUCCESS,
         REMEMBERME_ERROR, REMEMBERME_SUCCESS,
-        LOGOUT } from '../actions';
+        LOGOUT } from 'actions/';
 
 let AnonymousState = {
     id: -1,
@@ -22,7 +22,6 @@ const user = (state = AnonymousState, action) => {
         data: action.data
       });
     case LOGIN_SUCCESS:
-      debugger;
       return Object.assign({},state,{
         name: action.data.name,
         data: action.data,

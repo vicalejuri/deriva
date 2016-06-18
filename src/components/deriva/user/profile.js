@@ -43,7 +43,7 @@ let ProfileComponent = React.createClass({
 ProfileComponent.displayName = 'Deriva.user.ProfileComponent';
 
 // Connect to redux store
-import * as allActions from 'actions';
+import actions from 'actions';
 import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
@@ -51,7 +51,7 @@ import { connect } from 'react-redux';
 ProfileComponent = connect( (state) => {
   return {user: state.user}
 }, (dispatch) => {
-  return { actions: bindActionCreators(allActions, dispatch) }
+  return { actions: bindActionCreators(actions, dispatch) }
 })(ProfileComponent);
 
 

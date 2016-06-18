@@ -18,7 +18,7 @@ let LoginComponent = React.createClass({
   },
 
   componentDidMount() {
-    this.props.actions.rememberme();
+    //this.props.actions.rememberme();
   },
 
   render() {
@@ -34,7 +34,7 @@ let LoginComponent = React.createClass({
               <input type="password" ref="password" className="form-control" id="password" placeholder="Senha"/>
              </div>
              <div className="submit">
-                <a href="/signup">Signup</a>
+                <Link to={`/signup`} >Signup</Link>
                 <button type="submit" ref="submit" value="Acessar" className="btn btn-primary left" >OK</button>
              </div>
             </form>);
@@ -45,7 +45,7 @@ LoginComponent.displayName = 'Deriva.user.LoginComponent';
 
 
 // Connect to redux store
-import * as allActions from 'actions'
+import actions from 'actions'
 import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
@@ -54,7 +54,7 @@ import { login as Login } from 'actions';
 LoginComponent = connect( (state) => {
   return {user: state.user}
 }, (dispatch) => {
-  return { actions: bindActionCreators(allActions, dispatch) }
+  return { actions: bindActionCreators(actions, dispatch) }
 })(LoginComponent);
 
 

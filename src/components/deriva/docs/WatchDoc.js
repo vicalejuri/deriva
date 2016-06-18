@@ -43,9 +43,6 @@ let WatchComponent = React.createClass({
 
     let WatchComponent = () => {
       return (<div>
-          <header>
-            <h1>{this.state.doc.data.title}</h1>
-          </header>
           <Player doc={this.state.doc.data}  />
           <section className="info">
             <nav className="nav-group">
@@ -69,7 +66,7 @@ let WatchComponent = React.createClass({
       </div>);
     };
 
-    return (<div className="watch-component box">
+    return (<div className="watch-component">
             {(this.state.error ? NotFound :
               (this.state.loaded ? WatchComponent() : Loading ))}
             </div>

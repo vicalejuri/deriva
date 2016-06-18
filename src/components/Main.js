@@ -3,13 +3,9 @@ import {  Link } from 'react-router';
 import React from 'react';
 import classNames from 'classnames';
 
-import TorrentComponent from 'components/deriva/player/Torrent.js';
-
 let yeomanImage = require('../assets/yeoman.png');
 require('normalize.css/normalize.css');
 require('styles/deriva/App.scss');
-
-
 
 export let DefaultComponent = React.createClass({
   render() {

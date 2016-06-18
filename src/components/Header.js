@@ -59,7 +59,9 @@ let HeaderComponent = React.createClass({
     return (
         <header className="toolbar toolbar-header header-nav">
           <div className="logo" side="left">
-            <h1 className="title"><a href="/">deriva</a></h1>
+            <Link to={`/`} >
+              <h1 className="title">deriva</h1>
+            </Link>
           </div>
           <div className="nav toolbar-actions" side="right">
             <button onClick={this.toggleLogin} className="btn btn-default btn-dropdown pull-right">
@@ -94,7 +96,7 @@ let HeaderComponent = React.createClass({
 });
 
 // Connect to redux store
-import * as allActions from 'actions'
+import actions from 'actions'
 import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
@@ -102,7 +104,7 @@ import { connect } from 'react-redux'
 HeaderComponent = connect( (state) => {
   return {user: state.user}
 }, (dispatch) => {
-  return { actions: bindActionCreators(allActions, dispatch) }
+  return { actions: bindActionCreators(actions, dispatch) }
 })(HeaderComponent);
 
 export default HeaderComponent;

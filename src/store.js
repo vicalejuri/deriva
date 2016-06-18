@@ -14,4 +14,5 @@ let store = createStore(deriva,
   )
 );
 
+store.actions = actions;
 export default store;

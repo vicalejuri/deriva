@@ -24,9 +24,11 @@ let PlayerComponent = React.createClass({
     let id = undefined;
 
     if( (id=/youtu.be\/(\w+)$/.exec(link)) ||
-        (id=/youtube.com\/embed\/(\w+)/.exec(link)) ||
+        (id=/youtube.com\/embed\/(\w+)$/.exec(link)) ||
         (id=/youtube.com\/watch\?v\=(\w+)/.exec(link)) ){
       this.setState({provider: 'youtube', id: id[1]});
+    }else if ( (id=/vimeo.com\/(\w+)$/.exec(link)) ) {
+      this.setState({provider: 'vimeo', id: id[1]})
     }
   },
 
@@ -43,7 +45,7 @@ let PlayerComponent = React.createClass({
   },
 
   componentWillUnmount () {
-    this.player.destroy();
+    //this.player.destroy();
   },
 
   render() {

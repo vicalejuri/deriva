@@ -21,7 +21,7 @@ $menu-height: 44px;
   height: 43px;
 }
 
-.header-nav .logo h1 {
+.header-nav .logo a {
   margin-left: 0;
   white-space: nowrap;
   display: inline-block;
@@ -29,11 +29,10 @@ $menu-height: 44px;
   padding: $padding;
   height: $menu-height - 2;
 
-  a {
-    font-family: 'Source Sans Pro', helvetica;
-    font-weight: bold;
-    text-transform: uppercase; 
-  }
+  font-family: 'Source Sans Pro', helvetica;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .header-nav .nav {

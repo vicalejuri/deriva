@@ -10,10 +10,14 @@ let defaultSettings = require('./defaults');
 let BowerWebpackPlugin = require('bower-webpack-plugin');
 
 let config = Object.assign({}, baseConfig, {
-  entry: path.join(__dirname, '../src/index'),
+  entry: {
+    'app':    path.join(__dirname, '../src/index'),
+    'vendor': ['lodash','react','react-dom','redux','react-redux','pouchdb','pouchdb-authentication']
+  },
   cache: false,
   devtool: 'sourcemap',
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin("vendor","vendor.bundle.js"),
     new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
@@ -21,7 +25,13 @@ let config = Object.assign({}, baseConfig, {
     new BowerWebpackPlugin({
       searchResolveModulesDirectories: false
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {warnings: false},
+      comments: false,
+      sourceMap: false,
+      mangle: true,
+      minimize: true
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.NoErrorsPlugin()
