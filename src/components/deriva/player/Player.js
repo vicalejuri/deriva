@@ -8,6 +8,7 @@ require('styles/deriva/player/Player.scss');
 require('plyr/dist/plyr.css');
 
 let plyrsvg = require('assets/plyr.svg');
+console.log(plyrsvg);
 
 let PlayerComponent = React.createClass({
   propTypes: {
