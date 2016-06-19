@@ -16,10 +16,10 @@ module.exports = {
   debug: true,
   devtool: 'eval',
   output: {
-    path: path.join(__dirname, '/../dist/assets/[hash]/'),
+    path: path.join(__dirname, '/../dist/'),
     filename: '[name].js',
-    chunkFilename: '[id].js',
-    publicPath: defaultSettings.publicPath + '[hash]/'
+    chunkFilename: '[name].chunk.js',
+    publicPath: defaultSettings.publicPath + 'assets/'
   },
   devServer: {
     contentBase: './src/',

@@ -81,3 +81,4 @@ WatchComponent.displayName = 'Deriva.WatchComponent';
 // WatchComponent.defaultProps = {};
 
 export default WatchComponent;
+module.exports = WatchComponent;

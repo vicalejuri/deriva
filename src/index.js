@@ -14,6 +14,7 @@ import actions from './actions';
 import config from 'config';
 import dataModels from 'models/index.js';
 
+window.config = window.defaultConfig = config;
 window.dataModels =  dataModels;
 window.store = store;
 

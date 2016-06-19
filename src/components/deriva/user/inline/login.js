@@ -34,7 +34,7 @@ let LoginComponent = React.createClass({
               <input type="password" ref="password" className="form-control" id="password" placeholder="Senha"/>
              </div>
              <div className="submit">
-                <Link to={`/signup`} >Signup</Link>
+                <Link to={`/users/signup`} >Signup</Link>
                 <button type="submit" ref="submit" value="Acessar" className="btn btn-primary left" >OK</button>
              </div>
             </form>);

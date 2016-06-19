@@ -6,7 +6,7 @@ import {  Link } from 'react-router';
 import _ from 'lodash';
 import classNames from 'classnames';
 
-import webcrypto from 'webcrypto';
+import nacl from 'tweetnacl';
 
 require('styles/deriva/user/signup.scss');
 
@@ -20,9 +20,12 @@ let SignupComponent = React.createClass({
 
     let invite_code = this.refs.invite.value;
 
-    const hash = webcrypto.createHash('sha256');
-    hash.update( invite_code );
-    let hex_code = hash.digest('hex');
+    const hash = nacl.hash( invite_code );
+    let hex_code = hash;
+
+    console.log(hex_code, hash);
+    const hash2 = nacl.hash('alienacao')
+    console.log( hash2 );
 
     // alienação || alienacao
     if(hex_code == "77fe165ab27d4ba9b479145402529d9816b4fc83bbace71948d656f9321ec6d6" ||
@@ -104,3 +107,4 @@ SignupComponent.displayName = 'Deriva.user.SignupComponent';
 // WatchComponent.defaultProps = {};
 
 export default SignupComponent;
+module.exports = SignupComponent;

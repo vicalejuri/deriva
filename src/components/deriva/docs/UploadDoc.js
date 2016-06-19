@@ -103,3 +103,4 @@ UploadComponent.displayName = 'Deriva.user.UploadComponent';
 // WatchComponent.defaultProps = {};
 
 export default UploadComponent;
+module.exports = UploadComponent

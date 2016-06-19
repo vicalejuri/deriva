@@ -7,6 +7,8 @@ import utils from 'utils';
 require('styles/deriva/player/Player.scss');
 require('plyr/dist/plyr.css');
 
+let plyrsvg = require('assets/plyr.svg');
+
 let PlayerComponent = React.createClass({
   propTypes: {
     doc: React.PropTypes.object
@@ -38,7 +40,7 @@ let PlayerComponent = React.createClass({
 
   componentDidMount(){
     this.player = plyr.setup( this.refs.player.firstChild , {
-      iconUrl: '/assets/plyr.svg',
+      iconUrl: plyrsvg,
       disableContextMenu: false,
       tooltips: { controls: true, seek: true}
     });

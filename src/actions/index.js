@@ -8,5 +8,4 @@ const actions = _.extend({},
   userActions, derivaActions, pouchActions
 );
 
-console.log(actions);
 export default actions;

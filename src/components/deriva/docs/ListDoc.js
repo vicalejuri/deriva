@@ -14,7 +14,7 @@ let ListComponent = React.createClass({
 
   render() {
     return (<div className="list-page">
-              <h3> All Docs </h3>
+              <h3> All Doxs </h3>
               <table className="list-component">
               <thead><tr>
                   <th>id</th>
@@ -24,7 +24,7 @@ let ListComponent = React.createClass({
               <tbody>
                 {this.props.docs.map( (doc, i) =>
                   <tr key={i}>
-                    <td><Link to={`/watch/${doc._id}`} >{doc._id}</Link></td>
+                    <td><Link to={`/docs/watch/${doc._id}`} >{doc._id}</Link></td>
                     <td>{doc.data.title}</td>
                     <td>{doc.data.url}</td>
                   </tr>
@@ -53,3 +53,4 @@ ListComponent = connect( (state) => {
 
 
 export default ListComponent;
+module.exports = ListComponent

@@ -13,7 +13,8 @@ let config = Object.assign({}, baseConfig, {
     'app': ['webpack-dev-server/client?http://127.0.0.1:' + defaultSettings.port,
             'webpack/hot/only-dev-server',
             './src/index'],
-    'vendor': ['lodash','react','pouchdb']
+    'vendor': ['lodash','react','react-dom','redux','react-redux',
+               'tweetnacl','pouchdb','pouchdb-authentication']
   },
   cache: true,
   devtool: 'eval-source-map',

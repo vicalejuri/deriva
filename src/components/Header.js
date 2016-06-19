@@ -5,11 +5,8 @@ import classNames from 'classnames';
 import _ from 'lodash';
 
 /* App */
-import WatchDoc from 'components/deriva/docs/WatchDoc.js';
-import ListDoc from 'components/deriva/docs/ListDoc.js';
-import UploadDoc from 'components/deriva/docs/UploadDoc.js';
-import LoginComponent from 'components/deriva/user/login.js';
-import ProfileComponent from 'components/deriva/user/profile.js';
+import LoginComponent from 'components/deriva/user/inline/login.js';
+import ProfileComponent from 'components/deriva/user/inline/profile.js';
 
 require('styles/deriva/Header.scss');
 
@@ -43,6 +40,7 @@ let HeaderComponent = React.createClass({
     this.setState({login_popover_active: is_activated});
   },
 
+  /* Go to link href route */
   goTo(e) {
     let target = e.target;
     if( _.includes(target.classList,'icon')){
@@ -69,13 +67,13 @@ let HeaderComponent = React.createClass({
             </button>
 
             <div className="btn-group" onClick={this.goTo}>
-              <button className="btn btn-default" href="/list">
+              <button className="btn btn-default" href="/docs/list">
                 <span className="icon icon-home"></span>
               </button>
               <button className="btn btn-default" href="/live/record">
                 <span className="icon icon-record"></span>
               </button>
-              <button className="btn btn-default " href="/upload">
+              <button className="btn btn-default " href="/docs/upload">
                 <span className="icon icon-plus" ></span>
                 Upload
               </button>
