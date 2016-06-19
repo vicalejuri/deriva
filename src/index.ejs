@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>deriva</title>
+  <meta name="application-name" content="deriva">
+  <link rel="manifest" href="/assets/manifest.json" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+  <div id="app">loading</div>
+
+  <script type="text/javascript">
+    window.manifest = {
+      version: "<%= htmlWebpackPlugin.options.version %>",
+      files: JSON.parse('<%= JSON.stringify(htmlWebpackPlugin.files) %>')
+    }
+  </script>
+</body>
+</html>
