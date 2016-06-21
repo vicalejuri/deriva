@@ -1,0 +1,26 @@
+@import "~styles/photon/variables.scss";
+
+.dashboard-profile {
+  padding: $padding $padding-more;
+  padding-top: 0px; padding-bottom: 0px;
+  border: $border-color;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > section {
+    width: 100%;
+  }
+
+  .footer {
+    padding: $padding;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: 64px;
+    margin: $padding $padding;
+    background-color: $border-color;
+  }
+}

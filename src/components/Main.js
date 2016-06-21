@@ -26,3 +26,4 @@ AppComponent.defaultProps = {
 };
 
 export default AppComponent;
+module.exports = AppComponent;

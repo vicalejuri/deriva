@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 
 import {  Link } from 'react-router';
@@ -42,7 +40,8 @@ let SignupComponent = React.createClass({
 
     let credentials = {username: this.refs.username.value,
                        password: this.refs.password.value }
-    let metadata = {email: this.refs.email.value};
+    let metadata = {};
+    //let metadata = {email: this.refs.email.value};
 
     window.remote_db.signup(credentials.username, credentials.password, {metadata},
        (err, response) => {
@@ -77,8 +76,6 @@ let SignupComponent = React.createClass({
                 className={classNames("form-control", this.state.invite)} placeholder="Invite password" />
                 <p>Only invited users</p>
               </div>
-              <div> <input type="email" className="form-control" ref="email" id="email" placeholder="Email"/>
-              </div>
               <div> <input type="text" className="form-control" ref="username" id="username" placeholder="Usuário"/>
               </div>
               <div><input type="password" className="form-control" ref="password" id="password" placeholder="Senha"/>
@@ -86,8 +83,7 @@ let SignupComponent = React.createClass({
               <div className="terms checkbox">
               { this.state.message ? (<p>{this.state.message}</p>) :
                 (<label>
-                  <input type="checkbox"></input>
-                    Eu li os  <a href="#"> Telmos de selvisso</a>.
+                    Nós não fazemos <a href="#">tracking</a>, nem guardamos informações pessoais.
                 </label>)
               }
               </div>

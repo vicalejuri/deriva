@@ -1,41 +1,40 @@
-import {LOGIN_ERROR, LOGIN_SUCCESS,
-        REMEMBERME_ERROR, REMEMBERME_SUCCESS,
-        LOGOUT } from 'actions/';
+import actions from 'actions/';
 
 let AnonymousState = {
     id: -1,
     authenticated: false,
     name: 'anonymous',
     message: '',
+    roles: ['_visitor'],
     error: false
 }
 
 const user = (state = AnonymousState, action) => {
-  switch(action.type){
-    case LOGOUT:
+  if(action.type == actions.LOGOUT){
       return Object.assign({}, state, AnonymousState );
-    case LOGIN_ERROR:
+  } else if(action.type == actions.LOGIN_ERROR){
       return Object.assign({},state,{
         authenticated: false,
         message: action.data.message,
         error: true,
         data: action.data
       });
-    case LOGIN_SUCCESS:
+  } else if(action.type == actions.LOGIN_SUCCESS) {
       return Object.assign({},state,{
         name: action.data.name,
         data: action.data,
+        roles: action.data.roles,
         error: false,
         message: `Hello ${action.data.name}`,
         authenticated: true
       });
-    case REMEMBERME_ERROR:
+    } else if(action.type == actions.REMEMBERME_ERROR) {
       return Object.assign({}, state, {
         authenticated: false,
         error: true,
-        message: "Your cookies are rotten. Login to get new ones!"
+        message: ""
       })
-    case REMEMBERME_SUCCESS:
+    } else if(action.type == actions.REMEMBERME_SUCCESS) {
       return Object.assign({}, state, {
         name: action.data.userCtx.name,
         data: action.data.userCtx,
@@ -43,9 +42,9 @@ const user = (state = AnonymousState, action) => {
         message: `Hello ${action.data.userCtx.name}`,
         authenticated: true
       })
-    default:
+    } else {
       return state;
-  }
+    }
 }
 
 export default user;

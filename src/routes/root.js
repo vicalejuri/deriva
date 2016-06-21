@@ -3,7 +3,7 @@ if( typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 
 import { Router, match, Route, Link, browserHistory } from 'react-router';
 
-import AppComponent from 'components/Main';
+//import AppComponent from 'components/Main';
 //import NotFoundComponent from 'components/404.js';
 //import WatchDoc from 'components/deriva/docs/WatchDoc.js';
 //import ListDoc from 'components/deriva/docs/ListDoc.js';
@@ -23,16 +23,18 @@ import AppComponent from 'components/Main';
 */
 
 export default {
-    path: '/',
-    component: AppComponent,
+  /*
+    component: 'div',
+    childRoutes: [{
+  */
+      path: '/',
+      component: require('components/Main'),
 
-    getChildRoutes( location, callback ) {
-      require.ensure([], (require) => {
-        callback(null, [
-          require('./deriva/docs/index.js'),
-          require('./deriva/user/index.js')
-        ])
-      })
-      
-    }
+      childRoutes: [
+        require('./deriva/docs/index.js'),
+        require('./deriva/user/index.js'),
+        require('./deriva/dashboard/index.js')
+      ]
+
+    //}]
 }

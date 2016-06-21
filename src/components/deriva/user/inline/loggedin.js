@@ -1,12 +1,15 @@
 'use strict';
+import { Router, Route, Link, browserHistory } from 'react-router';
 
 import React, {PropTypes} from 'react';
 import _ from 'lodash';
 
 import classNames from 'classnames';
 
-require('styles/deriva/user/profile.scss');
-let ProfileComponent = React.createClass({
+require('styles/deriva/user/loggedin.scss');
+let avatarImg = require('assets/components/user/avatar.jpg');
+
+let LoggedInComponent = React.createClass({
   propTypes: {
     user: PropTypes.object.isRequired
   },
@@ -14,18 +17,20 @@ let ProfileComponent = React.createClass({
   logout(ev) {
     ev.preventDefault();
 
-    console.log('lgoout');
     this.props.actions.logout();
+    browserHistory.replace('/');
   },
 
   render() {
     //let signup_classes = {success: this.state.success, failed: this.state.failed };
-    return (<div className={classNames("profile-component box")}>
+    return (<div className={classNames("loggedin-component box")}>
             <ul className="list-group">
               <li className="list-group-header">
                 <div className="media-body">
-                  <img className="img-circle media-object pull-left" src="/assets/components/user/avatar.jpg" width="32" height="32" />
-                  <strong> Hello {this.props.user.name} </strong>
+                  <Link to="/dashboard/profile">
+                    <img className="img-circle media-object pull-left" src={avatarImg} width="32" height="32" />
+                    <strong> Hello {this.props.user.name} </strong>
+                  </Link>
                 </div>
               </li>
               <li className="list-group-item">
@@ -40,7 +45,7 @@ let ProfileComponent = React.createClass({
   }
 });
 
-ProfileComponent.displayName = 'Deriva.user.ProfileComponent';
+LoggedInComponent.displayName = 'Deriva.user.LoggedInComponent';
 
 // Connect to redux store
 import actions from 'actions';
@@ -48,12 +53,12 @@ import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-ProfileComponent = connect( (state) => {
+LoggedInComponent = connect( (state) => {
   return {user: state.user}
 }, (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
-})(ProfileComponent);
+})(LoggedInComponent);
 
 
 
-export default ProfileComponent;
+export default LoggedInComponent;

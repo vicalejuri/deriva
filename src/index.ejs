@@ -8,58 +8,27 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="shortcut icon" href="favicon.ico?v=3" />
+
+  <meta name="description" content="Deriva is an documentary aggregator in portuguese.">
+  <meta property="og:image" content="https://snapdrop.net/images/touch/chrome-splashscreen-icon-384x384.png" />
+  <meta property="og:url" content="https://deriva.net/" />
+
   <style>
-    body {
-    }
     #ripple-loader{
-      top: 50%;
-      left: 50%;
       position: relative;
-      margin-top: 40vh;
+      margin: 0px auto;
+      margin-top: calc( 50vh - 50px );
       width:100px;
       height: 100px;
-      border-radius: 50%;
     }
     #ripple-loader:before{
-      content:'Loading';
+      content:'loading';
       position: absolute;
-      font-family: 'Open Sans', sans-serif;
+      font-family: monospace, sans-serif;
       font-size: 1.3em;
       margin: 38% 0% 0% 14%;
       color: #1d1d1d;
-    }
-    #ripple-loader:after{
-      content: '';
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      border: 2px solid #1d1d1d;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      top: 50%;
-      left: 50%;
-      -webkit-animation: ripple 1.5s ease-out infinite;
-      -moz-animation: ripple 1.5s ease-out infinite;
-      -ms-animation: ripple 1.5s ease-out infinite;
-      -o-animation: ripple 1.5s ease-out infinite;
-      animation: ripple 1.5s ease-out infinite;
-    }
-    @keyframes ripple{
-      0%{
-        width: 100px;
-        height: 100px;
-        opacity: 1;
-      }
-      96%{
-        width: 400px;
-        height: 400px;
-        opacity: 0;
-      }
-      100%{
-        width: 400px;
-        height: 400px;
-        opacity: 0;
-      }
     }
   </style>
 </head>
@@ -73,6 +42,70 @@
       version: "<%= htmlWebpackPlugin.options.version %>",
       files: JSON.parse('<%= JSON.stringify(htmlWebpackPlugin.files) %>')
     }
+  </script>
+  <script type="text/javascript">
+  var requestAnimFrame = (function() {
+      return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+          function(callback) {
+              window.setTimeout(callback, 1000 / 60);
+          };
+  })();
+  var c = document.createElement('canvas');
+  document.getElementById('app').appendChild(c);
+  var style = c.style;
+  style.width = '100%';
+  style.top = 0; style.left = 0;
+  style.position = 'absolute';
+  var ctx = c.getContext('2d');
+  var x0, y0, w, h, dw;
+
+  function init() {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      c.width = w;
+      c.height = h;
+      x0 = w / 2;
+      y0 = h / 2;
+      dw = Math.max(w, h, 1000) / 13;
+      drawCircles();
+  }
+  window.onresize = init;
+
+  function drawCicrle(radius) {
+      ctx.beginPath();
+      var color = Math.round(255 * (1 - radius / Math.max(w, h)));
+      ctx.strokeStyle = 'rgba(' + color + ',' + color + ',' + color + ',0.3)';
+      ctx.arc(x0, y0, radius, 0, 2 * Math.PI);
+      ctx.stroke();
+      ctx.lineWidth = 2;
+  }
+
+  var step = 0;
+
+  function drawCircles() {
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < 8; i++) {
+          drawCicrle(dw * i + step % dw);
+      }
+      step += 1;
+  }
+
+  var loading = true;
+
+  function animate() {
+      if (loading || step % dw < dw - 5) {
+          requestAnimFrame(function() {
+              drawCircles();
+              animate();
+          });
+      }
+  }
+  window.anim = function(l) {
+      loading = l;
+      animate();
+  };
+  init();
+  animate();
   </script>
 </body>
 </html>

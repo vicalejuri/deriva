@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 /* App */
 import LoginComponent from 'components/deriva/user/inline/login.js';
-import ProfileComponent from 'components/deriva/user/inline/profile.js';
+import LoggedInComponent from 'components/deriva/user/inline/loggedin.js';
 
 require('styles/deriva/Header.scss');
 
@@ -81,9 +81,9 @@ let HeaderComponent = React.createClass({
 
           </div>
           <div onMouseLeave={this.togglePopoverLinks} className={classNames('anim-fadeIn',menu_popover_classes)}>
-          {(this.props.user.authenticated ?
-            (<ProfileComponent ref="profile_popover" />) :
-            (<LoginComponent ref="login_popover" />) )}
+            {(this.props.user.authenticated ?
+              (<LoggedInComponent ref="loggedin_popover" active={menu_popover_classes.active} />) :
+              (<LoginComponent ref="login_popover" active={menu_popover_classes.active} />) )}
           </div>
 
           <div className="toolbar-actions">

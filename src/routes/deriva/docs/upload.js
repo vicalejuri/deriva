@@ -4,9 +4,8 @@ let uploadRoute = {
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
       cb(null, require('components/deriva/docs/UploadDoc'))
-    })
+    },'components:deriva:docs:upload')
   }
 }
 
-export default uploadRoute;
 module.exports = uploadRoute;

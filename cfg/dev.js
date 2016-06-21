@@ -4,29 +4,49 @@ let path = require('path');
 let webpack = require('webpack');
 let baseConfig = require('./base');
 let defaultSettings = require('./defaults');
+let packjson = require('../package.json');
 
 // Add needed plugins here
 let BowerWebpackPlugin = require('bower-webpack-plugin');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let config = Object.assign({}, baseConfig, {
   entry: {
     'app': ['webpack-dev-server/client?http://127.0.0.1:' + defaultSettings.port,
             'webpack/hot/only-dev-server',
             './src/index'],
-    'vendor': ['lodash','react','react-dom','redux','react-redux',
-               'tweetnacl','pouchdb','pouchdb-authentication']
+    'lib1': ['lodash','react','react-dom','redux','react-redux'],
+    'lib2': ['tweetnacl','pouchdb','pouchdb-authentication']
   },
   cache: true,
   devtool: 'eval-source-map',
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin("vendor","vendor.bundle.js"),
+    new HtmlWebpackPlugin({
+      version: packjson.version,
+      template: path.join(__dirname , '../src/index.ejs')
+    }),
+    new webpack.optimize.CommonsChunkPlugin("lib1","vendor.bundle.js"),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new BowerWebpackPlugin({
       searchResolveModulesDirectories: false
     })
   ],
-  module: defaultSettings.getDefaultModules()
+  module: defaultSettings.getDefaultModules(),
+  output: {
+    path: baseConfig.output.path ,
+    filename: '[name].js',
+    chunkFilename: '[name].js',
+    update: true,
+    publicPath: '/'
+  },
+  devServer: {
+    contentBase: './dist/',
+    historyApiFallback: true,
+    hot: true,
+    port: defaultSettings.port,
+    publicPath: '/'
+  }
 });
 
 // Add needed loaders to the defaults here

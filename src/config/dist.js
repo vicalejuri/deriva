@@ -4,7 +4,7 @@ import baseConfig from './base';
 let packjson = require('../../package.json')
 let config = {
   appEnv: 'dist',
-  appVersion: packjson.version,  
+  appVersion: packjson.version,
 
   OEMBED_ENDPOINT:  'http://localhost:8061/oembed',
   OEMBED_API_KEY:   '123456789',

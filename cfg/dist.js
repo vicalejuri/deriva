@@ -16,8 +16,8 @@ let HtmlWebpackPlugin = require('html-webpack-plugin');
 let config = Object.assign({}, baseConfig, {
   entry: {
     'app':    path.join(__dirname, '../src/index' ),
-    'vendor': ['lodash','react','react-dom','redux','react-redux',
-               'tweetnacl','pouchdb','pouchdb-authentication']
+    'lib1': ['lodash','react','react-dom','redux','react-redux'],
+    'lib2': ['tweetnacl','pouchdb','pouchdb-authentication']
   },
   cache: true,
   devtool: 'sourcemap',
@@ -31,7 +31,7 @@ let config = Object.assign({}, baseConfig, {
       filename: baseConfig.output.path + '/index.html',
       template: path.join(__dirname , '../src/index.ejs')
     }),
-    new webpack.optimize.CommonsChunkPlugin("vendor","vendor.bundle.js"),
+    new webpack.optimize.CommonsChunkPlugin("lib1","vendor.bundle.js"),
     new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'

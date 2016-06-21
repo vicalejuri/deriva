@@ -1,12 +1,15 @@
 
 let listRoute = {
   path: 'list',
+  // component: listDoc
+
+
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      cb(null, require('components/deriva/docs/ListDoc'))
-    })
+      cb(null, require('components/404.js'))
+    },'components:deriva:docs:list')
   }
+
 }
 
-export default listRoute;
 module.exports = listRoute;

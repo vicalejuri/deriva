@@ -1,6 +1,7 @@
 @import "~styles/photon/variables.scss";
 
 $menu-height: 44px;
+
 /*
  * header-nav
  *
@@ -12,13 +13,12 @@ $menu-height: 44px;
   padding: 0px;
   height: $menu-height;
   display: inline-block;
-  border-bottom: 1px solid #474747;
 }
 
 .header-nav .logo {
   float: left;
   left: 0;
-  height: 43px;
+  height: $menu-height;
 }
 
 .header-nav .logo a {
@@ -29,7 +29,7 @@ $menu-height: 44px;
   padding: $padding;
   height: $menu-height - 2;
 
-  font-family: 'Source Sans Pro', helvetica;
+  font-family: 'Source Code Pro', helvetica;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
@@ -65,11 +65,22 @@ $menu-height: 44px;
 .header-nav .menu-popover {
   position: absolute;
   right: 0px;
-  top: $menu-height;
+  top: $menu-height - 1px;
   visibility: hidden;
   pointer-events: none;
   opacity: 0;
   z-index: $zmenu - 1;
+
+  // Arrow
+  &:before {
+    content: "";
+    border-style: solid;
+    border-width: 0px 10px 10px 10px;
+    border-color: transparent transparent $dark-border-color transparent;
+    position: absolute;
+    right: 30px;
+    top: -10px;
+  }
 }
 .header-nav .menu-popover.active {
   pointer-events: all;

@@ -8,7 +8,7 @@
 $font-path: '../fonts/' !default;
 // Try to use the system's font on whatever platform the user is on.
 $font-family-default: system, -apple-system, ".SFNSDisplay-Regular", "Helvetica Neue", Helvetica, "Segoe UI", sans-serif !default;
-$font-size-default: 13px !default;
+$font-size-default: 14px !default;
 $font-weight: 500 !default;
 $font-weight-bold: 700 !default;
 $font-weight-light: 300 !default;
@@ -20,7 +20,7 @@ $line-height-default: 1.6 !default;
 
 // Main colors
 $primary-color: #3b99fc !default;
-$chrome-color:  #fff !default;
+$chrome-color:  #efefef !default;
 
 // Copy
 $gray-color: #333 !default;

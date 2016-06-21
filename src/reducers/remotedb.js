@@ -1,9 +1,9 @@
-import { REMOTEDB_READY } from '../actions';
+import actions from 'actions/';
 
 
 const remotedb = (state = null, action) => {
   switch(action.type){
-    case REMOTEDB_READY:
+    case actions.REMOTEDB_READY:
       return Object.assign({}, state, action.db );
     default:
       return state;

@@ -1,14 +1,15 @@
 
 let docsRoute = {
   path: 'docs',
-  getChildRoutes( location, callback ) {
+
+  getChildRoutes( location, cb ) {
     require.ensure([], (require) => {
-      callback(null, [
+      cb(null, [
         require('./watch.js'),
         require('./list.js'),
-        require('./upload.js'),
+        require('./upload.js')
       ])
-    });
+    }, 'docs');
   }
 
 }

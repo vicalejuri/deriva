@@ -1,4 +1,5 @@
 import React , {PropTypes} from 'react';
+import ReactDOM from 'react-dom';
 
 import {  Link } from 'react-router';
 import classNames from 'classnames';
@@ -6,29 +7,40 @@ import classNames from 'classnames';
 require('styles/deriva/user/login.scss');
 let LoginComponent = React.createClass({
   propTypes: {
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    active: PropTypes.bool.isRequired
+  },
+
+  focus() {
+    ReactDOM.findDOMNode(this.refs.username).focus();
   },
 
   login(ev) {
     let credentials = {u: this.refs.username.value, p: this.refs.password.value};
-    console.log("login", credentials.u, credentials.p);
 
     ev.preventDefault();
     this.props.actions.login(credentials);
   },
 
+  componentDidUpdate() {
+    if(this.props.active){
+      this.focus()
+    }
+  },
+
   componentDidMount() {
-    //this.props.actions.rememberme();
+    this.props.actions.rememberme();
   },
 
   render() {
     let login_failed = this.props.user.error;
     let login_success = this.props.user.authenticated;
     let login_classes = {'success': login_success, 'failed': login_failed};
-    return (<form className={classNames('login-component box',login_classes)} onSubmit={this.login}>
+
+    return (<form ref="form" className={classNames('login-component box',login_classes)} onSubmit={this.login}>
              <div className="message">{this.props.user.message}</div>
              <div className="form-group">
-                  <input type="text" ref="username" className="form-control" id="username" placeholder="Usuário"/>
+                  <input type="text" ref="username" className="form-control" id="username" placeholder="Usuário" autoFocus={true} />
              </div>
              <div className="form-group">
               <input type="password" ref="password" className="form-control" id="password" placeholder="Senha"/>

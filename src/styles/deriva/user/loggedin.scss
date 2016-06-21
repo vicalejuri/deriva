@@ -1,6 +1,6 @@
 @import "~styles/photon/variables.scss";
 
-.profile-component {
+.loggedin-component {
   display: flex;
   flex-direction: column;
   min-width: 280px;
@@ -12,6 +12,12 @@
 
   .list-group-header {
     .media-body {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+    }
+    
+    a {
       display: flex;
       align-items: center;
       flex-direction: row;
