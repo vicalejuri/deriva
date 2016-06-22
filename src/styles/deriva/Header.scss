@@ -29,7 +29,7 @@ $menu-height: 44px;
   padding: $padding;
   height: $menu-height - 2;
 
-  font-family: 'Source Code Pro', helvetica;
+  font-family: $font-header; 
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;

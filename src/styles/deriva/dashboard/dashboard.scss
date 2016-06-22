@@ -1,4 +1,12 @@
+@import "~styles/photon/variables.scss";
+
 .dashboard {
   width: 100%;
   background-color: #F5F5F5;
+
+  > .main {
+    padding: $padding $padding-more;
+    padding-top: 0px; padding-bottom: 0px;
+    border: 1px solid $border-color;
+  }
 }

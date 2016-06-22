@@ -1,0 +1,36 @@
+@import "~styles/photon/variables.scss";
+
+
+.list-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: $padding-more;
+
+  .actions {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: $padding;
+    background-color: $border-color;
+
+    .info {
+      align-self: flex-start;
+    }
+  }
+
+  .list-component {
+    border: 1px solid $border-color;
+    border-radius: $default-border-radius;
+    margin: 0 auto;
+
+    th , td {
+      padding: 10px;
+
+      &:last-child { border-right: 0; }
+    }
+  }
+
+}

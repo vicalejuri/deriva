@@ -67,12 +67,6 @@ let HeaderComponent = React.createClass({
             </button>
 
             <div className="btn-group" onClick={this.goTo}>
-              <button className="btn btn-default" href="/docs/list">
-                <span className="icon icon-home"></span>
-              </button>
-              <button className="btn btn-default" href="/live/record">
-                <span className="icon icon-record"></span>
-              </button>
               <button className="btn btn-default " href="/docs/upload">
                 <span className="icon icon-plus" ></span>
                 Upload
