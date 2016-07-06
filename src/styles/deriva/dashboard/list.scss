@@ -26,6 +26,10 @@
     border-radius: $default-border-radius;
     margin: 0 auto;
 
+    .checked {
+      background-color: $active-color;
+    }
+
     th , td {
       padding: 10px;
 

@@ -61,10 +61,10 @@ export const DELETE_DOC = 'DELETE_DOC';
 export const DELETE_DOC_SUCCESS = 'DELETE_DOC_SUCCESS';
 export const DELETE_DOC_ERROR  = 'DELETE_DOC_ERROR';
 
-export const delete_doc = ( doc_id ) => {
+export const delete_doc = ( doc  ) => {
   return (dispatch) => {
-    dispatch({type: DELETE_DOC})
-    window.remote_db.delete( {_id: doc_id } )
+    dispatch({type: DELETE_DOC, data: doc});
+    window.remote_db.remove( doc )
     .then( (doc) => {
         dispatch({type: DELETE_DOC_SUCCESS, data: doc});
     }).catch( (err) => {

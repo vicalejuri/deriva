@@ -3,29 +3,66 @@ import ReactDOM from 'react-dom';
 import _ from 'lodash'
 
 import {  Link } from 'react-router';
+import classNames from 'classnames';
 
 require('styles/deriva/dashboard/list.scss');
+
+
+/*
+ * Single rows
+ */
+let DocRow = React.createClass({
+  propTypes: {
+    doc: React.PropTypes.object.isRequired
+  },
+
+  getInitialState(){
+    return {checked: false};
+  },
+
+  check(ev){
+    let cbox = this.refs.checkbox;
+
+    cbox.checked = !cbox.checked;
+    this.setState({checked: cbox.checked});
+  },
+
+  render(){
+    let doc = this.props.doc;
+
+    return (<tr className={classNames(this.state)} onClick={this.check} ref="tr">
+      <td><input type="checkbox" ref="checkbox" className="checkbox" onClick={this.check} checked={this.state.checked}/></td>
+      <td><Link to={`/docs/watch/${doc._id}`} >{doc._id}</Link></td>
+      <td>{doc.data.title}</td>
+      <td>{doc.data.url}</td>
+    </tr>);
+  }
+});
+
+
+
+/*
+ * Table listing every document
+ */
 let ListDocsComponent = React.createClass({
   componentDidMount( ) {
     this.props.actions.list_all_docs();
   },
 
-  /* Select */
-  check( ev ) {
-    var target = ev.target;
-
-    let alldocs = _(this.props.docs);
-
-    this.props.actions.delete_doc( target.value )
-  },
-
-  checkAll(ev){
+  check( doc_id, doc ){
     //ReactDOM.findDOMNode()
-    console.log("check all");
+    //console.log("check all", $$);
   },
 
   remove( ){
-
+    let checked_rows = (this.props.docs.filter( (doc, i) => {
+      let dom_el = this.refs[`doc[${i}]`];
+      return (dom_el.state.checked == true);
+    }));
+    checked_rows.forEach( (doc,i) => {
+      console.log(doc);
+      this.props.actions.delete_doc( doc );
+    })
   },
 
   render() {
@@ -49,12 +86,7 @@ let ListDocsComponent = React.createClass({
               </tr></thead>
               <tbody>
                 {this.props.docs.map( (doc, i) =>
-                  <tr key={i} onClick={this.check}>
-                    <td><input type="checkbox" className="checkbox" value={doc._id} onClick={this.check} /></td>
-                    <td><Link to={`/docs/watch/${doc._id}`} >{doc._id}</Link></td>
-                    <td>{doc.data.title}</td>
-                    <td>{doc.data.url}</td>
-                  </tr>
+                  <DocRow ref={`doc[${i}]`} doc={doc} key={doc._id} />
                 )}
               </tbody>
             </table>
