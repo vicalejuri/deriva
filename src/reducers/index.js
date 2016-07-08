@@ -11,6 +11,4 @@ const deriva = combineReducers({
   docs, watch, upload
 });
 
-console.info('reducers', docs, watch)
-
 export default deriva;

@@ -20,7 +20,7 @@ let defaultWatch = {
 export const  watch = (state = defaultWatch, action) => {
   switch (action.type) {
     case actions.GET_DOC:
-      return state;
+      return defaultWatch;
     case actions.GET_DOC_ERROR:
       return  Object.assign( {}, action.data, {loaded: false, error: true});
     case actions.GET_DOC_SUCCESS:
@@ -35,6 +35,8 @@ let defaultUpload = {
 }
 export const upload = (state = {}, action) => {
   switch (action.type) {
+    case actions.INSERT_DOC:
+      return defaultUpload;
     case actions.INSERT_DOC_ERROR:
       return Object.assign( {}, action.data, {error: true});
     case actions.INSERT_DOC_SUCCESS:

@@ -8,7 +8,6 @@ require('styles/deriva/player/Player.scss');
 require('plyr/dist/plyr.css');
 
 let plyrsvg = require('assets/plyr.svg');
-console.log(plyrsvg);
 
 let PlayerComponent = React.createClass({
   propTypes: {
@@ -36,6 +35,7 @@ let PlayerComponent = React.createClass({
   },
 
   componentWillMount(){
+    console.log( 'rendering video: ' , this.props.doc.url );
     this.getVideoId( this.props.doc.url );
   },
 
@@ -44,16 +44,17 @@ let PlayerComponent = React.createClass({
       iconUrl: plyrsvg,
       disableContextMenu: false,
       tooltips: { controls: true, seek: true}
-    });
+    })[0].plyr;
   },
 
   componentWillUnmount () {
-    //this.player.destroy();
+    if(this.player)
+      this.player.destroy();
   },
 
   render() {
     return (<section ref="player" className="player-component" >
-            <div data-type={this.state.provider} data-video-id={this.state.id}></div>
+              <div data-type={this.state.provider} data-video-id={this.state.id}></div>
             </section>
     );
   }

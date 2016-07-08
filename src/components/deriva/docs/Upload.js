@@ -64,8 +64,7 @@ let UploadComponent = React.createClass({
 
   componentWillReceiveProps( newProps ) {
     // error/success messages
-     if(_.has(newProps,'upload') ){
-       console.log(newProps.upload);
+     if(! newProps.uploaded.error ){
        this.setState({message: `Created ${newProps.upload._id}`});
      }
   },
