@@ -49,7 +49,7 @@ let UploadComponent = React.createClass({
                      oembed: this.state.oembed }
 
     this.props.actions.insert_doc( doc_props );
-    
+
     /*
     window.db.put( doc ).then( () => {
       console.log('uploaddoc',doc._id, 'OK');
@@ -62,6 +62,13 @@ let UploadComponent = React.createClass({
   },
 
 
+  componentWillReceiveProps( newProps ) {
+    // error/success messages
+     if(_.has(newProps,'upload') ){
+       console.log(newProps.upload);
+       this.setState({message: `Created ${newProps.upload._id}`});
+     }
+  },
 
   render() {
     let signup_classes = {success: this.state.success, failed: this.state.failed };
@@ -105,7 +112,7 @@ import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
 UploadComponent = connect( (state) => {
-  return {}
+  return {upload: state.upload}
 }, (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 })(UploadComponent);

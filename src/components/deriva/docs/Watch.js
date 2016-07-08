@@ -12,27 +12,26 @@ let WatchComponent = React.createClass({
 
   getInitialState() {
     let docId =  (this.props.docId || this.props.params.docId || 0);
-    return { docId , doc: {}, error: false, loaded: false}
+    return { docId }
   },
 
   componentDidMount() {
-    window.remote_db.get(this.state.docId)
+    this.props.actions.get_doc( this.state.docId );
+    /*
+    window.db.get(this.state.docId)
     .then( (doc) => {
       this.setDocumentary( doc )
     }).catch( (err) => {
       console.error(err);
       this.setState({error: true});
     });
-  },
-
-  setDocumentary(doc) {
-    this.setState( {doc: doc, loaded: true}  );
+    */
   },
 
   render() {
     let NotFound = (<div>
       <h1>404 - Documentary {this.state.docId} not found...</h1>
-      <p>Ops,bad bad computer...</p>
+      <p>Ops, bad bad computer...</p>
     </div>);
 
     let Loading = (<div>
@@ -41,7 +40,7 @@ let WatchComponent = React.createClass({
 
     let WatchComponent = () => {
       return (<div>
-          <Player doc={this.state.doc.data}  />
+          <Player doc={this.props.watch.data}  />
           <section className="info">
             <nav className="nav-group">
               <a className="nav-group-item active">
@@ -56,17 +55,17 @@ let WatchComponent = React.createClass({
               </span>
             </nav>
             <div className="group">
-              <div>{this.state.doc.data.title}</div>
-              <div>{this.state.doc.data.url}</div>
-              <div><textarea readOnly value={JSON.stringify(this.state.doc.data)} /></div>
+              <div>{this.props.watch.data.title}</div>
+              <div>{this.props.watch.data.url}</div>
+              <div><textarea readOnly value={JSON.stringify(this.props.watch.data)} /></div>
             </div>
           </section>
       </div>);
     };
 
     return (<div className="watch-component">
-            {(this.state.error ? NotFound :
-              (this.state.loaded ? WatchComponent() : Loading ))}
+            {(this.props.watch.error ? NotFound :
+              (this.props.watch.loaded ? WatchComponent() : Loading ))}
             </div>
     );
   }
@@ -74,9 +73,19 @@ let WatchComponent = React.createClass({
 
 WatchComponent.displayName = 'Deriva.WatchComponent';
 
-// Uncomment properties you need
-// WatchComponent.propTypes = {};
-// WatchComponent.defaultProps = {};
+// Connect to redux store
+import actions from 'actions'
+import { bindActionCreators } from 'redux'
+
+import { connect } from 'react-redux'
+
+WatchComponent = connect( (state) => {
+  return {watch: state.watch}
+}, (dispatch) => {
+  return { actions: bindActionCreators(actions, dispatch) }
+})(WatchComponent);
+
+
 
 export default WatchComponent;
 module.exports = WatchComponent;

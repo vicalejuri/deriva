@@ -54,7 +54,7 @@ export const GET_DOC_ERROR  = 'GET_DOC_ERROR';
 
 export const get_doc = ( doc_id ) => {
   return (dispatch) => {
-    dispatch({type: GET_DOC})
+    dispatch({type: GET_DOC, data: doc_id})
     window.db.get( doc_id )
     .then( (doc) => {
         dispatch({type: GET_DOC_SUCCESS, data: doc});
