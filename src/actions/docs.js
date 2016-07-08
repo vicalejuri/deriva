@@ -1,20 +1,20 @@
 import _ from 'lodash';
+import dataModels from 'models/index.js';
 
-export const LIST_DOCS = 'LIST_DOCS';
-export const LIST_DOCS_SUCCESS = 'LIST_DOCS_SUCCESS';
-export const LIST_DOCS_ERROR  = 'LIST_DOCS_ERROR';
+export const LIST_DOC = 'LIST_DOC';
+export const LIST_DOC_SUCCESS = 'LIST_DOC_SUCCESS';
+export const LIST_DOC_ERROR  = 'LIST_DOC_ERROR';
 
 export const list_all_docs = () => {
   return (dispatch) => {
-    dispatch({type: LIST_DOCS})
-    window.remote_db.query( 'docs/by_id', {include_docs: true} )
+    dispatch({type: LIST_DOC})
+    //window.db.query( 'docs/by_id', {include_docs: true} )
+    window.db.find({selector: {type: 'deriva/doc'}})
     .then( (results) => {
-        let docs = _.map( results.rows, (v,k) => {
-          return v.doc;
-        });
-        dispatch({type: LIST_DOCS_SUCCESS, data: docs});
+        let docs = results.docs;
+        dispatch({type: LIST_DOC_SUCCESS, data: docs});
     }).catch( (err) => {
-        dispatch({type: LIST_DOCS_ERROR, data: err });
+        dispatch({type: LIST_DOC_ERROR, data: err });
     });
   }
 };
@@ -24,12 +24,22 @@ export const list_all_docs = () => {
 
 
 
-export const UPLOAD_DOCS = 'UPLOAD_DOCS';
-export const UPLOAD_DOCS_SUCCESS = 'UPLOAD_DOCS_SUCCESS';
-export const UPLOAD_DOCS_ERROR  = 'UPLOAD_DOCS_ERROR';
+export const INSERT_DOC = 'INSERT_DOC';
+export const INSERT_DOC_SUCCESS = 'INSERT_DOC_SUCCESS';
+export const INSERT_DOC_ERROR  = 'INSERT_DOC_ERROR';
 
-export const upload_docs = () => {
-  return
+export const insert_doc = ( doc_props ) => {
+  let doc = new dataModels.Doc(doc_props);
+  return (dispatch) => {
+    dispatch({type: INSERT_DOC, data: doc})
+    window.db.put( doc ).then( (response) => {
+      debugger;
+      dispatch({type: INSERT_DOC_SUCCESS, data: doc});
+    }).catch( (err) => {
+      dispatch({type: INSERT_DOC_ERROR, data: err})
+    });
+  }
+
 }
 
 
@@ -45,7 +55,7 @@ export const GET_DOC_ERROR  = 'GET_DOC_ERROR';
 export const get_doc = ( doc_id ) => {
   return (dispatch) => {
     dispatch({type: GET_DOC})
-    window.remote_db.get( doc_id )
+    window.db.get( doc_id )
     .then( (doc) => {
         dispatch({type: GET_DOC_SUCCESS, data: doc});
     }).catch( (err) => {
@@ -61,10 +71,10 @@ export const DELETE_DOC = 'DELETE_DOC';
 export const DELETE_DOC_SUCCESS = 'DELETE_DOC_SUCCESS';
 export const DELETE_DOC_ERROR  = 'DELETE_DOC_ERROR';
 
-export const delete_doc = ( doc  ) => {
+export const delete_doc = ( doc ) => {
   return (dispatch) => {
     dispatch({type: DELETE_DOC, data: doc});
-    window.remote_db.remove( doc )
+    window.db.remove( doc )
     .then( (doc) => {
         dispatch({type: DELETE_DOC_SUCCESS, data: doc});
     }).catch( (err) => {

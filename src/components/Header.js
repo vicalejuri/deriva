@@ -48,7 +48,7 @@ let HeaderComponent = React.createClass({
     }
 
     let uri = target.getAttribute('href');
-    browserHistory.replace(uri);
+    browserHistory.push(uri);
   },
 
   render() {

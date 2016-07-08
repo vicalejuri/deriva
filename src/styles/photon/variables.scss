@@ -6,17 +6,20 @@
 // --------------------------------------------------
 
 $font-path: '../fonts/' !default;
+
 // Try to use the system's font on whatever platform the user is on.
 $font-family-default: system, -apple-system, ".SFNSDisplay-Regular", "Helvetica Neue", Helvetica, "Segoe UI", sans-serif !default;
+
 $font-size-default: 14px !default;
 $font-weight: 500 !default;
 $font-weight-bold: 700 !default;
 $font-weight-light: 300 !default;
 $line-height-default: 1.6 !default;
 
-$font-header: 'Inconsolata', monospace;
+//$font-header: 'Inconsolata', monospace;
 $font-body: 'Source Sans Pro', helvetica;
 $font-textarea: 'Lucida Console', monospace;
+$font-header: 'Share Tech Mono';
 
 
 // Colors
@@ -25,6 +28,7 @@ $font-textarea: 'Lucida Console', monospace;
 // Main colors
 $primary-color: #3b99fc !default;
 $chrome-color:  #efefef !default;
+$shadow-color: rgba(217,217,217,0.7);
 
 // Copy
 $gray-color: #333 !default;
@@ -67,3 +71,13 @@ $timing: 0.3s;
 $zoverlay: 2000;
 $zmenu:     1000;
 $zbody:     0;
+
+
+
+
+$phone-size: 320px;
+$smalltablet-size: 481px;
+$tablet-size: 641px;
+$laptop-size: 961px;
+$desktop-size: 1025px;
+$highres-size: 1281px;

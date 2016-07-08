@@ -1,13 +1,11 @@
 
 let listRoute = {
-  path: 'list',
-  // component: listDoc
-
+  path: 'gallery',
 
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      cb(null, require('components/404.js'))
-    },'components:deriva:docs:list')
+      cb(null, require('components/deriva/docs/Gallery'))
+    },'components:deriva:docs:gallery')
   }
 
 }

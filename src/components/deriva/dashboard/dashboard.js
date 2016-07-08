@@ -34,10 +34,12 @@ let DashboardComponent = React.createClass({
 
                 <nav className="nav-group">
                   <h5 className="nav-group-title" ><Link to="/dashboard/">Settings</Link></h5>
+                  {/*
                   <span className="nav-group-item" href="#">
                     <span className="icon icon-record" style={{"color":"#fc605b"}}></span>
                     Theme
                   </span>
+                  */}
                   <span className="nav-group-item" href="#">
                     <span className="icon icon-record" style={{"color":"#fdbc40"}}></span>
                     Engine

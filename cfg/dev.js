@@ -46,6 +46,10 @@ let config = Object.assign({}, baseConfig, {
     hot: true,
     port: defaultSettings.port,
     publicPath: '/'
+  },
+  pouchDB: {
+    endpoint: 'http://localhost:5984',
+    remote_name: 'deriva'
   }
 });
 

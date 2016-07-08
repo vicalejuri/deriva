@@ -76,9 +76,9 @@ let SignupComponent = React.createClass({
                 className={classNames("form-control", this.state.invite)} placeholder="Invite password" />
                 <p>Only invited users</p>
               </div>
-              <div> <input type="text" className="form-control" ref="username" id="username" placeholder="Usuário"/>
+              <div> <input type="text" className="form-control" ref="username" autocomplete="username" id="username" placeholder="Usuário"/>
               </div>
-              <div><input type="password" className="form-control" ref="password" id="password" placeholder="Senha"/>
+              <div><input type="password" className="form-control" ref="password" autocomplete="password" id="password" placeholder="Senha"/>
               </div>
               <div className="terms checkbox">
               { this.state.message ? (<p>{this.state.message}</p>) :

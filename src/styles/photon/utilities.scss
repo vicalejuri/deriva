@@ -116,6 +116,10 @@
   -webkit-app-region: no-drag;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 // Clearfix
 .clearfix {
   @include clearfix();

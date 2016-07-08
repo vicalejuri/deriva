@@ -1,5 +1,12 @@
 import { Doc , Channel } from './docs.js';
-let dataModels = {};
+
+let dataModels = function( database ){
+
+  // Setup indexes and shit
+  Doc.setup(database);
+
+  return {};
+};
 
 dataModels.Doc = Doc;
 

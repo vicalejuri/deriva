@@ -6,7 +6,6 @@ import {  Link } from 'react-router';
 import classNames from 'classnames';
 
 import utils from 'utils/index.js';
-import dataModels from 'models/index.js';
 
 require('styles/deriva/docs/Upload.scss');
 
@@ -49,14 +48,17 @@ let UploadComponent = React.createClass({
                      provider_name: this.state.oembed.provider_name,
                      oembed: this.state.oembed }
 
-    let doc = new dataModels.Doc(doc_props);
-    window.remote_db.put( doc ).then( () => {
+    this.props.actions.insert_doc( doc_props );
+    
+    /*
+    window.db.put( doc ).then( () => {
       console.log('uploaddoc',doc._id, 'OK');
       this.setState({success: true, failed: false,
                      message: `Created ${doc._id}`});
     }).catch( (err) => {
       console.error('uploaddoc',err);
     });
+    */
   },
 
 
@@ -95,11 +97,18 @@ let UploadComponent = React.createClass({
   }
 });
 
-UploadComponent.displayName = 'Deriva.user.UploadComponent';
+UploadComponent.displayName = 'Deriva.docs.UploadComponent';
 
-// Uncomment properties you need
-// WatchComponent.propTypes = {};
-// WatchComponent.defaultProps = {};
+// redux
+import actions from 'actions'
+import { bindActionCreators } from 'redux'
+
+import { connect } from 'react-redux'
+UploadComponent = connect( (state) => {
+  return {}
+}, (dispatch) => {
+  return { actions: bindActionCreators(actions, dispatch) }
+})(UploadComponent);
 
 export default UploadComponent;
 module.exports = UploadComponent

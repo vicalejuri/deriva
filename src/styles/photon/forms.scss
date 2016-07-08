@@ -30,7 +30,7 @@ input[type="checkbox"] {
   font-size: $font-size-default;
   line-height: $line-height-default;
   background-color: $chrome-color;
-  border: 1px solid $border-color;
+  border: 3px solid $border-color;
   border-radius: $default-border-radius;
   outline: none;
 
@@ -88,4 +88,57 @@ textarea {
   &:last-child {
     margin-right: 0;
   }
+}
+
+
+// Tags input
+.react-tagsinput {
+  width: 100%;
+  min-height: 25px;
+  padding: $padding-less $padding;
+  font-size: $font-size-default;
+  line-height: $line-height-default;
+  background-color: $chrome-color;
+  border: 3px solid $border-color;
+  border-radius: $default-border-radius;
+  outline: none;
+
+  &--focused {
+    border-color: $focus-input-color;
+    box-shadow: 0 0 0 3px $focus-input-color;
+  }
+
+  .react-tagsinput-tag {
+    background-color: $primary-color;
+    border-radius: 2px;
+    border: 1px solid $border-color;
+    color: $default-color;
+    display: inline-block;
+    font-weight: 400;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 5px;
+  }
+
+  .react-tagsinput-remove {
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .react-tagsinput-tag a::before {
+    content: " ×";
+  }
+
+  .react-tagsinput-input {
+    background: transparent;
+    border: 0;
+    color: #777;
+    font-weight: 400;
+    margin-bottom: 6px;
+    margin-top: 1px;
+    outline: none;
+    padding: 5px;
+    width: 80px;
+  }
+
 }

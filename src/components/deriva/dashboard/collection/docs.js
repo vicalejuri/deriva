@@ -7,7 +7,6 @@ import classNames from 'classnames';
 
 require('styles/deriva/dashboard/list.scss');
 
-
 /*
  * Single rows
  */
@@ -73,9 +72,17 @@ let ListDocsComponent = React.createClass({
 
               <section className="actions">
                 <div className="info">Total: <strong>{this.props.docs.length}</strong></div>
-                <button className="btn btn-default" onClick={this.remove}>
-                  <span className="icon icon-minus-circled"></span>
-                </button>
+
+                <div className="btn-group">
+                  <button className="btn btn-default" onClick={this.remove}>
+                    <span className="icon icon-trash"></span>
+                  </button>
+
+                  <Link to="/docs/upload" className="btn btn-default">
+                    <span className="icon icon-plus-circled"></span>
+                  </Link>
+                </div>
+
               </section>
               <table className="list-component table-striped" ref="table">
               <thead><tr>

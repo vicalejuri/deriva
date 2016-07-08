@@ -23,10 +23,7 @@ import { Router, match, Route, Link, browserHistory } from 'react-router';
 */
 
 export default {
-  /*
-    component: 'div',
-    childRoutes: [{
-  */
+
       path: '/',
       component: require('components/Main'),
 
@@ -34,7 +31,7 @@ export default {
         require('./deriva/docs/index.js'),
         require('./deriva/user/index.js'),
         require('./deriva/dashboard/index.js')
-      ]
+      ],
 
-    //}]
+      indexRoute: require('./deriva/docs/gallery.js')
 }

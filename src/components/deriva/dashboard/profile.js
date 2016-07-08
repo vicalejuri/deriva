@@ -4,8 +4,18 @@ import {  Link } from 'react-router';
 import _ from 'lodash';
 import classNames from 'classnames';
 
+import TagsInput from 'react-tagsinput'
+
 require('styles/deriva/dashboard/profile.scss');
 let ProfileComponent = React.createClass({
+
+  getInitialState() {
+    return {roles: []}
+  },
+
+  handleRoleChange( roles ){
+    this.setState({roles})
+  },
 
   render() {
     return (<div className={classNames("dashboard-profile")}>
@@ -16,7 +26,7 @@ let ProfileComponent = React.createClass({
                 <section className="main">
                     <div className="form-group">
                       <label>Name</label>
-                      <input type="text" className="form-control" id="title" placeholder="{name}" />
+                      <input type="text" className="form-control" id="title" placeholder={this.props.user.name} />
                     </div>
                     <div className="form-group">
                       <label>Email</label>
@@ -24,16 +34,7 @@ let ProfileComponent = React.createClass({
                     </div>
                     <div className="form-group">
                       <label>Role</label>
-                      <select className="form-control" id="role">
-                      <option>Option one</option>
-                          <option>Option two</option>
-                          <option>Option three</option>
-                          <option>Option four</option>
-                          <option>Option five</option>
-                          <option>Option six</option>
-                          <option>Option seven</option>
-                          <option>Option eight</option>
-                      </select>
+                      <TagsInput value={this.props.user.roles} onChange={this.handleRoleChange} />
                     </div>
                 </section>
 
@@ -48,9 +49,18 @@ let ProfileComponent = React.createClass({
 
 ProfileComponent.displayName = 'Deriva.dashboard.ProfileComponent';
 
-// Uncomment properties you need
-// WatchComponent.propTypes = {};
-// WatchComponent.defaultProps = {};
+// Connect to redux store
+import actions from 'actions'
+import { bindActionCreators } from 'redux'
+
+import { connect } from 'react-redux'
+
+ProfileComponent = connect( (state) => {
+  return {user: state.user}
+}, (dispatch) => {
+  return { actions: bindActionCreators(actions, dispatch) }
+})(ProfileComponent);
+
 
 export default ProfileComponent;
 module.exports = ProfileComponent;

@@ -5,11 +5,22 @@ import PouchDB from 'pouchdb'
 import utils from 'utils/index.js'
 import _ from 'lodash'
 
-export function Doc( params ) {
-  this._id =   utils.uuid();
-  this.type = 'deriva/doc';
-  this.data = params;
+/*
+ * Base document
+ */
+export class Doc {
+  constructor(params){
+    this._id =   utils.uuid();
+    this.type = 'deriva/doc';
+    this.data = params;
+  }
+
 }
+Doc.setup = (db) => {
+  db.createIndex({index: {fields: ['type','data.title']}});
+
+}
+
 
 export let Channel = {};
 export default Doc;

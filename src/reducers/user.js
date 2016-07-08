@@ -38,6 +38,7 @@ const user = (state = AnonymousState, action) => {
       return Object.assign({}, state, {
         name: action.data.userCtx.name,
         data: action.data.userCtx,
+        roles: action.data.userCtx.roles,
         error: false,
         message: `Hello ${action.data.userCtx.name}`,
         authenticated: true

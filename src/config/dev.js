@@ -8,7 +8,9 @@ let config = {
   OEMBED_ENDPOINT:  'http://localhost:8061/oembed',
   OEMBED_API_KEY:   '123456789',
 
-  POUCHDB_SERVER:   'http://localhost:5984/deriva',
+  POUCHDB_SERVER:   'http://localhost:5984/docs',
+  //POUCHDB_SERVER: 'ws://localhost:3001',
+  POUCHDB_REMOTE_NAME: 'deriva',
   DERIVA_YTUBE:     'AIzaSyA84xjydegSxJZz03yxgOG5dB48q0C1DSM'
 };
 
