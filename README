@@ -17,4 +17,10 @@ Technology
 ===========
 
 	This is javascript web application, made with React and PouchDB.
-	So, in order to install
+
+
+Roadmap
+=======
+
+	- [ ] 0.0.1.1 - Multiple Channels support
+	- [x] 0.0.1.0 - Hello World.
