@@ -21,6 +21,23 @@ Doc.setup = (db) => {
 
 }
 
+/*
+ * Channel
+ */
+export class Channel {
+  constructor(params){
+    this._id = params.title;
+    this.type = 'deriva/channel';
+    this.data = {
+      title: 'Psycology',
+      subtitle: 'Psycology and mind studies',
+      color: '3FE20F'
+    };
+  }
+}
 
-export let Channel = {};
+Channel.setup = (db) => {
+  db.createIndex({index: {fields: ['type','data.title']}})
+}
+
 export default Doc;

@@ -24,6 +24,13 @@ let DashboardComponent = React.createClass({
                       Docs
                     </Link>
                   </span>
+                  <span className="nav-group-item" href="#">
+                    <Link to="/dashboard/collection/channels">
+                    <span className="icon icon-database" ></span>
+                      Channels
+                    </Link>
+                  </span>
+
 
                   <span className="nav-group-item" href="#">
                     <span className="icon icon-database" ></span>

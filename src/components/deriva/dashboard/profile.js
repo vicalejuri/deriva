@@ -26,7 +26,7 @@ let ProfileComponent = React.createClass({
                 <section className="main">
                     <div className="form-group">
                       <label>Name</label>
-                      <input type="text" className="form-control" id="title" placeholder={this.props.user.name} />
+                      <input type="text" className="form-control" id="title" placeholder={this.props.user.name} value={this.props.user.name}/>
                     </div>
                     <div className="form-group">
                       <label>Email</label>
