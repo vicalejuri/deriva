@@ -1,10 +1,20 @@
 deriva
 ======
 
-	We use parse backend server (https://github.com/ParsePlatform/Parse-Server), so dont
-	forget to start it before.
+	A app for storing/sharing/tagging video documentaries
+	over youtube/webtorrent.
 
-	$ parse-server ./cfg/parse.json
+	We started as a facebook group for br documentaries.
+	We made a website to make it easier to share and discover.
 
-👧 👨 👩 👱 👴 👵 👲 👳 👮 👷 💂 🕵 🎅 👼 👸 
+	# Demo
+	http://deriva.labs.com/
+
+👧 👨 👩 👱 👴 👵 👲 👳 👮 👷 💂 🕵 🎅 👼 👸
 👰 🚶 🏃 💃 👯 👫 👬 👭 🙇 💁 🙅 🙆 🙋 🙎
+
+Technology
+===========
+
+	This is javascript web application, made with React and PouchDB.
+	So, in order to install

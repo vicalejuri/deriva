@@ -1,2 +1,2 @@
 # About this folder
-This folder will hold all of your **redux** reducers
+This folder will hold all of your **redux** actions

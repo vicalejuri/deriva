@@ -54,7 +54,9 @@ let PlayerComponent = React.createClass({
 
   render() {
     return (<section ref="player" className="player-component" >
-              <div data-type={this.state.provider} data-video-id={this.state.id}></div>
+              <div data-type={this.state.provider}
+                   data-poster={this.props.doc.oembed.thumbnail_url}
+                   data-video-id={this.state.id}></div>
             </section>
     );
   }

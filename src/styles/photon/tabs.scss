@@ -35,7 +35,7 @@
     text-align: center;
     color: #666;
     opacity: 0;
-    transition: opacity .1s linear, background-color .1s linear;
+    transition: opacity .1s $easing-default, background-color .1s $easing-default;
     border-radius: 3px;
     transform: translateY(-50%);
     z-index: 10;
@@ -50,7 +50,7 @@
     content: "";
     background-color: rgba(0,0,0,.08);
     opacity: 0;
-    transition: opacity .1s linear;
+    transition: opacity .1s $easing-default;
     z-index: 1;
   }
 

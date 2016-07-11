@@ -13,15 +13,3 @@ pre {
     margin: 0 auto;
   }
 }
-
-polygon , path {
-  stroke: rgba(0,0,0,0.9);
-  stroke-width: 2.0px;
-  transform:rotateY(-180deg) scale(0);
-  transition:all 0.4s cubic-bezier(0.590, 0.720, 0.375, 1.650);
-  transform-origin:center;
-  transition: transform 0.2s ease-out;
-}
-polygon.processed {
-  transform:rotateY(0deg) scale(1);
-}

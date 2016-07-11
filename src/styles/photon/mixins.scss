@@ -4,6 +4,9 @@
 
 // General
 // --------------------------------------------------
+@function unicode($str){
+  @return unquote("\"")+unquote(str-insert($str, "\\", 1))+unquote("\"")
+}
 
 // Clearfix
 // Source: http://nicolasgallagher.com/micro-clearfix-hack/

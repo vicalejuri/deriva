@@ -66,12 +66,14 @@ let HeaderComponent = React.createClass({
               <span className="icon">👴</span>
             </button>
 
+            {/*
             <div className="btn-group" onClick={this.goTo}>
               <button className="btn btn-default " href="/docs/upload">
                 <span className="icon icon-plus" ></span>
                 Upload
               </button>
             </div>
+            */}
 
           </div>
           <div onMouseLeave={this.togglePopoverLinks} className={classNames('anim-fadeIn',menu_popover_classes)}>

@@ -83,7 +83,7 @@ a {
   background-image: none;
   border: 1px solid #ddd;
   border-radius: 4px;
-  transition: all .2s linear;
+  transition: all .2s $easing-default;
 
   &:hover {
     border-color: #999;
@@ -229,7 +229,7 @@ a {
   color: #fff;
   white-space: nowrap;
   transform: translatex(-50%);
-  transition: opacity .15s linear;
+  transition: opacity .15s $easing-default;
   opacity: .5;
   z-index: 10;
 
@@ -296,7 +296,7 @@ a {
   color: #fff;
   line-height: 1;
   opacity: .7;
-  transition: opacity .15s linear;
+  transition: opacity .15s $easing-default;
 
   &:hover {
     opacity: 1;

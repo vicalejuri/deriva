@@ -5,14 +5,39 @@ import _ from 'lodash'
 import {  Link , browserHistory} from 'react-router';
 import classNames from 'classnames';
 
+let Isotope = require('isotope-layout')
+
 require('styles/deriva/docs/gallery.scss');
 
 /*
  * Media gallery
  */
 let GalleryComponent = React.createClass({
+  getInitialState() {
+    return {isotope: false}
+  },
+
   componentDidMount( ) {
     this.props.actions.list_all_docs();
+  },
+
+
+  componentDidUpdate() {
+    if(!this.state.isotope){
+
+      // create isotope layot
+      this.setState({isotope:  new Isotope( this.refs.gallery, {
+        itemSelector: '.item',
+        layoutMode: 'masonry',
+        percentPosition: true
+      }) });
+
+    } else {
+
+      // Reload items plz
+      console.log("gallery: isotope.reloadItems", this.props.docs.length);
+      this.state.isotope.reloadItems();
+    }
   },
 
   itemClick(ev){
@@ -27,6 +52,7 @@ let GalleryComponent = React.createClass({
   render() {
 
     // inline style for .item element
+    let idx = 0;
     let itemStyle = (doc) => {
       return {
         backgroundImage: `url(${doc.data.oembed.thumbnail_url})`
@@ -42,18 +68,23 @@ let GalleryComponent = React.createClass({
                 <div className="info">Total: <strong>{this.props.docs.length}</strong></div>
 
               </section>
-              <ul className="gallery" ref="gallery">
+              <div className="gallery" ref="gallery">
                 {this.props.docs.map( (doc, i) =>
-                  <li
+                  <Link
                       ref={`item[${i}]`} doc={doc} key={doc._id}
-                      href={`/docs/watch/${doc._id}`} onClick={this.itemClick}
-                      className="item clickable" style={itemStyle(doc)}>
-                    <div className="icon icon-trash">
-                      {doc.data.title}
-                    </div>
-                  </li>
+                      to={`/docs/watch/${doc._id}`} onClick={this.itemClick}
+                      className={classNames('item','clickable')} style={itemStyle(doc)}>
+                    <span className="label passtrough">
+                      <span className="helper"></span>
+                      <span className="info">
+                        <h2>{doc.data.title}</h2>
+                        <hr></hr>
+                        <p>{doc.data.provider_name}</p>
+                      </span>
+                    </span>
+                  </Link>
                 )}
-              </ul>
+              </div>
           </div>
     );
   }

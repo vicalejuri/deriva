@@ -2,7 +2,7 @@
 
 .signup-component {
   min-width: 300px;
-  width: 40%;
+  max-width: 100%;
   padding: 10px 30px 20px 30px;
   margin: 40px auto 30px auto;
   border: 1px solid $border-color;
@@ -20,6 +20,7 @@
         text-align: center;
 
         display: flex;
+        transition: all 0.3s $easing-default;
 
         &.title , &.terms { display: block; }
         &.terms { margin-top: 20px; }
@@ -67,12 +68,15 @@
  * Invite sucess/error
  */
 #invite {
+  transition: background-color 0.3s $easing-default;
+
   &.empty {}
   &.error {
-    background-color: #f00;
+    background-color: $warning-color;
+    animation: shake 0.5s $easing-default;
   }
   &.success {
-    background-color: #0f0;
+    background-color: $positive-color;
   }
 }
 
@@ -83,13 +87,13 @@
  */
 .signup-component.failed {
   form > div.terms {
-    color: #f00;
+    color: $warning-color;
   }
 }
 
 
 .signup-component.success {
   form > div.terms {
-    color: #0fb3d0;
+    color: $positive-color;
   }
 }

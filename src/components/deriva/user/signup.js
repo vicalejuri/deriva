@@ -5,6 +5,7 @@ import _ from 'lodash';
 import classNames from 'classnames';
 
 import nacl from 'tweetnacl';
+import util from 'tweetnacl-util';
 
 require('styles/deriva/user/signup.scss');
 
@@ -17,17 +18,18 @@ let SignupComponent = React.createClass({
     ev.preventDefault();
 
     let invite_code = this.refs.invite.value;
+    let uint8_invite = util.decodeUTF8(invite_code);
 
-    const hash = nacl.hash( invite_code );
-    let hex_code = hash;
+    const uint8_hash = nacl.hash( uint8_invite );
+    let hex_code = util.encodeBase64( uint8_hash )
 
-    console.log(hex_code, hash);
-    const hash2 = nacl.hash('alienacao')
-    console.log( hash2 );
+    console.log(hex_code, uint8_hash);
+    //const hash2 = nacl.hash('alienacao')
+    //console.log( hash2 );
 
     // alienação || alienacao
-    if(hex_code == "77fe165ab27d4ba9b479145402529d9816b4fc83bbace71948d656f9321ec6d6" ||
-       hex_code == "037d3826e59234c02644da2fda5eaab0da21ede8dae58282ac91bd9ff827a235" ){
+    if(hex_code == "covGM2PC9I9YHBJrqom/8PXujTGokJinFuoOjbh9kkBvDQ8wc9gIzmKyaGzk4aq1yyGoFCe0mnQJ+m9byMSY/Q==" ||
+       hex_code == "V5dhqki0pnXr9wR+ChlSi4pBsIzNXif4uVeTucg0NL7sVxfBvfLZtHY6AqyJD//ThJoQoEhusFex0+lTkzMXMA==" ){
       this.setState({invite: 'success'});
     } else {
       this.setState({invite: 'error'})

@@ -82,14 +82,14 @@
  */
 .upload-component.failed {
   form > div.terms {
-    color: #f00;
+    color: $warning-color;
   }
 }
 
 
 .upload-component.success {
   form > div.terms {
-    color: #0fb3d0;
+    color: $positive-color;
   }
 }
 

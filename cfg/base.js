@@ -32,6 +32,9 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
+      masonry: 'masonry-layout',
+      isotope: 'isotope-layout',
+
       libs: `${defaultSettings.srcPath}/libs/`,
       actions: `${defaultSettings.srcPath}/actions/`,
       reducers: `${defaultSettings.srcPath}/reducers/`,
@@ -41,7 +44,7 @@ module.exports = {
       stores: `${defaultSettings.srcPath}/stores/`,
       utils:  `${defaultSettings.srcPath}/utils/`,
       styles: `${defaultSettings.srcPath}/styles/`,
-      config: `${defaultSettings.srcPath}/config/` + process.env.REACT_WEBPACK_ENV
+      config: `${defaultSettings.srcPath}/config/` + process.env.ENV
     }
   },
   target: 'web',

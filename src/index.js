@@ -24,40 +24,31 @@ PouchDB.plugin( PouchFind );
 PouchDB.plugin( PouchDBAuth );
 PouchDB.debug.enable('pouchdb:http');
 
-// Local sync
-let local_db = new PouchDB('docs')
+// db sync
 let remote_db = new PouchDB( config.POUCHDB_SERVER )
+let local_db = remote_db;
 
-/*
-let sync_client = new PouchSync.createClient()
-let sync = sync_client.connect( config.POUCHDB_SERVER )
-                      .on('error', (err) => {
-                        console.error(err);
-                      })
-                      .sync(local_db, {remote_name: config.POUCHDB_REMOTE_NAME});
-*/
+// Offline first
+if(config.POUCHDB_OFFLINE_FIRST){
+  let local_db = new PouchDB('docs')
 
-const syncEvents = ['change', 'paused', 'active', 'denied', 'complete', 'error'];
-const clientEvents = ['connect', 'disconnect', 'reconnect'];
+  /*
+   * Enable sync with remote
+   */
+  const syncEvents = ['change', 'paused', 'active', 'denied', 'complete', 'error'];
+  const clientEvents = ['connect', 'disconnect', 'reconnect'];
 
-let sync = PouchDB.sync( remote_db, local_db, {live: true, retry: true});
+  let sync = PouchDB.sync( remote_db, local_db, {live: true, retry: true});
 
-syncEvents.forEach( (ev) => {
-  sync.on(ev, (info) => {
-    if(ev == 'change'){
-      console.log( `sync:${ev} --> ${info}`, info)
-    }
-    //store.dispatch({type: actions.SET_SYNC_STATE, data: ev});
-  })
-});
-
-/*{}
-clientEvents.forEach( (ev) => {
-  sync_client.on(ev, () => {
-    store.dispatch({type: actions.SET_SYNC_STATE, data: ev});
-  })
-});
-*/
+  syncEvents.forEach( (ev) => {
+    sync.on(ev, (info) => {
+      if(ev == 'change'){
+        console.log( `sync:${ev} --> ${info}`, info)
+      }
+      //store.dispatch({type: actions.SET_SYNC_STATE, data: ev});
+    })
+  });
+}
 
 
 window.PouchDB = PouchDB

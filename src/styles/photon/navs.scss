@@ -39,3 +39,8 @@
   font-weight: 500;
   color: lighten($gray-color, 20%);
 }
+
+.nav-group-title a ,
+.nav-group-item a {
+  color: inherit;
+}

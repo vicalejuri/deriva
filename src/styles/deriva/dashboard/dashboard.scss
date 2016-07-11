@@ -4,6 +4,13 @@
   width: 100%;
   background-color: #F5F5F5;
 
+  > .sidebar {
+    .nav-group-title ,
+    .nav-group-item {
+      color: inherit;
+    }
+  }
+
   > .main {
     padding: $padding $padding-more;
     padding-top: 0px; padding-bottom: 0px;
