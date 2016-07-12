@@ -3,17 +3,206 @@
 .dashboard {
   width: 100%;
   background-color: #F5F5F5;
+  overflow: hidden;
 
   > .sidebar {
+    z-index: $zmenu;
     .nav-group-title ,
     .nav-group-item {
       color: inherit;
+      a {
+        text-decoration: none;
+      }
+    }
+
+    /* show / hide triggers */
+    .nav-group {
+      .nav-group-item {
+        display: none;
+      }
+    }
+    .nav-group.show {
+      .nav-group-item {
+        display: block;
+      }
     }
   }
 
   > .main {
-    padding: $padding $padding-more;
+    z-index: $zbody;
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+
+
+    //padding: $padding $padding-more;
+    width: 100%;
     padding-top: 0px; padding-bottom: 0px;
-    border: 1px solid $border-color;
+
+    transition: all 0.3s $easing-default;
+  }
+
+  > .rightbar {
+    position: absolute;
+    top: 0px; right: 0px;
+
+    height: 100%;
+    width: 0;
+
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform: translate3d( 100%, 0, 0);
+
+    transition: all 0.3s $easing-default;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: $color-c03;
+  }
+
+}
+
+
+
+/*
+ * Large screens have 3 columns
+ *
+@media (min-width: $desktop-size){
+  .dashboard {
+    > .main {
+      position: relative;
+      width: 100%;
+    }
+
+    > .rightbar {
+      position: relative;
+    }
+
+    &.has_rightbar {
+      > .rightbar {
+        max-width: 50%;
+        width: 40%;
+        min-width: 300px;
+        transform: translate3d(0,0,0);
+      }
+
+      > .main {
+        max-width: calc(100% - 220px - 300px);
+        transform: translate3d(0,0,0);
+      }
+    }
+  }
+}*/
+
+
+/*
+ * Tablet / small window
+ */
+@media (min-width: $smalltablet-size){
+  .dashboard {
+
+    > .main {
+      position: absolute;
+      width: calc(100% - 220px);
+    }
+
+    > .rightbar {
+      position: absolute;
+    }
+
+    &.has_rightbar {
+      > .rightbar {
+        min-width: 300px;
+        transform: translate3d(0,0,0);
+      }
+
+      > .main {
+        width: calc(100% - 220px - 300px);
+      }
+    }
+  }
+}
+
+/*
+ * laptop-size
+ */
+@media (min-width: $laptop-size){
+  .dashboard {
+    &.has_rightbar {
+      > .rightbar {
+        width: 40%;
+      }
+
+      > .main {
+        width: calc(100% - 200px - 41%);
+      }
+    }
+  }
+}
+
+
+/*
+ * Mobile (iphone5) size
+ */
+$footer-height: 40px;
+@media (max-width: $smalltablet-size){
+  .dashboard {
+
+    /* Sidebar appears as a footer */
+    > .sidebar {
+      position: absolute;
+      bottom: 0px;
+      display: flex;
+
+      width: 100vw;
+      min-height: $footer-height;
+      max-width: none;
+      min-width: none;
+      justify-content: space-around;
+
+      .nav-group {
+        position: relative;
+
+        a {
+          text-decoration: none;
+        }
+
+        .nav-group-item {
+          display: none;
+        }
+
+        &::after {
+          position: absolute;
+          display: inline;
+          content: ' ';
+          right: -10px;
+          width: 1px;
+          height: $footer-height;
+          top: 0px;
+          border-right: 1px solid $darker-bottom-border-color;
+        }
+
+        // hide last-child border
+        &::last-child {
+          &::after {
+            border-right: 0;
+          }
+        }
+      }
+    }
+
+    &.has_rightbar {
+      > .rightbar {
+        min-width: 300px;
+        width: 100%;
+        transform: translate3d(0,0,0);
+      }
+
+      > .main {
+        position: absolute;
+        width: 0%;
+      }
+    }
   }
 }

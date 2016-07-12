@@ -5,8 +5,8 @@ let collectionRoute = {
   getChildRoutes( location, cb ) {
     require.ensure([], (require) => {
       cb(null, [
-        require('./docs.js'),
-        require('./channels.js')
+        require('./docs/index.js'),
+        require('./channels/index.js')
       ])
     },'collection')
   }

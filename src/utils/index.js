@@ -4,18 +4,21 @@ import config from 'config';
 
 let utils = {};
 
-import ajax from 'pouchdb/extras/ajax';
+//import ajax from 'pouchdb/extras/ajax';
 
-utils.oembed = (url, cb) => {
+
+utils.oembed = (url) => {
   let url_encoded = qs.stringify({url});
   console.log(`Using ${url} -> ${url_encoded}`);
 
   // Todo: use other xhr library, because
   // pouchdb will wrap error responses
-  ajax({url: `${config.OEMBED_ENDPOINT}?${url_encoded}`,
-                withCredentials: false},
-  (e, r) => {
-      cb(e,r);
+  return fetch( `${config.OEMBED_ENDPOINT}?${url_encoded}`).then( (response) => {
+    if(response.status == 200 || response.status == 0){
+      return Promise.resolve(response.json());
+    } else {
+      return Promise.reject(new Error(response.statusText))
+    }
   });
 };
 

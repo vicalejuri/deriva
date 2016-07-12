@@ -18,7 +18,7 @@ let GalleryComponent = React.createClass({
   },
 
   componentDidMount( ) {
-    this.props.actions.list_all_docs();
+    this.props.actions.list_all_doc();
   },
 
 

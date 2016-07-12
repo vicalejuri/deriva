@@ -6,8 +6,7 @@ let docsRoute = {
     require.ensure([], (require) => {
       cb(null, [
         require('./gallery.js'),
-        require('./watch.js'),
-        require('./upload.js')
+        require('./watch.js')
       ])
     }, 'docs');
   }

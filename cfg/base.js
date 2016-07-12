@@ -43,13 +43,17 @@ module.exports = {
       assets: `${defaultSettings.srcPath}/assets/`,
       stores: `${defaultSettings.srcPath}/stores/`,
       utils:  `${defaultSettings.srcPath}/utils/`,
+      routes: `${defaultSettings.srcPath}/routes/`,
       styles: `${defaultSettings.srcPath}/styles/`,
       config: `${defaultSettings.srcPath}/config/` + process.env.ENV
     }
   },
   target: 'web',
   node: {
-    fs: 'empty'
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    console: true
   },
   module: {}
 };

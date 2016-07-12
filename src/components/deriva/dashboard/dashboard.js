@@ -6,17 +6,61 @@ import classNames from 'classnames';
 
 require('styles/deriva/dashboard/dashboard.scss');
 let DashboardComponent = React.createClass({
-  render() {
-    let { sidebar, main, children, params } = this.props
 
-    return (<div className={classNames("pane-group","dashboard")}>
+  isViewportBigEnough(){
+    let width = document.body.clientWidth;
+
+    /* $smalltablet-size */
+    let show = false;
+    if(width >= 481){
+      show = true;
+    }
+
+    return {show}
+  },
+
+  getInitialState(){
+    let shouldShow = this.isViewportBigEnough();
+    return {navs: {
+            collections: shouldShow,            profile: shouldShow,
+            settings: shouldShow,
+          }};
+  },
+
+  toggleNavGroup( nav_ref ){
+    if(! _.has(this.state.navs,nav_ref)){
+      console.error("nav group ", nav_ref, " is invalid. Maybe you mispelled?");
+      console.dir( this.state.navs);
+      return;
+    }
+
+    return (ev) => {
+      console.log("licked");
+      ev.preventDefault();
+      this.setState(_.merge({}, this.state,
+                             {navs: {[nav_ref]: {show: !this.state['navs'][nav_ref].show}}}));
+    }
+  },
+
+  render() {
+    let { sidebar, main, rightbar, children, params } = this.props
+
+    let rightbar_klass = classNames('rightbar', (!rightbar ? 'empty' : ''));
+    return (<div className={classNames("pane-group","dashboard",{has_rightbar: rightbar})}>
               <section className="pane pane-sm sidebar">
-                <nav className="nav-group">
-                  <h5 className="nav-group-title"> <Link to="/dashboard/profile"> Profile </Link> </h5>
-                </nav>
-                <nav className="nav-group">
+                <nav className={classNames("nav-group", this.state.navs.profile)} >
                   <h5 className="nav-group-title">
-                    <Link to="/dashboard/profile"> Collection </Link>
+                    <Link to="/dashboard/profile">
+                    <span className="icon icon-user" > </span>
+                    Profile</Link>
+                  </h5>
+                </nav>
+                <nav className={classNames("nav-group", this.state.navs.collections)} >
+                  <h5 className="nav-group-title">
+                  <Link to="/dashboard/profile" onClick={this.toggleNavGroup('collections')}>
+                    <span className="icon icon-flag" > </span>
+                    Collections
+                  </Link>
                   </h5>
                   <span className="nav-group-item" href="#">
                     <Link to="/dashboard/collection/docs">
@@ -39,8 +83,13 @@ let DashboardComponent = React.createClass({
 
                 </nav>
 
-                <nav className="nav-group">
-                  <h5 className="nav-group-title" ><Link to="/dashboard/">Settings</Link></h5>
+                <nav className={classNames("nav-group", this.state.navs.settings)}>
+                  <h5 className="nav-group-title" >
+                    <Link to="/dashboard/" onClick={this.toggleNavGroup('settings')}>
+                      <span className="icon icon-record" style={{"color":"#fc605b"}}> </span>
+                      Settings
+                    </Link>
+                  </h5>
                   {/*
                   <span className="nav-group-item" href="#">
                     <span className="icon icon-record" style={{"color":"#fc605b"}}></span>
@@ -55,6 +104,9 @@ let DashboardComponent = React.createClass({
               </section>
               <section className="pane main">
                 {main || <p>Choose an page from the sidebar.</p>}
+              </section>
+              <section className={rightbar_klass}>
+                {rightbar}
               </section>
             </div>
     );

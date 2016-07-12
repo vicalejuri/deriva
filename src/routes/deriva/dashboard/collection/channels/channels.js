@@ -4,9 +4,9 @@ let channelsRoute = {
 
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      let listDocsComponent = require('components/deriva/dashboard/collection/channels');
+      let listDocsComponent = require('components/deriva/dashboard/collection/channels/channels.js');
       cb(null, { main: listDocsComponent })
-    },'components:deriva:dashboard:collection:channels')
+    },'components:deriva:dashboard:collection:channels:channels')
   }
 
 }

@@ -9,6 +9,7 @@ var autoPrefixer = require('autoprefixer');
 
 function getDefaultModules() {
   return {
+    noParse: /node_modules\/json-schema\/lib\/validate\.js/,
     preLoaders: [{
         test: /\.(js|jsx)$/,
         include: srcPath,

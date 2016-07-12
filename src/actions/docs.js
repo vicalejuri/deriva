@@ -5,7 +5,7 @@ export const LIST_DOC = 'LIST_DOC';
 export const LIST_DOC_SUCCESS = 'LIST_DOC_SUCCESS';
 export const LIST_DOC_ERROR  = 'LIST_DOC_ERROR';
 
-export const list_all_docs = () => {
+export const list_all_doc = () => {
   return (dispatch) => {
     dispatch({type: LIST_DOC})
     //window.db.query( 'docs/by_id', {include_docs: true} )

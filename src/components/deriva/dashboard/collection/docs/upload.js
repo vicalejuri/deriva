@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 import utils from 'utils/index.js';
 
-require('styles/deriva/docs/Upload.scss');
+require('styles/deriva/dashboard/collection/docs/upload.scss');
 
 let UploadComponent = React.createClass({
   getInitialState() {
@@ -23,10 +23,16 @@ let UploadComponent = React.createClass({
   preview_embed(ev) {
     let url = this.refs.url.value;
 
-    utils.oembed( url, (err, data) => {
-      if(err && err.status === 500){
-        this.setState({success: false, failed: true,
-                       message: 'No preview available...'})
+    utils.oembed( url ).then( (data) => {
+
+                          this.setState({success: false, failed: false,
+                                         url, oembed: data });
+
+                        }).catch( (err) => {
+                         this.setState({success: false, failed: true,
+                                        message: 'Sorry, the preview robot is offline.'})
+                        } );
+    /*
       } else if(err && err.status === 404){
         this.setState({success: false, failed: true,
                        message: 'Video not found'});
@@ -35,6 +41,7 @@ let UploadComponent = React.createClass({
                        url, oembed: data });
       }
     })
+    */
   },
 
   uploadDoc(ev) {

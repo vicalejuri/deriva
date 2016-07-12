@@ -5,32 +5,26 @@ import _ from 'lodash'
 import {  Link , browserHistory} from 'react-router';
 import classNames from 'classnames';
 
-/*
- * Table listing every document
- */
+require('styles/deriva/dashboard/list.scss');
+
 let ListChannelsComponent = React.createClass({
   componentDidMount( ) {
-    this.props.actions.list_all_channels();
-  },
-
-  check( doc_id, doc ){
-    //ReactDOM.findDOMNode()
-    //console.log("check all", $$);
+    this.props.actions.list_all_channel();
   },
 
   remove( ){
-    let checked_rows = (this.props.docs.filter( (doc, i) => {
-      let dom_el = this.refs[`doc[${i}]`];
+    let checked_rows = (this.props.channels.filter( (channel, i) => {
+      let dom_el = this.refs[`channel[${i}]`];
       return (dom_el.state.checked == true);
     }));
-    checked_rows.forEach( (doc,i) => {
-      console.log(doc);
-      this.props.actions.delete_doc( doc );
+    checked_rows.forEach( (channel,i) => {
+      console.log(channel);
+      this.props.actions.delete_channel( channel );
     })
   },
 
   render() {
-    return (<div className="list-page docs">
+    return (<div className="list-page channels">
               <section className="header">
                 <h1> All Channels </h1>
               </section>
@@ -39,11 +33,15 @@ let ListChannelsComponent = React.createClass({
                 <div className="info">Total: <strong>{this.props.channels.length}</strong></div>
 
                 <div className="btn-group">
+                  <Link to="/dashboard/collection/channels" className="btn btn-default" >
+                    <span className="icon icon-list"></span>
+                  </Link>
+
                   <button className="btn btn-default" onClick={this.remove}>
                     <span className="icon icon-trash"></span>
                   </button>
 
-                  <Link to="/docs/upload" className="btn btn-default">
+                  <Link to="/dashboard/collection/channels/upload" className="btn btn-default">
                     <span className="icon icon-plus-circled"></span>
                   </Link>
                 </div>
@@ -53,8 +51,7 @@ let ListChannelsComponent = React.createClass({
               <thead><tr>
                   <th><input type="checkbox" onClick={this.checkAll}/> </th>
                   <th>id</th>
-                  <th>title</th>
-                  <th>url</th>
+                  <th>title / subtitle</th>
               </tr></thead>
               <tbody>
                 {this.props.channels.map( (channel, i) =>

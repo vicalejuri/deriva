@@ -45,12 +45,7 @@ let DocRow = React.createClass({
  */
 let ListDocsComponent = React.createClass({
   componentDidMount( ) {
-    this.props.actions.list_all_docs();
-  },
-
-  check( doc_id, doc ){
-    //ReactDOM.findDOMNode()
-    //console.log("check all", $$);
+    this.props.actions.list_all_doc();
   },
 
   remove( ){
@@ -74,11 +69,15 @@ let ListDocsComponent = React.createClass({
                 <div className="info">Total: <strong>{this.props.docs.length}</strong></div>
 
                 <div className="btn-group">
+                  <button className="btn btn-default" >
+                    <span className="icon icon-list"></span>
+                  </button>
+
                   <button className="btn btn-default" onClick={this.remove}>
                     <span className="icon icon-trash"></span>
                   </button>
 
-                  <Link to="/docs/upload" className="btn btn-default">
+                  <Link to="/dashboard/collection/docs/upload" className="btn btn-default">
                     <span className="icon icon-plus-circled"></span>
                   </Link>
                 </div>

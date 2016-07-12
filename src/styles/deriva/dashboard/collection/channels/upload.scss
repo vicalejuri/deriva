@@ -101,7 +101,7 @@
 /*
  * media queries
  */
-@media (max-width: 460px) {
+@media (max-width: $smalltablet-size) {
 
 .upload-component {
   min-width: 360px;
