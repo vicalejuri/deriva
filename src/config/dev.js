@@ -14,7 +14,7 @@ let config = {
 
   // Pouchdb remote database
   POUCHDB_OFFLINE_ENABLED: false,
-  POUCHDB_SERVER:   'http://localhost:3001/docs',
+  POUCHDB_SERVER:   'http://localhost:3001/deriva-test',
 
   //POUCHDB_SERVER: 'ws://localhost:3001',
 

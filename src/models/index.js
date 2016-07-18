@@ -1,15 +1,16 @@
 import { Doc , Channel } from './docs.js';
+import _ from 'lodash'
 
 let dataModels = function( database ){
 
-  // Setup indexes and shit
-  Doc.setup(database);
-  Channel.setup(database);
+  // Setup indexes and relations & shit
+  let full_schema = [Doc,Channel].map( (doc) => {
+    return doc.schema();
+  });
 
-  return {};
+  database.setSchema( full_schema )
+
+  return {Doc, Channel};
 };
-
-dataModels.Doc = Doc;
-dataModels.Channel = Channel;
 
 export default dataModels;

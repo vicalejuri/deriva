@@ -66,7 +66,7 @@ export const get_doc = ( doc_id ) => {
         Promise.resolve(doc);
     }).catch( (err) => {
         dispatch({type: GET_DOC_ERROR, data: err });
-        Promise.reject(doc);
+        Promise.reject(err);
     });
   }
 }

@@ -18,15 +18,21 @@ let UploadComponent = React.createClass({
     // cancel form submission
     ev.preventDefault();
 
-    let doc_props = {_id: this.refs._id.value,
+    let channel_props = {
                      title: this.refs.title.value,
                      subtitle: this.refs.subtitle.value,
                      description: this.refs.description.value,
-                     author: this.refs.author.value,
-                     priority: this.refs.order.value
+                     tags: this.refs.tags.value,
+                     order: this.refs.order.value,
+                     docs: []
                     }
 
-    this.props.actions.insert_doc( doc_props );
+    //let newChannel = new dataModels.Channel( doc_props );
+    this.props.actions.insert_channel( channel_props ).then( (response) => {
+      console.log('insert_doc success', response);
+    }).catch( (err) => {
+      console.error(err);
+    });
   },
 
 
@@ -58,12 +64,12 @@ let UploadComponent = React.createClass({
               </div>
 
               <div className="form-group">
-                <label for="author">Author</label>
-                <input type="text" className="form-control" ref="author" id="author" placeholder="Autor"/>
+                <label for="tags">Tags</label>
+                <input type="text" className="form-control" ref="tags" id="tags" placeholder="Tags"/>
               </div>
               <div className="form-group">
                 <label for="author">order</label>
-                <input type="range" min="0" max="100" step="1" defaultValue="0" className="form-control" ref="priority" id="priority" placeholder="Autor"/>
+                <input type="range" min="0" max="100" step="1" defaultValue="0" className="form-control" ref="order" id="order"/>
               </div>
 
               <div className="terms">

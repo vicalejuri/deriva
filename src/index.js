@@ -19,9 +19,13 @@ import PouchDB from 'pouchdb'
 import PouchDBAuth from 'pouchdb-authentication'
 import PouchSync from 'pouch-websocket-sync'
 import PouchFind from 'pouchdb-find';
+import PouchUpsert from 'pouchdb-upsert';
+import PouchRelational from 'relational-pouch';
 
 PouchDB.plugin( PouchFind );
 PouchDB.plugin( PouchDBAuth );
+PouchDB.plugin( PouchUpsert );
+PouchDB.plugin( PouchRelational );
 PouchDB.debug.enable('pouchdb:http');
 
 // db sync
