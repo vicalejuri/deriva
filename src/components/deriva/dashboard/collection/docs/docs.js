@@ -31,9 +31,9 @@ let DocRow = React.createClass({
 
     return (<tr className={classNames(this.state)} onClick={this.check} ref="tr">
       <td><input type="checkbox" ref="checkbox" className="checkbox" onClick={this.check} checked={this.state.checked}/></td>
-      <td><Link to={`/docs/watch/${doc._id}`} >{doc._id}</Link></td>
-      <td>{doc.data.title}</td>
-      <td>{doc.data.url}</td>
+      <td><Link to={`/docs/watch/${doc.id}`} >{doc.id}</Link></td>
+      <td>{doc.title}</td>
+      <td>{doc.url}</td>
     </tr>);
   }
 });
@@ -92,7 +92,7 @@ let ListDocsComponent = React.createClass({
               </tr></thead>
               <tbody>
                 {this.props.docs.map( (doc, i) =>
-                  <DocRow ref={`doc[${i}]`} doc={doc} key={doc._id} />
+                  <DocRow ref={`doc[${i}]`} doc={doc} key={doc.id} />
                 )}
               </tbody>
             </table>

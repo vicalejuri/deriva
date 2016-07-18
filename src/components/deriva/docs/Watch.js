@@ -40,7 +40,7 @@ let WatchComponent = React.createClass({
 
     let WatchComponent = () => {
       return (<div>
-          <Player doc={this.props.watch.data}  />
+          <Player doc={this.props.watch}  />
           <section className="info">
             <nav className="nav-group">
               <a className="nav-group-item active">
@@ -55,9 +55,9 @@ let WatchComponent = React.createClass({
               </span>
             </nav>
             <div className="group">
-              <div>{this.props.watch.data.title}</div>
-              <div>{this.props.watch.data.url}</div>
-              <div><textarea readOnly value={JSON.stringify(this.props.watch.data)} /></div>
+              <div>{this.props.watch.title}</div>
+              <div>{this.props.watch.url}</div>
+              <div><textarea readOnly value={JSON.stringify(this.props.watch)} /></div>
             </div>
           </section>
       </div>);

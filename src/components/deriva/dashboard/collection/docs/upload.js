@@ -5,6 +5,9 @@ import _ from 'lodash';
 import {  Link } from 'react-router';
 import classNames from 'classnames';
 
+import TagsInput from 'react-tagsinput'
+import Autosuggest from 'react-autosuggest'
+
 import utils from 'utils/index.js';
 
 require('styles/deriva/dashboard/collection/docs/upload.scss');
@@ -13,7 +16,8 @@ let UploadComponent = React.createClass({
   getInitialState() {
     return { success: false, failed: false, message: false,
              url: false,
-             oembed: {title: '', author: '', html: ''}}
+             oembed: {title: '', author: '', html: ''},
+             channel: []}
   },
 
   embed(html) {
@@ -24,24 +28,12 @@ let UploadComponent = React.createClass({
     let url = this.refs.url.value;
 
     utils.oembed( url ).then( (data) => {
-
                           this.setState({success: false, failed: false,
                                          url, oembed: data });
-
                         }).catch( (err) => {
                          this.setState({success: false, failed: true,
                                         message: 'Sorry, the preview robot is offline.'})
                         } );
-    /*
-      } else if(err && err.status === 404){
-        this.setState({success: false, failed: true,
-                       message: 'Video not found'});
-      } else {
-        this.setState({success: false, failed: false,
-                       url, oembed: data });
-      }
-    })
-    */
   },
 
   uploadDoc(ev) {
@@ -56,24 +48,40 @@ let UploadComponent = React.createClass({
                      oembed: this.state.oembed }
 
     this.props.actions.insert_doc( doc_props );
+  },
 
-    /*
-    window.db.put( doc ).then( () => {
-      console.log('uploaddoc',doc._id, 'OK');
-      this.setState({success: true, failed: false,
-                     message: `Created ${doc._id}`});
-    }).catch( (err) => {
-      console.error('uploaddoc',err);
-    });
-    */
+  channelChange: (ev) => {
+    console.log("channelChange");
   },
 
 
   componentWillReceiveProps( newProps ) {
     // error/success messages
-     if(! newProps.uploaded.error ){
+     if(! _.get(newProps,'uploaded' , false) ){
        this.setState({message: `Created ${newProps.upload._id}`});
      }
+  },
+
+  /*
+   * Make 'channels' autocomplete Suggestion
+   */
+  autocompleteSuggestion(props) {
+
+    let { channel } = this.state;
+    let suggestions = this.props.channels;
+
+
+    return (
+      <Autosuggest
+        suggestions={suggestions}
+        shouldRenderSuggestions={(value) => value && value.trim().length > 0}
+        getSuggestionValue={(suggestion) => suggestion.id }
+        renderSuggestion={(suggestion) => <span>{suggestion.id}</span>}
+        onSuggestionSelected={(e,{suggestion}) => {
+          console.log('suggestion:selected', suggestion.id);
+        }}
+      />
+    )
   },
 
   render() {
@@ -94,8 +102,8 @@ let UploadComponent = React.createClass({
                 <input type="text" className="form-control" ref="title" id="title" placeholder="Título" value={this.state.oembed.title}/>
               </div>
               <div className="form-group">
-                <label for="author">Author</label>
-                <input type="text" className="form-control" ref="author" id="author" placeholder="Autor" value={this.state.oembed.author}/>
+                <label for="author">Channel</label>
+                <TagsInput ref="channel" renderInput={this.autocompleteSuggestion} value={this.state.channel} onChange={this.channelChange}/>
               </div>
               <div className="terms">
                 { this.state.message ? (<p>{this.state.message}</p>) :
@@ -118,7 +126,8 @@ import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
 UploadComponent = connect( (state) => {
-  return {upload: state.upload}
+  return {upload: state.upload,
+          channels: state.channels}
 }, (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 })(UploadComponent);

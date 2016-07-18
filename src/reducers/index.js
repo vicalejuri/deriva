@@ -5,7 +5,6 @@ import remotedb from './remotedb';
 import { docs , watch, upload } from './deriva/docs/docs.js';
 import { channels } from './deriva/channel/channel.js';
 
-console.log('reducers: ',channels);
 const deriva = combineReducers({
   user,
   remotedb,

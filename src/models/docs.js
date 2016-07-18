@@ -10,16 +10,25 @@ import _ from 'lodash'
  */
 export class Doc {
   constructor(params){
-    this._id =   utils.uuid();
+    this.id = utils.uuid()
     this.type = 'deriva/doc';
-    this.data = params;
+
+    this.title = params.title;
+    this.url = params.url
+    this.description = params.description
+    this.type = params.type
+    this.provider_name = params.provider_name
+    this.oembed = params.oembed;
   }
 
 }
 Doc.schema = (db) => {
   return {
     singular: 'deriva/doc',
-    plural:   'docs'
+    plural:   'docs',
+    relations: {
+      'channels': {hasMany: 'deriva/channel'}
+    }
   }
   //db.createIndex({index: {fields: ['type','data.title']}});
 }
@@ -31,7 +40,7 @@ Doc.schema = (db) => {
    "Computação", "Design", "Ecologia", "Economia", "Filosofia", "Física", "Geografia", "História",
    "Jornalismo", "Literatura", "Matemática", "Media", "Música", "Política", "Psicologia", "Química",
    "Religião", "Sociologia"]
-   
+
  */
 export class Channel {
   constructor(params){

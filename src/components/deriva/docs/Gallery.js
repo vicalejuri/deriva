@@ -73,15 +73,15 @@ let GalleryComponent = React.createClass({
               <div className="gallery" ref="gallery">
                 {this.props.docs.map( (doc, i) =>
                   <Link
-                      ref={`item[${i}]`} doc={doc} key={doc._id}
-                      to={`/docs/watch/${doc._id}`} onClick={this.itemClick}
+                      ref={`item[${i}]`} doc={doc} key={doc.id}
+                      to={`/docs/watch/${doc.id}`} onClick={this.itemClick}
                       className={classNames('item','clickable')} style={itemStyle(doc)}>
                     <span className="label passtrough">
                       <span className="helper"></span>
                       <span className="info">
-                        <h2 className="title">{doc.data.title}</h2>
+                        <h2 className="title">{doc.title}</h2>
                         <hr className="separator"></hr>
-                        <p>{doc.data.provider_name}</p>
+                        <p>{doc.provider_name}</p>
                       </span>
                     </span>
                   </Link>
