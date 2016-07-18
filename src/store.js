@@ -14,18 +14,6 @@ let storeMaker = ( db ) => {
   let store = createStore(deriva, compose(
     applyMiddleware(
       thunkMiddleware
-
-/* ,
-      PouchMiddleware({
-        path: '/docs',
-        db,
-        actions: {
-          remove: doc => store.dispatch({type: actions.REMOVE_DOC, doc}),
-          insert: doc => store.dispatch({type: actions.INSERT_DOC, doc}),
-          update: doc => store.dispatch({type: actions.UPDATE_DOC, doc})
-        }
-      })
-*/
     ),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));

@@ -1,6 +1,6 @@
 @import "~styles/photon/variables.scss";
 
-/* upload css */
+/* upload channels css */
 .upload-component {
 
   min-width: 400px;
@@ -104,7 +104,7 @@
 @media (max-width: $smalltablet-size) {
 
 .upload-component {
-  min-width: 360px;
+  min-width: 320px;
 
   input[type="text"], {
     min-width: auto;

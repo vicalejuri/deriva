@@ -18,7 +18,9 @@ let GalleryComponent = React.createClass({
   },
 
   componentDidMount( ) {
-    this.props.actions.list_all_doc();
+    this.props.actions.list_all_doc().then( (docs) => {
+      console.log('list_all_doc', docs, docs.length);
+    });
   },
 
 
@@ -77,8 +79,8 @@ let GalleryComponent = React.createClass({
                     <span className="label passtrough">
                       <span className="helper"></span>
                       <span className="info">
-                        <h2>{doc.data.title}</h2>
-                        <hr></hr>
+                        <h2 className="title">{doc.data.title}</h2>
+                        <hr className="separator"></hr>
                         <p>{doc.data.provider_name}</p>
                       </span>
                     </span>

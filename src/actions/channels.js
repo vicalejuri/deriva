@@ -7,15 +7,18 @@ export const LIST_CHANNEL_ERROR  = 'LIST_CHANNEL_ERROR';
 
 export const list_all_channel = () => {
   return (dispatch) => {
-    dispatch({type: LIST_CHANNEL})
+
+    dispatch({type: LIST_CHANNEL});
     //window.db.query( 'docs/by_id', {include_docs: true} )
-    window.db.find({selector: {type: 'deriva/channel'}})
-    .then( (results) => {
-        let docs = results.docs;
-        dispatch({type: LIST_CHANNEL_SUCCESS, data: docs});
-    }).catch( (err) => {
-        dispatch({type: LIST_CHANNEL_ERROR, data: err });
-    });
+    return window.db.find({selector: {type: 'deriva/channel'}})
+      .then( (results) => {
+          let docs = results.docs;
+          dispatch({type: LIST_CHANNEL_SUCCESS, data: docs});
+          return Promise.resolve(docs)
+      }).catch( (err) => {
+          dispatch({type: LIST_CHANNEL_ERROR, data: err });
+          return Promise.reject(err);
+      });
   }
 };
 

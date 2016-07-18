@@ -7,15 +7,19 @@ export const LIST_DOC_ERROR  = 'LIST_DOC_ERROR';
 
 export const list_all_doc = () => {
   return (dispatch) => {
-    dispatch({type: LIST_DOC})
-    //window.db.query( 'docs/by_id', {include_docs: true} )
-    window.db.find({selector: {type: 'deriva/doc'}})
-    .then( (results) => {
-        let docs = results.docs;
-        dispatch({type: LIST_DOC_SUCCESS, data: docs});
-    }).catch( (err) => {
-        dispatch({type: LIST_DOC_ERROR, data: err });
-    });
+
+    dispatch({type: LIST_DOC});
+
+      //window.db.query( 'docs/by_id', {include_docs: true} )
+      return window.db.find({selector: {type: 'deriva/doc'}})
+      .then( (results) => {
+          let docs = results.docs;
+          dispatch({type: LIST_DOC_SUCCESS, data: docs});
+          return Promise.resolve(docs)
+      }).catch( (err) => {
+          dispatch({type: LIST_DOC_ERROR, data: err });
+          return Promise.reject(err)
+      });
   }
 };
 
@@ -32,11 +36,12 @@ export const insert_doc = ( doc_props ) => {
   let doc = new dataModels.Doc(doc_props);
   return (dispatch) => {
     dispatch({type: INSERT_DOC, data: doc})
-    window.db.put( doc ).then( (response) => {
-      debugger;
-      dispatch({type: INSERT_DOC_SUCCESS, data: doc});
+    return window.db.put( doc ).then( (response) => {
+      dispatch({type: INSERT_DOC_SUCCESS, data: response});
+      return Promise.resolve(response);
     }).catch( (err) => {
       dispatch({type: INSERT_DOC_ERROR, data: err})
+      return Promise.reject(err);
     });
   }
 
@@ -55,11 +60,13 @@ export const GET_DOC_ERROR  = 'GET_DOC_ERROR';
 export const get_doc = ( doc_id ) => {
   return (dispatch) => {
     dispatch({type: GET_DOC, data: doc_id})
-    window.db.get( doc_id )
+    return window.db.get( doc_id )
     .then( (doc) => {
         dispatch({type: GET_DOC_SUCCESS, data: doc});
+        Promise.resolve(doc);
     }).catch( (err) => {
         dispatch({type: GET_DOC_ERROR, data: err });
+        Promise.reject(doc);
     });
   }
 }
@@ -74,11 +81,13 @@ export const DELETE_DOC_ERROR  = 'DELETE_DOC_ERROR';
 export const delete_doc = ( doc ) => {
   return (dispatch) => {
     dispatch({type: DELETE_DOC, data: doc});
-    window.db.remove( doc )
+    return window.db.remove( doc )
     .then( (doc) => {
         dispatch({type: DELETE_DOC_SUCCESS, data: doc});
+        return Promise.resolve(doc);
     }).catch( (err) => {
         dispatch({type: DELETE_DOC_ERROR, data: err });
+        return Promise.reject(err);
     });
   }
 }
