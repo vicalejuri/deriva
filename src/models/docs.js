@@ -2,7 +2,6 @@
  * DataSources from parse-server
  */
 import PouchDB from 'pouchdb'
-import utils from 'utils/index.js'
 import _ from 'lodash'
 
 /*
@@ -10,7 +9,6 @@ import _ from 'lodash'
  */
 export class Doc {
   constructor(params){
-    this.id = utils.uuid()
     this.type = 'deriva/doc';
 
     this.title = params.title;
@@ -25,7 +23,7 @@ export class Doc {
 Doc.schema = (db) => {
   return {
     singular: 'deriva/doc',
-    plural:   'docs',
+    plural:   'deriva/docs',
     relations: {
       'channels': {hasMany: 'deriva/channel'}
     }

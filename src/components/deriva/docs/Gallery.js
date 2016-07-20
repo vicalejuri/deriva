@@ -57,7 +57,7 @@ let GalleryComponent = React.createClass({
     let idx = 0;
     let itemStyle = (doc) => {
       return {
-        backgroundImage: `url(${doc.data.oembed.thumbnail_url})`
+        backgroundImage: `url(${doc.oembed.thumbnail_url})`
       }
     }
 

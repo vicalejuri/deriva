@@ -47,19 +47,26 @@ let UploadComponent = React.createClass({
                      provider_name: this.state.oembed.provider_name,
                      oembed: this.state.oembed }
 
-    this.props.actions.insert_doc( doc_props );
-  },
-
-  channelChange: (ev) => {
-    console.log("channelChange");
+    this.props.actions.insert_doc( doc_props )
+                      .then( (doc) => {
+                          console.log('Created', doc)
+                      })
   },
 
 
   componentWillReceiveProps( newProps ) {
     // error/success messages
-     if(! _.get(newProps,'uploaded' , false) ){
-       this.setState({message: `Created ${newProps.upload._id}`});
+     if( _.get(newProps,'upload' , false) ){
+       if( _.get(newProps,'upload.error')){
+         this.setState({message: `Error: ${newProps.upload.error}`})
+       } else {
+         this.setState({message: `Created ${newProps.upload.id}`});
+       }
      }
+  },
+
+  componentDidMount( ) {
+    this.props.actions.list_all_channel();
   },
 
   /*
@@ -67,22 +74,34 @@ let UploadComponent = React.createClass({
    */
   autocompleteSuggestion(props) {
 
+    const {addTag, ...other} = props;
     let { channel } = this.state;
-    let suggestions = this.props.channels;
+    let input = (props.value && props.value.trim().toLowerCase())
 
+    let suggestions = this.props.channels.filter( (channel) => {
+      return channel.id.toLowerCase().slice(0, input.length) == input
+    });
 
     return (
       <Autosuggest
+        ref={props.ref}
         suggestions={suggestions}
         shouldRenderSuggestions={(value) => value && value.trim().length > 0}
         getSuggestionValue={(suggestion) => suggestion.id }
         renderSuggestion={(suggestion) => <span>{suggestion.id}</span>}
+        inputProps={other}
         onSuggestionSelected={(e,{suggestion}) => {
           console.log('suggestion:selected', suggestion.id);
+          this.refs.channel.addTag( suggestion.id );
         }}
       />
     )
   },
+
+  channelTagsChange(channels_list) {
+    this.setState({channel: channels_list})
+  },
+
 
   render() {
     let signup_classes = {success: this.state.success, failed: this.state.failed };
@@ -103,7 +122,7 @@ let UploadComponent = React.createClass({
               </div>
               <div className="form-group">
                 <label for="author">Channel</label>
-                <TagsInput ref="channel" renderInput={this.autocompleteSuggestion} value={this.state.channel} onChange={this.channelChange}/>
+                <TagsInput ref="channel" renderInput={this.autocompleteSuggestion} value={this.state.channel} onChange={this.channelTagsChange}/>
               </div>
               <div className="terms">
                 { this.state.message ? (<p>{this.state.message}</p>) :

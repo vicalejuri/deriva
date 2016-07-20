@@ -11,9 +11,9 @@ export const list_all_doc = () => {
     dispatch({type: LIST_DOC});
 
       //window.db.query( 'docs/by_id', {include_docs: true} )
-      return window.db.find({selector: {type: 'deriva/doc'}})
+      return window.db.rel.find('deriva/docs')
       .then( (results) => {
-          let docs = results.docs;
+          let docs = results['deriva/docs'];
           dispatch({type: LIST_DOC_SUCCESS, data: docs});
           return Promise.resolve(docs)
       }).catch( (err) => {
@@ -33,12 +33,13 @@ export const INSERT_DOC_SUCCESS = 'INSERT_DOC_SUCCESS';
 export const INSERT_DOC_ERROR  = 'INSERT_DOC_ERROR';
 
 export const insert_doc = ( doc_props ) => {
-  let doc = new dataModels.Doc(doc_props);
+  let doc = new window.dataModels.Doc(doc_props);
   return (dispatch) => {
     dispatch({type: INSERT_DOC, data: doc})
-    return window.db.put( doc ).then( (response) => {
-      dispatch({type: INSERT_DOC_SUCCESS, data: response});
-      return Promise.resolve(response);
+    return window.db.rel.save( 'deriva/doc', doc ).then( (response) => {
+      let new_doc = response['deriva/docs'][0]
+      dispatch({type: INSERT_DOC_SUCCESS, data: new_doc});
+      return Promise.resolve(new_doc);
     }).catch( (err) => {
       dispatch({type: INSERT_DOC_ERROR, data: err})
       return Promise.reject(err);
@@ -60,8 +61,9 @@ export const GET_DOC_ERROR  = 'GET_DOC_ERROR';
 export const get_doc = ( doc_id ) => {
   return (dispatch) => {
     dispatch({type: GET_DOC, data: doc_id})
-    return window.db.get( doc_id )
-    .then( (doc) => {
+    return window.db.rel.find( 'deriva/doc', doc_id )
+    .then( (response) => {
+        let doc = response['deriva/docs'][0]
         dispatch({type: GET_DOC_SUCCESS, data: doc});
         Promise.resolve(doc);
     }).catch( (err) => {

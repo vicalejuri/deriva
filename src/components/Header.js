@@ -8,6 +8,8 @@ import _ from 'lodash';
 import LoginComponent from 'components/deriva/user/inline/login.js';
 import LoggedInComponent from 'components/deriva/user/inline/loggedin.js';
 
+import {ChannelSelect} from 'components/deriva/channels/_select.js';
+
 require('styles/deriva/Header.scss');
 
 /*
@@ -61,10 +63,17 @@ let HeaderComponent = React.createClass({
               <h1 className="title">deriva</h1>
             </Link>
           </div>
+
+          <div className="featured">
+            <ChannelSelect ref='channel_select' className="btn" />
+          </div>
+
           <div className="nav toolbar-actions" side="right">
+
             <button onClick={this.toggleLogin} className="btn btn-default btn-dropdown pull-right">
               <span className="icon">👴</span>
             </button>
+
 
             {/*
             <div className="btn-group" onClick={this.goTo}>
@@ -74,16 +83,15 @@ let HeaderComponent = React.createClass({
               </button>
             </div>
             */}
-
           </div>
+
+
           <div onMouseLeave={this.togglePopoverLinks} className={classNames('anim-fadeIn',menu_popover_classes)}>
             {(this.props.user.authenticated ?
               (<LoggedInComponent ref="loggedin_popover" active={menu_popover_classes.active} />) :
               (<LoginComponent ref="login_popover" active={menu_popover_classes.active} />) )}
           </div>
 
-          <div className="toolbar-actions">
-           </div>
         </header>
     );
   }

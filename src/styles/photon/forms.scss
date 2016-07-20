@@ -141,4 +141,28 @@ textarea {
     width: 80px;
   }
 
+  // Everything in the Same line
+  .react-autosuggest__container {
+    display: inline-block;
+  }
+
+  .react-autosuggest__suggestions-container {
+    position: absolute;
+    background-color: $chrome-color;
+    border: 1px solid $border-color;
+    min-width: 300px;
+
+    li {
+      padding: $padding-less;
+      border-bottom: 1px solid $border-color;
+      list-style: none;
+    }
+    li:hover {
+      background-color: $primary-color;
+    }
+    li:last-child {
+      border-bottom: 0;
+    }
+  }
+
 }

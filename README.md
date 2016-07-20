@@ -12,11 +12,16 @@ deriva
 
 [![forthebadge](http://forthebadge.com/images/badges/gluten-free.svg)](http://forthebadge.com)
 
-Technology
+Deploy
 ===========
 
-	This is javascript web application, made with React and PouchDB.
+	This is javascript web application, made with React, redux and PouchDB.
 
+	It's backend is only a PouchDB Database
+							and additional configurable HTTP REST services.
+
+	And you can host almost everywhere (ipfs, 0net ), because
+	its only a bunch
 
 Roadmap
 =======

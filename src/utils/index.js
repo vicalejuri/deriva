@@ -24,7 +24,7 @@ utils.oembed = (url) => {
 
 let UUID_LENGTH = 8
 utils.uuid = () => {
-  return PouchDB.utils.uuid( UUID_LENGTH );
+   throw "utils.uuid() Deprecated."
 };
 
 

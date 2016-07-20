@@ -72,6 +72,7 @@
   },
   "dependencies": {
     "autoprefixer": "^6.3.6",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "chunk-manifest-webpack-plugin": "^0.1.0",
     "classnames": "^2.2.5",
     "core-js": "^2.0.0",
