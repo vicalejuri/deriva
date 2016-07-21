@@ -15,26 +15,97 @@
   <meta property="og:url" content="https://deriva.net/" />
 
   <style>
-    #ripple-loader{
-      position: relative;
-      margin: 0px auto;
-      margin-top: calc( 50vh - 50px );
-      width:100px;
-      height: 100px;
+
+body , html {
+  background-color: #000;
+  color: #fff;
+}
+.circles {
+    height: 55vmin;
+    width: 55vmin;
+    position: absolute;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    transform: translate3D(-50%, -50%, 0);
+    transition: all 1.2s linear;
+}
+
+.circle {
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2.5vmin solid transparent;
+    border-radius: 115% 140% 145% 110%/125% 140% 110% 125%;
+    mix-blend-mode: screen;
+}
+.circle:nth-child(1) {
+    border-color: #DB4437;
+    transform-origin: 50%-0% 50%;
+    animation: spin1 5.5s linear infinite;
+}
+.circle:nth-child(2) {
+    border-color: #F4B400;
+    transform-origin: 50% 50%+0%;
+    animation: spin2 5.5s linear infinite;
+}
+.circle:nth-child(3) {
+    border-color: #4285F4;
+    transform-origin: 50%+0% 50%;
+    animation: spin3 5.5s linear infinite;
+}
+.circle:nth-child(4) {
+    border-color: #0F9D58;
+    transform-origin: 50% 50%-0%;
+    animation: spin4 5.5s linear infinite;
+}
+
+@keyframes spin1 {
+    0% {
+        transform: rotate(0);
     }
-    #ripple-loader:before{
-      content:'loading';
-      position: absolute;
-      font-family: monospace, sans-serif;
-      font-size: 1.3em;
-      margin: 38% 0% 0% 14%;
-      color: #1d1d1d;
+    100% {
+        transform: rotate(360deg);
     }
+}
+
+@keyframes spin2 {
+    0% {
+        transform: rotate(72deg);
+    }
+    100% {
+        transform: rotate(-288deg);
+    }
+}
+
+@keyframes spin3 {
+    0% {
+        transform: rotate(-144deg);
+    }
+    100% {
+        transform: rotate(216deg);
+    }
+}
+
+@keyframes spin4 {
+    0% {
+        transform: rotate(216deg);
+    }
+    100% {
+        transform: rotate(-144deg);
+    }
+}
   </style>
 </head>
 <body>
   <div id="app">
-    <div id="ripple-loader"></div>
+    <div class="circles" id="circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
   </div>
 
   <script type="text/javascript">
@@ -42,70 +113,6 @@
       version: "<%= htmlWebpackPlugin.options.version %>",
       files: JSON.parse('<%= JSON.stringify(htmlWebpackPlugin.files) %>')
     }
-  </script>
-  <script type="text/javascript">
-  var requestAnimFrame = (function() {
-      return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
-          function(callback) {
-              window.setTimeout(callback, 1000 / 60);
-          };
-  })();
-  var c = document.createElement('canvas');
-  document.getElementById('app').appendChild(c);
-  var style = c.style;
-  style.width = '100%';
-  style.top = 0; style.left = 0;
-  style.position = 'absolute';
-  var ctx = c.getContext('2d');
-  var x0, y0, w, h, dw;
-
-  function init() {
-      w = window.innerWidth;
-      h = window.innerHeight;
-      c.width = w;
-      c.height = h;
-      x0 = w / 2;
-      y0 = h / 2;
-      dw = Math.max(w, h, 1000) / 13;
-      drawCircles();
-  }
-  window.onresize = init;
-
-  function drawCicrle(radius) {
-      ctx.beginPath();
-      var color = Math.round(255 * (1 - radius / Math.max(w, h)));
-      ctx.strokeStyle = 'rgba(' + color + ',' + color + ',' + color + ',0.3)';
-      ctx.arc(x0, y0, radius, 0, 2 * Math.PI);
-      ctx.stroke();
-      ctx.lineWidth = 2;
-  }
-
-  var step = 0;
-
-  function drawCircles() {
-      ctx.clearRect(0, 0, w, h);
-      for (var i = 0; i < 8; i++) {
-          drawCicrle(dw * i + step % dw);
-      }
-      step += 1;
-  }
-
-  var loading = true;
-
-  function animate() {
-      if (loading || step % dw < dw - 5) {
-          requestAnimFrame(function() {
-              drawCircles();
-              animate();
-          });
-      }
-  }
-  window.anim = function(l) {
-      loading = l;
-      animate();
-  };
-  init();
-  animate();
   </script>
 </body>
 </html>

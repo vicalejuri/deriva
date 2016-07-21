@@ -101,7 +101,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 GalleryComponent = connect( (state) => {
-  return {docs: state.docs}
+  return {docs: state.data.docs}
 }, (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 })(GalleryComponent);

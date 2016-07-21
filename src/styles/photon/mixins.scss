@@ -61,3 +61,7 @@
   background-image:    -moz-linear-gradient($deg, $color-from 0%, $color-to 100%);           // FF3.6+
   background-image:         linear-gradient($deg, $color-from 0%, $color-to 100%);     // W3C
 }
+
+@mixin transition($props , $time , $easing ) {
+  transition: $props $time $easing;
+}

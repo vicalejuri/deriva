@@ -3,7 +3,6 @@ let dashboardRoute = {
   path: 'dashboard',
   //component: require('components/deriva/dashboard/dashboard')
 
-
   getComponent( nextState, cb) {
     require.ensure([], (require) => {
       let dashboard = require('components/deriva/dashboard/dashboard');

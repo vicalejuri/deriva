@@ -54,6 +54,7 @@ let HeaderComponent = React.createClass({
   },
 
   render() {
+    console.log(this.props.ui_header);
     let menu_popover_classes  = { 'menu-popover': true,
                                   'active': this.state.login_popover_active };
     return (
@@ -104,7 +105,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 HeaderComponent = connect( (state) => {
-  return {user: state.user}
+  return {user: state.data.user,
+          ui_header: state.ui.header}
 }, (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 })(HeaderComponent);

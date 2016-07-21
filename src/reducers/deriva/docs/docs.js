@@ -22,25 +22,25 @@ export const  watch = (state = defaultWatch, action) => {
     case actions.GET_DOC:
       return defaultWatch;
     case actions.GET_DOC_ERROR:
-      return  Object.assign( {}, action.data, {loaded: false, error: true});
+      return  Object.assign( {}, action.data);
     case actions.GET_DOC_SUCCESS:
-      return  Object.assign( {}, action.data, {loaded: true, error: false});
+      return  Object.assign( {}, action.data);
     default:
       return state;
   }
 }
 
-let defaultUpload = {
+let defaultInsert = {
   error: false
 }
-export const upload = (state = {}, action) => {
+export const insert = (state = {}, action) => {
   switch (action.type) {
     case actions.INSERT_DOC:
-      return defaultUpload;
+      return defaultInsert;
     case actions.INSERT_DOC_ERROR:
-      return Object.assign( {}, action.data, {error: true});
+      return Object.assign( {}, action.data);
     case actions.INSERT_DOC_SUCCESS:
-      return Object.assign( {}, action.data , {error: false} );
+      return Object.assign( {}, action.data);
     default:
       return state;
   }

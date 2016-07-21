@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash'
 
-import {  Link } from 'react-router';
+import {  Link , browserHistory } from 'react-router';
 import classNames from 'classnames';
 
-require('styles/deriva/dashboard/list.scss');
+import ImportDocComponent from './_import.js';
 
+require('styles/deriva/dashboard/list.scss');
 /*
  * Single rows
  */
@@ -44,45 +45,93 @@ let DocRow = React.createClass({
  * Table listing every document
  */
 let ListDocsComponent = React.createClass({
+  getInitialState() {
+    return {actions: {active: false,
+                      default_url: '/dashboard/collection/docs',
+                      url: location.pathname}}
+  },
+
   componentDidMount( ) {
     this.props.actions.list_all_doc();
   },
 
-  remove( ){
+  myremove( ){
+    console.log('remove')
     let checked_rows = (this.props.docs.filter( (doc, i) => {
       let dom_el = this.refs[`doc[${i}]`];
       return (dom_el.state.checked == true);
     }));
+    console.log(checked_rows);
     checked_rows.forEach( (doc,i) => {
-      console.log(doc);
+      console.log('Checked: ',doc);
       this.props.actions.delete_doc( doc );
     })
+  },
+
+  toggle_actions( e ){
+
+    let link = e.target;
+    let url =  link.getAttribute('href');
+
+    // Toggle on/off
+    // if clicked link is the same url
+    // otherwise just show the url
+    let is_active = this.state.actions.active
+    if(is_active){
+      if(url == this.state.actions.url){
+        url = this.state.actions.default_url;
+      }
+    }
+
+    e.preventDefault();
+    browserHistory.push( url )
+    this.setState( {actions:  {active: !is_active,
+                               url: url  ,
+                               default_url: this.state.actions.default_url}})
   },
 
   render() {
     return (<div className="list-page docs">
               <section className="header">
-                <h1> All Docs </h1>
               </section>
 
               <section className="actions">
-                <div className="info">Total: <strong>{this.props.docs.length}</strong></div>
-
                 <div className="btn-group">
-                  <button className="btn btn-default" >
-                    <span className="icon icon-list"></span>
-                  </button>
-
-                  <button className="btn btn-default" onClick={this.remove}>
+                  <button className="btn btn-default" onClick={this.myremove}>
                     <span className="icon icon-trash"></span>
+                    Delete
                   </button>
 
-                  <Link to="/dashboard/collection/docs/upload" className="btn btn-default">
+                  <Link to="/dashboard/collection/docs/upload" className="btn btn-default"
+                    onClick={this.toggle_actions}>
                     <span className="icon icon-plus-circled"></span>
+                    Add New
                   </Link>
                 </div>
 
+                <div className="btn-group">
+                  <Link to="/dashboard/collection/docs/" className="btn btn-default"
+                    onClick={this.toggle_actions}>
+                    <span className="icon icon-list"></span>
+                  </Link>
+                </div>
+
+                <div className="btn-group">
+                  <Link to="/dashboard/collection/docs/import" className="btn btn-default btn-warning"
+                        onClick={this.toggle_actions}>
+                    <span className="icon icon-facebook"></span>
+                    Import json
+                  </Link>
+                </div>
               </section>
+
+              {/*
+              <section className="tools">
+                <ImportDocComponent type="fb_feed_json"
+                className={classNames({enabled: this.state['tools.import']})}
+                />
+              </section>
+              */}
               <table className="list-component table-striped" ref="table">
               <thead><tr>
                   <th><input type="checkbox" onClick={this.checkAll}/> </th>
@@ -110,7 +159,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 ListDocsComponent = connect( (state) => {
-  return {docs: state.docs}
+  return {docs: state.data.docs}
 }, (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 })(ListDocsComponent);

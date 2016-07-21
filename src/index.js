@@ -13,7 +13,6 @@ window.config = window.defaultConfig = config;
 
 
 
-
 // Start Pouchdb API
 import PouchDB from 'pouchdb'
 import PouchDBAuth from 'pouchdb-authentication'
@@ -67,7 +66,7 @@ window.dataModels =  dataModels(window.db);
 
 // Create session store
 let store = window.store = storeMaker(window.db);
-
+window.actions = actions;
 
 
 

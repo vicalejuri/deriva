@@ -1,0 +1,20 @@
+@import "~styles/photon/variables.scss";
+@import "~styles/photon/mixins.scss";
+
+.import {
+  width: 100%;
+
+  .item-content {
+    .info {
+      ul.list {
+
+        li {
+          text-overflow: ellipsis;
+          word-wrap: break-word;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}

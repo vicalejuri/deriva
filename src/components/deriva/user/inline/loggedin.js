@@ -54,7 +54,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 LoggedInComponent = connect( (state) => {
-  return {user: state.user}
+  return {user: state.data.user}
 }, (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 })(LoggedInComponent);

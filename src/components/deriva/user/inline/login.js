@@ -64,7 +64,7 @@ import { connect } from 'react-redux'
 import { login as Login } from 'actions';
 
 LoginComponent = connect( (state) => {
-  return {user: state.user}
+  return {user: state.data.user}
 }, (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 })(LoginComponent);

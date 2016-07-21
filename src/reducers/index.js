@@ -1,16 +1,34 @@
 import { combineReducers } from 'redux';
-import user from './user';
 import remotedb from './remotedb';
+import uiReducer from './utils';
 
-import { docs , watch, upload } from './deriva/docs/docs.js';
+import user from './deriva/user.js';
+import { docs , watch, insert } from './deriva/docs/docs.js';
 import { channels } from './deriva/channel/channel.js';
 
 const deriva = combineReducers({
-  user,
-  remotedb,
+  /*
+   * Raw data, for example
+   *
+   * user -> Authenticated|Anonymous user
+   * docs -> Collection of docs PouchDocuments
+   * channels -> Collection of all channels PouchDocuments
+   */
+  data: combineReducers({
+    user,
+    docs,
+    channels,
+  }),
 
-  docs, watch, upload,
-  channels
+  /*
+   *  UI State and options
+   */
+  ui: uiReducer({
+    header: {
+      channel_filter_enabled: false
+    },
+    docs: {}
+  })
 });
 
 export default deriva;

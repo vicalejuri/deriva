@@ -12,20 +12,16 @@ let WatchComponent = React.createClass({
 
   getInitialState() {
     let docId =  (this.props.docId || this.props.params.docId || 0);
-    return { docId }
+    return { docId , doc: {} , error: false, loaded: false}
   },
 
   componentDidMount() {
-    this.props.actions.get_doc( this.state.docId );
-    /*
-    window.db.get(this.state.docId)
-    .then( (doc) => {
-      this.setDocumentary( doc )
-    }).catch( (err) => {
-      console.error(err);
-      this.setState({error: true});
+    this.props.actions.get_doc( this.state.docId ).then( (new_doc) => {
+      this.setState({doc: new_doc, loaded: true})
+    }).catch( (error) => {
+      console.error(error);
+      this.setState({error: true})
     });
-    */
   },
 
   render() {
@@ -40,7 +36,8 @@ let WatchComponent = React.createClass({
 
     let WatchComponent = () => {
       return (<div>
-          <Player doc={this.props.watch}  />
+          <Player doc={this.state.doc}  />
+
           <section className="info">
             <nav className="nav-group">
               <a className="nav-group-item active">
@@ -55,17 +52,16 @@ let WatchComponent = React.createClass({
               </span>
             </nav>
             <div className="group">
-              <div>{this.props.watch.title}</div>
-              <div>{this.props.watch.url}</div>
-              <div><textarea readOnly value={JSON.stringify(this.props.watch)} /></div>
+              <div>{this.state.doc.title}</div>
+              <div>{this.state.doc.url}</div>
             </div>
           </section>
       </div>);
     };
 
     return (<div className="watch-component">
-            {(this.props.watch.error ? NotFound :
-              (this.props.watch.loaded ? WatchComponent() : Loading ))}
+            {(this.state.error ? NotFound :
+              (this.state.loaded ? WatchComponent() : Loading ))}
             </div>
     );
   }
@@ -80,7 +76,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 WatchComponent = connect( (state) => {
-  return {watch: state.watch}
+  return {}
 }, (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 })(WatchComponent);

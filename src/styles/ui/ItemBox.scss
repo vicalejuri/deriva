@@ -1,0 +1,51 @@
+@import "~styles/photon/variables.scss";
+
+.item-box {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+
+  .item-header {
+    background-color: $color-c06;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 $padding-more;
+
+    h1 {
+      margin: 0; padding: 0;
+      word-wrap: break-word;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .item-content {
+    width: 100%;
+    height: 80%;
+    flex: 200% 100% 100%;
+    overflow-y: auto;
+    padding: $padding-more $padding-more;
+  }
+
+
+  .item-actions {
+    align-self: flex-end;
+
+    width: 100%;
+    height: 64px;
+
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: $padding-more;
+    background-color: $color-c11;
+  }
+}

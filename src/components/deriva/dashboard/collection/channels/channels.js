@@ -56,24 +56,26 @@ let ListChannelsComponent = React.createClass({
 
   render() {
     return (<div className="list-page channels">
-              <section className="header">
-                <h1> All Channels </h1>
-              </section>
 
               <section className="actions">
-                <div className="info">Total: <strong>{this.props.channels.length}</strong></div>
-
                 <div className="btn-group">
-                  <Link to="/dashboard/collection/channels" className="btn btn-default" >
-                    <span className="icon icon-list"></span>
-                  </Link>
 
                   <button className="btn btn-default" onClick={this.remove}>
                     <span className="icon icon-trash"></span>
+                    Delete
                   </button>
 
                   <Link to="/dashboard/collection/channels/upload" className="btn btn-default">
-                    <span className="icon icon-plus-circled"></span>
+                    <span className="icon icon-plus-circled"> </span>
+                     Add new
+                  </Link>
+                </div>
+
+                <div className="btn-group">
+
+                  <Link to="/dashboard/collection/channels/import" className="btn btn-default btn-warning" onClick={this.toggle_toolsImport}>
+                    <span className="icon icon-facebook"></span>
+                    Import json
                   </Link>
                 </div>
 
@@ -105,7 +107,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 ListChannelsComponent = connect( (state) => {
-  return {channels: state.channels || []}
+  return {channels: state.data.channels}
 }, (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 })(ListChannelsComponent);

@@ -19,7 +19,7 @@ let SelectComponent = React.createClass({
   render() {
     return (<select ref={this.props.ref} className={classNames('select-component', this.props.className)} >
             {this.props.options.map( (opt, i) =>
-              <option label={opt.label} value={opt.value}>{opt.label}</option>
+              <option key={i} label={opt.label} value={opt.value}>{opt.label}</option>
             )}
             </select>
     );
@@ -36,7 +36,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 export let ChannelSelect = connect( (state) => {
-  return {options: state.channels.map( (channel) => {
+  return {options: state.data.channels.map( (channel) => {
     return {label: channel.title, value: channel.id}
   })}
 }, (dispatch) => {

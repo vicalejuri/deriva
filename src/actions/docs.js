@@ -7,10 +7,7 @@ export const LIST_DOC_ERROR  = 'LIST_DOC_ERROR';
 
 export const list_all_doc = () => {
   return (dispatch) => {
-
     dispatch({type: LIST_DOC});
-
-      //window.db.query( 'docs/by_id', {include_docs: true} )
       return window.db.rel.find('deriva/docs')
       .then( (results) => {
           let docs = results['deriva/docs'];
@@ -65,10 +62,10 @@ export const get_doc = ( doc_id ) => {
     .then( (response) => {
         let doc = response['deriva/docs'][0]
         dispatch({type: GET_DOC_SUCCESS, data: doc});
-        Promise.resolve(doc);
+        return Promise.resolve(doc);
     }).catch( (err) => {
         dispatch({type: GET_DOC_ERROR, data: err });
-        Promise.reject(err);
+        return Promise.reject(err);
     });
   }
 }
@@ -83,7 +80,7 @@ export const DELETE_DOC_ERROR  = 'DELETE_DOC_ERROR';
 export const delete_doc = ( doc ) => {
   return (dispatch) => {
     dispatch({type: DELETE_DOC, data: doc});
-    return window.db.remove( doc )
+    return window.db.rel.del( 'deriva/doc', doc )
     .then( (doc) => {
         dispatch({type: DELETE_DOC_SUCCESS, data: doc});
         return Promise.resolve(doc);

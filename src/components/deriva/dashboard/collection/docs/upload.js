@@ -14,7 +14,7 @@ require('styles/deriva/dashboard/collection/docs/upload.scss');
 
 let UploadComponent = React.createClass({
   getInitialState() {
-    return { success: false, failed: false, message: false,
+    return { error: false, message: false,
              url: false,
              oembed: {title: '', author: '', html: ''},
              channel: []}
@@ -28,12 +28,12 @@ let UploadComponent = React.createClass({
     let url = this.refs.url.value;
 
     utils.oembed( url ).then( (data) => {
-                          this.setState({success: false, failed: false,
+                          this.setState({error: false,
                                          url, oembed: data });
                         }).catch( (err) => {
-                         this.setState({success: false, failed: true,
+                         this.setState({error: true,
                                         message: 'Sorry, the preview robot is offline.'})
-                        } );
+                        });
   },
 
   uploadDoc(ev) {
@@ -49,20 +49,17 @@ let UploadComponent = React.createClass({
 
     this.props.actions.insert_doc( doc_props )
                       .then( (doc) => {
-                          console.log('Created', doc)
+                        console.log('Created', doc)
+                        this.setState({error: false, message: `Created ${doc.id}`});
+                      })
+                      .catch( (err) => {
+                        this.setState({error: true, message: `Error: ${err.error}`})
                       })
   },
 
 
   componentWillReceiveProps( newProps ) {
     // error/success messages
-     if( _.get(newProps,'upload' , false) ){
-       if( _.get(newProps,'upload.error')){
-         this.setState({message: `Error: ${newProps.upload.error}`})
-       } else {
-         this.setState({message: `Created ${newProps.upload.id}`});
-       }
-     }
   },
 
   componentDidMount( ) {
@@ -104,7 +101,7 @@ let UploadComponent = React.createClass({
 
 
   render() {
-    let signup_classes = {success: this.state.success, failed: this.state.failed };
+    let signup_classes = {success: !this.state.error, failed: this.state.error };
     return (<div className={classNames("upload-component box", signup_classes)}>
             <form onSubmit={this.uploadDoc}>
             { this.state.oembed ? (
@@ -145,8 +142,7 @@ import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
 UploadComponent = connect( (state) => {
-  return {upload: state.upload,
-          channels: state.channels}
+  return { channels: state.data.channels}
 }, (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 })(UploadComponent);

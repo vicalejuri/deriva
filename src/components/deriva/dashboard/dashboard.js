@@ -35,7 +35,6 @@ let DashboardComponent = React.createClass({
     }
 
     return (ev) => {
-      console.log("licked");
       ev.preventDefault();
       this.setState(_.merge({}, this.state,
                              {navs: {[nav_ref]: {show: !this.state['navs'][nav_ref].show}}}));
@@ -75,12 +74,6 @@ let DashboardComponent = React.createClass({
                     </Link>
                   </span>
 
-
-                  <span className="nav-group-item" href="#">
-                    <span className="icon icon-database" ></span>
-                    Users
-                  </span>
-
                 </nav>
 
                 <nav className={classNames("nav-group", this.state.navs.settings)}>
@@ -114,10 +107,6 @@ let DashboardComponent = React.createClass({
 });
 
 DashboardComponent.displayName = 'Deriva.dashboard.DashboardComponent';
-
-// Uncomment properties you need
-// WatchComponent.propTypes = {};
-// WatchComponent.defaultProps = {};
 
 export default DashboardComponent;
 module.exports = DashboardComponent;

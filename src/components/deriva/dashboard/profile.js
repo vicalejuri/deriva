@@ -56,7 +56,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 ProfileComponent = connect( (state) => {
-  return {user: state.user}
+  return {user: state.data.user}
 }, (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 })(ProfileComponent);
