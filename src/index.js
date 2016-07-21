@@ -33,7 +33,7 @@ let local_db = remote_db;
 
 // Offline first
 if(config.POUCHDB_OFFLINE_FIRST){
-  let local_db = new PouchDB('docs')
+  let local_db = new PouchDB('deriva')
 
   /*
    * Enable sync with remote
@@ -41,16 +41,14 @@ if(config.POUCHDB_OFFLINE_FIRST){
   const syncEvents = ['change', 'paused', 'active', 'denied', 'complete', 'error'];
   const clientEvents = ['connect', 'disconnect', 'reconnect'];
 
-  let sync = PouchDB.sync( remote_db, local_db, {live: true, retry: true});
+  console.log('Replicate REMOTE_DB to LOCAL_DB')
+  remote_db.replicate.to(local_db, {live: true, filter: (doc) => {
+    return doc.type === 'deriva/channel';
+  }});
+  remote_db.replicate.to(local_db, {live: true, filter: (doc) => {
+    return doc.type === 'deriva/doc';
+  }});
 
-  syncEvents.forEach( (ev) => {
-    sync.on(ev, (info) => {
-      if(ev == 'change'){
-        console.log( `sync:${ev} --> ${info}`, info)
-      }
-      //store.dispatch({type: actions.SET_SYNC_STATE, data: ev});
-    })
-  });
 }
 
 

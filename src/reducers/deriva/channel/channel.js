@@ -7,7 +7,6 @@ export const channels = (state = [], action) => {
     case actions.LIST_CHANNEL:
       return state;
     case actions.LIST_CHANNEL_SUCCESS:
-      console.log('channels', _.map(action.data, (d) => { return d.id }) )
       return action.data || [];
     default:
       return state;

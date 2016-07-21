@@ -54,7 +54,6 @@ let HeaderComponent = React.createClass({
   },
 
   render() {
-    console.log(this.props.ui_header);
     let menu_popover_classes  = { 'menu-popover': true,
                                   'active': this.state.login_popover_active };
     return (
