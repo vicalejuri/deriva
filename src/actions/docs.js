@@ -81,7 +81,7 @@ export const delete_doc = ( doc ) => {
   return (dispatch) => {
     dispatch({type: DELETE_DOC, data: doc});
     return window.db.rel.del( 'deriva/doc', doc )
-    .then( (doc) => {
+    .then( (response) => {
         dispatch({type: DELETE_DOC_SUCCESS, data: doc});
         return Promise.resolve(doc);
     }).catch( (err) => {
