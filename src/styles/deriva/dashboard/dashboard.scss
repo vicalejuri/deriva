@@ -7,6 +7,8 @@
 
   > .sidebar {
     z-index: $zmenu;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+
     .nav-group-title ,
     .nav-group-item {
       color: inherit;
@@ -55,10 +57,12 @@
     backface-visibility: hidden;
     transform: translate3d( 100%, 0, 0);
 
+    background-color: $chrome-color;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+
     transition: all 0.3s $easing-default;
     overflow: hidden;
     overflow-y: auto;
-    background-color: $color-c03;
   }
 
 }

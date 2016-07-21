@@ -2,7 +2,7 @@ let docsRoute = {
   path: 'docs',
 
   childRoutes: [
-    require('./upload.js'),
+    require('./insert.js'),
     require('./import.js')
   ],
 

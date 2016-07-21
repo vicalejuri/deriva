@@ -92,8 +92,6 @@ let ListDocsComponent = React.createClass({
 
   render() {
     return (<div className="list-page docs">
-              <section className="header">
-              </section>
 
               <section className="actions">
                 <div className="btn-group">

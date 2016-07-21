@@ -9,10 +9,11 @@ import TagsInput from 'react-tagsinput'
 import Autosuggest from 'react-autosuggest'
 
 import utils from 'utils/index.js';
+import ItemBox from 'components/ui/ItemBox.js';
 
-require('styles/deriva/dashboard/collection/docs/upload.scss');
+require('styles/deriva/dashboard/collection/docs/insert.scss');
 
-let UploadComponent = React.createClass({
+let InsertDocComponent = React.createClass({
   getInitialState() {
     return { error: false, message: false,
              url: false,
@@ -101,8 +102,10 @@ let UploadComponent = React.createClass({
 
 
   render() {
-    let signup_classes = {success: !this.state.error, failed: this.state.error };
-    return (<div className={classNames("upload-component box", signup_classes)}>
+    let insert_classes = {success: !this.state.error, failed: this.state.error };
+    return (
+      <ItemBox className={classNames('insert-doc', insert_classes)} title="New Doc">
+          <section className="item-content">
             <form onSubmit={this.uploadDoc}>
             { this.state.oembed ? (
               <div className="embed-preview"
@@ -125,27 +128,30 @@ let UploadComponent = React.createClass({
                 { this.state.message ? (<p>{this.state.message}</p>) :
                   (<div/>) }
               </div>
-              <button className="btn btn-primary submit">
-                Enviar ✨
-              </button>
             </form>
-            </div>
+          </section>
+          <section className="item-actions">
+            <button className="btn btn-primary submit">
+              Insert ✨
+            </button>
+          </section>
+        </ItemBox>
     );
   }
 });
 
-UploadComponent.displayName = 'Deriva.docs.UploadComponent';
+InsertDocComponent.displayName = 'Deriva.docs.InsertDocComponent';
 
 // redux
 import actions from 'actions'
 import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
-UploadComponent = connect( (state) => {
+InsertDocComponent = connect( (state) => {
   return { channels: state.data.channels}
 }, (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
-})(UploadComponent);
+})(InsertDocComponent);
 
-export default UploadComponent;
-module.exports = UploadComponent
+export default InsertDocComponent;
+module.exports = InsertDocComponent
