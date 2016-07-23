@@ -15,28 +15,34 @@ let ImportDocComponent = React.createClass({
             error: false, message: ''}
   },
 
-  mapJSONToDoc(raw_json) {
-    /* Filter valid documents from raw json */
-    return raw_json.data.filter( (doc) => {
-      let allowed = !(
-        ( _.isEmpty( doc.message || doc.description) )  ||
-        ( _.isEmpty(doc.link || doc.source) )  );
-      return allowed;
-    /* Transform it to a document model */
-    }).map( (doc, i) => {
-      let props = {title: (doc.message || doc.description),
-                   url: (doc.link || doc.source),
-                   description: (doc.description || doc.message)}
+  /*
+   * Create a document from a raw json
+   *
+   * Only allow if oembed is successfull
+   */
+  createDoc(json) {
+    return new Promise( (resolve,reject) => {
 
-      /*
-        this.type = params.type
-        this.provider_name = params.provider_name
-        this.oembed = params.oembed;
-      */
-      let ndoc = new window.dataModels.Doc(props);
-      return ndoc;
+      let props = {title: (json.message || json.description),
+                   url: (json.link || json.source),
+                   description: (json.description || json.message)}
+
+      this.props.actions.oembed( props.url ).then((oembed) => {
+        let fprops = _.merge(props, {type: oembed.type,
+                                    provider_name: oembed.provider_name,
+                                    oembed: oembed } );
+        let ndoc = new window.dataModels.Doc(fprops);
+
+        return resolve(ndoc);
+      }).catch( (err) => {
+        console.error(err);
+        console.trace();
+        return reject(err);
+      });
+
     });
   },
+
 
   /*
    * Read a local json file {data: [{doc1}, ... ]}
@@ -52,10 +58,19 @@ let ImportDocComponent = React.createClass({
         let raw_json = e.target.result;
         let json = JSON.parse(raw_json);
 
-        let old_documents = this.state.documents;
-        let newest_documents = this.mapJSONToDoc(json);
-        this.setState({documents: _.union(old_documents,newest_documents),
-                       message: ``})
+        /* Filter valid documents from raw json */
+        return json.data.filter( (doc) => {
+          let allowed = !(
+            ( _.isEmpty( doc.message || doc.description) )  ||
+            ( _.isEmpty(doc.link || doc.source) )  );
+          return allowed;
+        /* Transform it to a document model */
+        }).map( (doc, i) => {
+          this.createDoc(doc).then( (fdoc) => {
+            let old_documents = this.state.documents;
+            this.setState({documents: _.union(old_documents,[fdoc])})
+          })
+        });
       }
 
       reader.readAsText(f);
@@ -71,7 +86,7 @@ let ImportDocComponent = React.createClass({
     e.preventDefault();
 
 
-    let insertDocs = function(documents) {
+    let insertDocs = (documents) => {
       return Promise.all( documents.map( this.props.actions.insert_doc) );
     }
 
@@ -94,10 +109,14 @@ let ImportDocComponent = React.createClass({
                     <b>Loaded {this.state.documents.length}</b> documents
                   </p>
                   <p>{this.state.message}</p>
-                  <ul className="list">
+                  <ul className="list-group">
                   {this.state.documents.map( (doc,i) =>
-                      <li key={i}>
-                        <a href={doc.url}>{doc.title}</a>
+                      <li key={i} className="list-group-item">
+                        <img className="img-circle media-object pull-left" src={doc.oembed.thumbnail_url} width="32" height="32" />
+                        <div className="media-body">
+                          <strong>{doc.url}</strong>
+                          <p>{doc.title}</p>
+                        </div>
                       </li>
                   )}
                   </ul>
