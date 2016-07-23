@@ -27,5 +27,5 @@ export default {
         require('./deriva/dashboard/index.js')
       ],
 
-      indexRoute: require('./deriva/docs/gallery.js')
+      indexRoute: require('./deriva/home.js')
 }

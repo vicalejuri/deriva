@@ -2,7 +2,7 @@
 @import "~styles/photon/photon.scss";
 @import "~styles/photon/variables.scss";
 
-//@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700,300);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700,300);
 @font-face {
   font-family:"Source Code Pro",Courier, monospace;
   font-style: normal;
@@ -21,23 +21,38 @@
 }
 
 
+@font-face {
+  font-family: Agency;
+   src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/agency-fb-bold.woff);
+}
+
+
 
 
 /* Base Application Styles */
+:focus { outline: none; }
+
 body,.window {
   font-family: $font-body;
   font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 100;
+  overflow-x: none;
+  overflow-y: auto;
 }
 
 a {
-  font-family: $font-header;
+  font-family: $font-subheader;
   font-weight: bold;
   color: #000;
   cursor: pointer;
+  outline: 0;
 }
+a:hover, a:active, a:focus {
+  outline: 0;
+}
+
 textarea , input {
   font-family: $font-textarea;
 }
@@ -50,6 +65,10 @@ h1,h2,h3,h4,h5,h6 {
   font-family: $font-header;
   text-transform: uppercase;
   font-weight: bold;
+
+  a {
+    font-family: $font-subheader;
+  }
 }
 
 
@@ -87,4 +106,27 @@ h1,h2,h3,h4,h5,h6 {
 
 .window-content {
   background-color: $chrome-color;
+}
+
+
+
+
+.blur{
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+}
+
+
+
+
+
+/*
+ * Mobile viewport
+ */
+@-ms-viewport {
+    width: device-width;
+}
+
+@viewport {
+    width: device-width;
 }

@@ -7,7 +7,7 @@ import utils from 'utils';
 require('styles/deriva/player/Player.scss');
 require('plyr/dist/plyr.css');
 
-let plyrsvg = require('assets/plyr.svg');
+let plyrsvg = require('assets/player/plyr.svg');
 
 let PlayerComponent = React.createClass({
   propTypes: {

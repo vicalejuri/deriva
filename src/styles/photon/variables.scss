@@ -20,8 +20,11 @@ $line-height-default: 1.6 !default;
 //$font-header: 'Inconsolata', monospace;
 $font-body: 'Source Sans Pro', helvetica;
 $font-textarea: 'Lucida Console', monospace;
-$font-header: 'Share Tech Mono';
+$font-header: Agency;
+$font-subheader: 'Share Tech Mono';
 
+$menu-height: 44px;
+$font-header-size: 24px;
 
 // Colors
 // --------------------------------------------------
@@ -29,7 +32,7 @@ $font-header: 'Share Tech Mono';
 // Main colors
 $primary-color: #3b99fc !default;
 $chrome-color:  #efefef !default;
-$shadow-color: rgba(217,217,217,0.7);
+$shadow-color: rgba(0,0,0,0.3);
 $sidebar-color: #1f1f1f;
 
 // Copy
@@ -71,6 +74,7 @@ $timing: 0.3s;
 
 // z-indexes
 $zoverlay:  2000;
+$zheader:   1500;
 $zmenu:     1000;
 $zbody:     0;
 

@@ -5,23 +5,5 @@
   width: auto;
   display: flex;
   flex-direction: column;
-}
-
-
-
-
-.index img {
-  margin: 40px auto;
-  border-radius: 4px;
-  display: block;
-  background: #fff;
-}
-
-.index .notice {
-  margin: 20px auto;
-  padding: 15px 0;
-  text-align: center;
-  border: 1px solid #000;
-  border-width: 1px 0;
-  background: #666;
+  overflow: auto;
 }

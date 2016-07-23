@@ -1,0 +1,22 @@
+@import "~styles/photon/variables.scss";
+
+.home-page {
+    width: 100%;
+
+    .theather {
+      position: static;
+      height: 90vh;
+      width: 100%;
+      background-color: $color-c12;
+      z-index: 0;
+      h1,h2,h3,h4,h5,h6 {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .theather + .page {
+      z-index: 10;
+      padding-top: 90vh;
+    }
+}

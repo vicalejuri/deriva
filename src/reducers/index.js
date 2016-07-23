@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import remotedb from './remotedb';
-import uiReducer from './utils';
+import uiReducer from './ui';
 
 import user from './deriva/user.js';
 import { docs , watch, insert } from './deriva/docs/docs.js';
@@ -25,6 +25,7 @@ const deriva = combineReducers({
    */
   ui: uiReducer({
     header: {
+      floated: true,
       channel_filter_enabled: false
     },
     docs: {}

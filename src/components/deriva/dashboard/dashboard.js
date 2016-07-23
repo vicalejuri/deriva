@@ -27,6 +27,10 @@ let DashboardComponent = React.createClass({
           }};
   },
 
+  componentWillMount(){
+    this.props.actions.set_ui('header.floated', false );
+  },
+
   toggleNavGroup( nav_ref ){
     if(! _.has(this.state.navs,nav_ref)){
       console.error("nav group ", nav_ref, " is invalid. Maybe you mispelled?");
@@ -107,6 +111,18 @@ let DashboardComponent = React.createClass({
 });
 
 DashboardComponent.displayName = 'Deriva.dashboard.DashboardComponent';
+
+// Connect to redux store
+import actions from 'actions'
+import { bindActionCreators } from 'redux'
+
+import { connect } from 'react-redux'
+
+DashboardComponent = connect( (state) => {
+  return {}
+}, (dispatch) => {
+  return { actions: bindActionCreators(actions, dispatch) }
+})(DashboardComponent);
 
 export default DashboardComponent;
 module.exports = DashboardComponent;

@@ -17,7 +17,7 @@ require('styles/deriva/Header.scss');
  */
 let HeaderComponent = React.createClass({
   getInitialState() {
-    return {popover_link: false, login_popover_active: false};
+    return {popover_link: false, login_popover_active: false}
   },
 
   toggleLogin(ev) {
@@ -56,23 +56,25 @@ let HeaderComponent = React.createClass({
   render() {
     let menu_popover_classes  = { 'menu-popover': true,
                                   'active': this.state.login_popover_active };
+    let header_float = {'floated': this.props.ui_header.floated}
     return (
-        <header className="toolbar toolbar-header header-nav">
+        <header className={classNames('toolbar','toolbar-header','header-nav', header_float)}>
           <div className="logo" side="left">
             <Link to={`/`} >
-              <h1 className="title">deriva</h1>
+              🉑deriva
             </Link>
           </div>
 
           <div className="featured">
-            <ChannelSelect ref='channel_select' className="btn" />
+            #⃣<ChannelSelect ref='channel_select' className="btn" />
+
           </div>
 
           <div className="nav toolbar-actions" side="right">
 
-            <button onClick={this.toggleLogin} className="btn btn-default btn-dropdown pull-right">
+            <a onClick={this.toggleLogin} className="btn-dropdown pull-right">
               <span className="icon">👴</span>
-            </button>
+            </a>
 
 
             {/*

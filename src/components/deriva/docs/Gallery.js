@@ -6,6 +6,7 @@ import {  Link , browserHistory} from 'react-router';
 import classNames from 'classnames';
 
 let Isotope = require('isotope-layout')
+let defaultBg = require('assets/components/docs/defaultDocThumb.png')
 
 require('styles/deriva/docs/gallery.scss');
 
@@ -56,8 +57,9 @@ let GalleryComponent = React.createClass({
     // inline style for .item element
     let idx = 0;
     let itemStyle = (doc) => {
+      let bgImage = (doc.oembed && doc.oembed.thumbnail_url || defaultBg );
       return {
-        backgroundImage: `url(${doc.oembed.thumbnail_url})`
+        backgroundImage: `url(${bgImage})`
       }
     }
 
@@ -81,7 +83,9 @@ let GalleryComponent = React.createClass({
                       <span className="info">
                         <h2 className="title">{doc.title}</h2>
                         <hr className="separator"></hr>
-                        <p>{doc.provider_name}</p>
+                        {(doc.provider_name)
+                          ? <p>{doc.provider_name}</p>
+                          : <p>-</p>}
                       </span>
                     </span>
                   </Link>

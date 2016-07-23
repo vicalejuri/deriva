@@ -1,40 +1,49 @@
 @import "~styles/photon/variables.scss";
 
-$menu-height: 44px;
-
 /*
  * header-nav
  *
  */
-.header-nav {
-  z-index: 1000;
+.toolbar.header-nav {
+  position: relative;
+  z-index: $zheader;
+
   width: 100%;
+  height: $menu-height;
   margin: 0px;
   padding: 0px;
-  height: $menu-height;
+
+  border: 0;
+  background-color: rgba(0,0,0,0.7);
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
 }
 
+.toolbar.header-nav.floated {
+  position: absolute;
+}
+
 // Left logo
 .header-nav .logo {
-  height: $menu-height;
   width: 30%;
 
   a {
-    margin-left: 0;
-    white-space: nowrap;
-    display: inline-block;
     margin: 0px;
+    margin-left: 0;
     padding: $padding;
     height: $menu-height - 2;
 
+    color: $default-color;
+    font-size: $font-header-size;
     font-family: $font-header;
     font-weight: bold;
+    text-decoration: none;
     text-transform: uppercase;
-    cursor: pointer;
+    white-space: nowrap;
   }
 }
 
@@ -45,7 +54,7 @@ $menu-height: 44px;
 }
 
 // Right nav
-.header-nav .nav {
+.header-nav .nav.toolbar-actions {
   width: 30%;
   display: flex;
   align-items: center;
@@ -54,6 +63,7 @@ $menu-height: 44px;
   height: 100%;
 
   a {
+    color: $default-color;
     padding: 10px;
     // border: 1px solid #242424;
     // border-top: 0px solid #474747; border-bottom: 1px solid #474747;

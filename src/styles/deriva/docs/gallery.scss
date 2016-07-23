@@ -35,7 +35,7 @@ $hover-time: 0.4s;
   /* Gallery of documents (isotope) */
   .gallery {
     padding: 0;
-    border: 1px solid $border-color;
+    border: 1px dashed $border-color;
     border-radius: $default-border-radius;
 
     width: 100%;
