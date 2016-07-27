@@ -17,21 +17,18 @@ let config = Object.assign({}, baseConfig, {
   entry: {
     'app':    path.join(__dirname, '../src/index' ),
     'lib1': ['lodash','react','react-dom','redux','react-redux'],
-    'lib2': ['tweetnacl','pouchdb','pouchdb-authentication']
+    'lib2': ['tweetnacl','pouchdb','pouchdb-authentication',
+             'pouchdb-upsert', 'pouchdb-find','relational-pouch']
   },
   cache: true,
   devtool: 'sourcemap',
   plugins: [
     new HtmlWebpackPlugin({
       version: packjson.version,
-      template: path.join(__dirname , '../src/index.ejs')
-    }),
-    new HtmlWebpackPlugin({
-      version: packjson.version,
       filename: baseConfig.output.path + '/index.html',
       template: path.join(__dirname , '../src/index.ejs')
     }),
-    new webpack.optimize.CommonsChunkPlugin("lib1","vendor.bundle.js"),
+    new webpack.optimize.CommonsChunkPlugin("lib1","lib1.bundle.js"),
     new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'

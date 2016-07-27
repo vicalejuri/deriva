@@ -2,6 +2,7 @@
 
 import baseConfig from './base';
 let packjson = require('../../package.json')
+
 let config = {
   appEnv: 'dist',
   appVersion: packjson.version,
@@ -9,8 +10,9 @@ let config = {
   OEMBED_ENDPOINT:  'http://localhost:8061/oembed',
   OEMBED_API_KEY:   '123456789',
 
-  POUCHDB_SERVER:   'http://localhost:5984/deriva',
-  DERIVA_YTUBE:     'AIzaSyA84xjydegSxJZz03yxgOG5dB48q0C1DSM'
+  // Pouchdb remote database
+  POUCHDB_OFFLINE_ENABLED: true,
+  POUCHDB_SERVER:   'http://localhost:3001/deriva-test',
 };
 
 export default Object.freeze(Object.assign({}, baseConfig, config));

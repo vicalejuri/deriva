@@ -16,7 +16,8 @@ let config = Object.assign({}, baseConfig, {
             'webpack/hot/only-dev-server',
             './src/index'],
     'lib1': ['lodash','react','react-dom','redux','react-redux'],
-    'lib2': ['tweetnacl','pouchdb','pouchdb-authentication']
+    'lib2': ['tweetnacl','pouchdb','pouchdb-authentication',
+             'pouchdb-upsert', 'pouchdb-find','relational-pouch']
   },
   cache: true,
   devtool: 'eval-source-map',
@@ -46,10 +47,6 @@ let config = Object.assign({}, baseConfig, {
     hot: true,
     port: defaultSettings.port,
     publicPath: '/'
-  },
-  pouchDB: {
-    endpoint: 'http://localhost:5984',
-    remote_name: 'deriva'
   }
 });
 

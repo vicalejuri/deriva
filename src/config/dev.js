@@ -1,9 +1,11 @@
 'use strict';
 
 import baseConfig from './base';
+let packjson = require('../../package.json')
 
 let config = {
   appEnv: 'dev',  // feel free to remove the appEnv property here,
+  appVersion: packjson.version,
 
   domain: 'localhost',
   port:   8000,

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 window.React = React;
 window.ReactDOM = ReactDOM;
 
+//
 import { Provider } from 'react-redux';
 import storeMaker from './store';
 import actions from './actions';
@@ -12,11 +13,9 @@ import config from 'config';
 window.config = window.defaultConfig = config;
 
 
-
 // Start Pouchdb API
 import PouchDB from 'pouchdb'
 import PouchDBAuth from 'pouchdb-authentication'
-import PouchSync from 'pouch-websocket-sync'
 import PouchFind from 'pouchdb-find';
 import PouchUpsert from 'pouchdb-upsert';
 import PouchRelational from 'relational-pouch';
