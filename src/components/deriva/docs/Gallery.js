@@ -75,7 +75,7 @@ let GalleryComponent = React.createClass({
               <div className="gallery" ref="gallery">
                 {this.props.docs.map( (doc, i) =>
                   <Link
-                      ref={`item[${i}]`} doc={doc} key={doc.id}
+                      ref={`item[${i}]`} key={doc.id}
                       to={`/docs/watch/${doc.id}`} onClick={this.itemClick}
                       className={classNames('item','clickable')} style={itemStyle(doc)}>
                     <span className="label passtrough">

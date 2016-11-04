@@ -12,21 +12,25 @@ let HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let config = Object.assign({}, baseConfig, {
   entry: {
+    'lib1': ['lodash'],
+    'lib2': ['react','react-dom','redux','react-redux',
+             'tweetnacl','pouchdb','pouchdb-authentication',
+             'pouchdb-upsert', 'pouchdb-find','relational-pouch'],
     'app': ['webpack-dev-server/client?http://127.0.0.1:' + defaultSettings.port,
-            'webpack/hot/only-dev-server',
-            './src/index'],
-    'lib1': ['lodash','react','react-dom','redux','react-redux'],
-    'lib2': ['tweetnacl','pouchdb','pouchdb-authentication',
-             'pouchdb-upsert', 'pouchdb-find','relational-pouch']
+           'webpack/hot/only-dev-server',
+           './src/index']
+
   },
   cache: true,
   devtool: 'eval-source-map',
   plugins: [
     new HtmlWebpackPlugin({
       version: packjson.version,
+      inject: false,
       template: path.join(__dirname , '../src/index.ejs')
     }),
     new webpack.optimize.CommonsChunkPlugin("lib1","vendor.bundle.js"),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new BowerWebpackPlugin({

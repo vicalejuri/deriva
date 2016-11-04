@@ -35,7 +35,7 @@ function getDefaultModules() {
       },
       {
           test   : /\.(ttf|eot|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-          loader : 'file-loader'
+          loader : 'url-loader'
       },
       {
         test: /\.(png|jpg|gif|svg)$/,

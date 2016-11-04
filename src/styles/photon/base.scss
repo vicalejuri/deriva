@@ -14,14 +14,13 @@ html {
 }
 
 body {
-  height: 100%;
   padding: 0;
   margin: 0;
   font-family: $font-family-default;
   font-size: $font-size-default;
   line-height: $line-height-default;
   color: $gray-color;
-  background-color: transparent;
+  background-color: $background-color;
 }
 
 hr {
@@ -36,7 +35,6 @@ hr {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 20px;
   margin-bottom: 10px;
-  font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -23,7 +23,6 @@ let SignupComponent = React.createClass({
     const uint8_hash = nacl.hash( uint8_invite );
     let hex_code = util.encodeBase64( uint8_hash )
 
-    console.log(hex_code, uint8_hash);
     //const hash2 = nacl.hash('alienacao')
     //console.log( hash2 );
 
@@ -55,7 +54,7 @@ let SignupComponent = React.createClass({
                       invalidUsername ? 'Invalid username' :
                       'Cosmic rays are too strong!');
 
-          console.log('signup','error',err);
+           console.log('signup','error',err);
            this.setState({success: false, failed: true, message: msg});
          } else {
            console.log('signup','success');

@@ -6,7 +6,7 @@
 
 /*
  * Fonts
- */
+ *
 @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700,300);
 @font-face {
   font-family:"Source Code Pro",Courier, monospace;
@@ -14,9 +14,10 @@
   font-weight: 400;
   font-size: 12px;
 }
+*/
 
 /* latin */
-@import url(https://fonts.googleapis.com/css?family=Share+Tech+Mono);
+@import url(//fonts.googleapis.com/css?family=Share+Tech+Mono);
 @font-face {
   font-family: 'Inconsolata';
   font-style: normal;
@@ -25,12 +26,20 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
 
-
 @font-face {
   font-family: Agency;
-   src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/agency-fb-bold.woff);
+  src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/agency-fb-bold.woff);
 }
 
+/* Abel */
+@font-face {
+  font-family: 'Abel';
+  font-style: normal;
+  font-weight: 400;
+
+  src: local('Abel'), url('~styles/fonts/Abel-Regular.ttf');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
 
 
 
@@ -41,19 +50,19 @@ body,.window {
   font-family: $font-body;
   font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-size: 12px;
-  font-weight: 100;
+  font-size: $font-size-default;
+  font-weight: $font-weight;
   overflow-x: none;
   overflow-y: auto;
 }
 
 a {
   font-family: $font-subheader;
-  font-weight: bold;
   color: #000;
   cursor: pointer;
   outline: 0;
 }
+
 a:hover, a:active, a:focus {
   outline: 0;
 }
@@ -68,8 +77,8 @@ input[type="button"] , button{
 
 h1,h2,h3,h4,h5,h6 {
   font-family: $font-header;
+  font-size: $font-size-header;
   text-transform: uppercase;
-  font-weight: bold;
 
   a {
     font-family: $font-subheader;

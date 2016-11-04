@@ -7,6 +7,9 @@ import _ from 'lodash';
 import Emoji from 'components/ui/Emoji.js';
 require('styles/deriva/Offline.scss');
 
+/*
+ * Offline screen for when PouchDB cannot be accessed
+ */
 export let OfflineComponent = React.createClass({
 
   render() {

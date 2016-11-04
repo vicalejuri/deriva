@@ -16,104 +16,114 @@
 
   <style>
 
-body , html {
-  background-color: #000;
-  color: #fff;
-}
-.circles {
-    height: 55vmin;
-    width: 55vmin;
-    position: absolute;
-    margin: 0 auto;
-    top: 50%;
-    left: 50%;
-    transform: translate3D(-50%, -50%, 0);
-    transition: all 1.2s linear;
-}
+    body { margin: 0; padding: 0; }
+    .welcome-screen h1 {
+      margin: 0px auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
 
-.circle {
-    box-sizing: border-box;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 2.5vmin solid transparent;
-    border-radius: 115% 140% 145% 110%/125% 140% 110% 125%;
-    mix-blend-mode: screen;
-}
-.circle:nth-child(1) {
-    border-color: #DB4437;
-    transform-origin: 50%-0% 50%;
-    animation: spin1 5.5s linear infinite;
-}
-.circle:nth-child(2) {
-    border-color: #F4B400;
-    transform-origin: 50% 50%+0%;
-    animation: spin2 5.5s linear infinite;
-}
-.circle:nth-child(3) {
-    border-color: #4285F4;
-    transform-origin: 50%+0% 50%;
-    animation: spin3 5.5s linear infinite;
-}
-.circle:nth-child(4) {
-    border-color: #0F9D58;
-    transform-origin: 50% 50%-0%;
-    animation: spin4 5.5s linear infinite;
-}
+      font-family: 'Abel', sans-serif;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 36px;
+      color: #333;
+      line-height: 1.6;
+    }
 
-@keyframes spin1 {
-    0% {
-        transform: rotate(0);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
+    #loading-bar {
+      position: absolute;
+      top: 0px;
+      height: 10px;
+      width: 0%;
+      background-color: #ff00ff;
 
-@keyframes spin2 {
-    0% {
-        transform: rotate(72deg);
+      transition: width 0.35s ease-out;
     }
-    100% {
-        transform: rotate(-288deg);
-    }
-}
-
-@keyframes spin3 {
-    0% {
-        transform: rotate(-144deg);
-    }
-    100% {
-        transform: rotate(216deg);
-    }
-}
-
-@keyframes spin4 {
-    0% {
-        transform: rotate(216deg);
-    }
-    100% {
-        transform: rotate(-144deg);
-    }
-}
   </style>
 </head>
 <body>
   <div id="container">
-    <div class="circles" id="circles">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
+    <div class="welcome-screen">
+      <h1>🉑deriva</h1>
+      <div class="loading-bar" id="loading-bar">
+      </div>
     </div>
   </div>
 
   <script type="text/javascript">
-  
     window.manifest = {
       version: "<%= htmlWebpackPlugin.options.version %>",
       files: JSON.parse('<%= JSON.stringify(htmlWebpackPlugin.files) %>')
     }
+
+
+    /*
+     * Load all assets with a progress bar
+     */
+    var Loader = window.Loader = {
+      start: function(){
+        var self   = this;
+        var vendor = window.manifest.files.chunks.lib1;
+        var app    = [window.manifest.files.chunks.lib2, window.manifest.files.chunks.app];
+
+        var loading_bar_el = document.querySelector('#loading-bar');
+        this.loading_bar_el = loading_bar_el;
+
+        // get total file size in MB
+        this.scripts = {vendor: vendor, app: app};
+        this.loaded_bytes = 0;
+        this.total_size = [vendor, app[0], app[1]].map( function(chunk){ return chunk.size } )
+                              .reduce( function(chunk1, chunk2){ return chunk1+chunk2; } );
+        console.log('Loading ',this.total_size/(1024*1024),' MB in javascript in ', window.manifest.files.js.length, ' files');
+
+        /* Load vendor, then app */
+        this.appendScripts( [this.createScript( vendor.entry, function(){
+          self.loaded( vendor );
+          var scripts = app.map( function(chunk) {
+            return self.createScript( chunk.entry, function(){
+              self.loaded( chunk );
+            });
+          });
+          self.appendScripts( scripts );
+
+        })]);
+
+      },
+
+      loaded: function( chunk ){
+        this.loaded_bytes += chunk.size;
+        var pct = Math.trunc((this.loaded_bytes / this.total_size)*100);
+
+        this.loading_bar_el.style.width = pct+'%';
+        this.loading_bar_el.offsetWidth;   // reflow necessary;
+
+        if(pct == 100){ this.complete(); }
+      },
+
+      complete: function( ){
+        window.start();
+      },
+
+      // Create a shadow DOM script tag
+      createScript: function(src , on_load_cb) {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src  = src;
+        script.async = true;
+        script.onload = on_load_cb;
+        return script;
+      },
+
+      // Append multiple scripts in a single DOM operation
+      appendScripts: function( scripts ){
+        var scriptsFrag = document.createDocumentFragment();
+        for(var i=0; i < scripts.length; i++){ scriptsFrag.appendChild( scripts[i] ); }
+        document.body.appendChild( scriptsFrag );
+      }
+    };
+    Loader.start();
   </script>
 </body>
 </html>

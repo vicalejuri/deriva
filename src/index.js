@@ -1,7 +1,6 @@
 import config from 'config';
 window.config = window.defaultConfig = config;
 
-
 // Start Pouchdb API
 import PouchDB from 'pouchdb'
 import PouchDBAuth from 'pouchdb-authentication'
@@ -52,28 +51,9 @@ window.db = db;
 import dataModels from 'models/index.js';
 import actions from './actions';
 window.actions = actions;
-window.dataModels =  dataModels(window.db);
-
-
-/*
- * Check connectivity to database
- */
-window.db.info().then( () => {
-  // db successfully ready
-  console.info('pouchdb is ready to rock');
-  store.dispatch( actions.remoteDbReady(window.db) );
-}).catch( (err) => {
-  console.error("Could not connect at the moment to our database servers...", err);
-  store.dispatch( actions.remotedbError(err) );
-});
-
 
 // Create session store
 import storeMaker from './store';
-let store = storeMaker(window.db);
-window.store = store;
-
-console.log(window.store);
 
 /*
  * Render the app main route
@@ -91,17 +71,41 @@ import routes from './routes/root';
 const { pathname, search, hash } = window.location
 const location = `${pathname}${search}${hash}`
 
-match({routes, location}, () => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <Router routes={routes} history={browserHistory} />
-    </Provider>,
-    document.getElementById('container')
-  )
-});
+window.start = function(){
+
+  // Models
+  window.dataModels =  dataModels(window.db);
 
 
-// Export for debugging
+  /*
+   * Check connectivity to database
+   */
+  window.db.info().then( () => {
+    // db successfully ready
+    console.info('pouchdb is ready to rock');
+    store.dispatch( actions.remotedbReady(window.db) );
+  }).catch( (err) => {
+    console.error("Could not connect at the moment to our database servers...", err);
+    store.dispatch( actions.remotedbError(err) );
+  });
+
+
+  // Create redux store to save app state
+  let store = storeMaker(window.db);
+  store.actions = actions;
+  window.store = store;
+
+  // Render app routes
+  match({routes, location}, () => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <Router routes={routes} history={browserHistory} />
+      </Provider>,
+      document.getElementById('container')
+    )
+  });
+
+};
 
 //window.trrnt = webtrrnt_client;
 export default window;

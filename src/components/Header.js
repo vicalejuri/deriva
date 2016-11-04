@@ -60,20 +60,20 @@ let HeaderComponent = React.createClass({
     let header_float = {'floated': this.props.ui_header.floated}
     return (
         <header className={classNames('toolbar','toolbar-header','header-nav', header_float)}>
-          <div className="logo" side="left">
+          <div className="logo">
             <Link to={`/`} >
               <Emoji>🉑deriva</Emoji>
             </Link>
           </div>
 
           <div className="featured">
-            <ChannelSelect ref='channel_select' />
+            {/* <ChannelSelect ref='channel_select' /> */}
           </div>
 
-          <div className="nav toolbar-actions" side="right">
+          <div className="nav toolbar-actions">
 
-            <a onClick={this.toggleLogin} className="btn btn-large btn-default btn-dropdown pull-right">
-              <span className="icon"><Emoji>👴</Emoji></span>
+            <a onClick={this.toggleLogin} className="pull-right">
+              Login
             </a>
 
 

@@ -9,28 +9,30 @@
 $font-path: '../fonts/' !default;
 
 // Try to use the system's font on whatever platform the user is on.
-$font-family-default: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+$font-family-default: 'Abel', monospace, serif;
 
 $font-size-default: 14px !default;
 $font-size-large: 18px;
-$font-size-header: 32px;
+$font-size-header: 40px;
 
-$font-weight: 500 !default;
+$font-weight: 400 !default;
 $font-weight-bold: 700 !default;
 $font-weight-light: 300 !default;
-$line-height-default: 1.6 !default;
+$line-height-default: inherit;
 
 //$font-header: 'Inconsolata', monospace;
-$font-body: 'Source Sans Pro', helvetica;
-$font-textarea: 'Lucida Console', monospace;
-$font-header: Agency;
-$font-subheader: 'Share Tech Mono';
+$font-body: 'Abel';
+$font-textarea: 'Inconsolata', monospace;
+$font-header: 'Abel';
+$font-subheader: 'Abel';
 
 $menu-height: 44px;
 $font-header-size: 24px;
 
 // Colors
 // --------------------------------------------------
+
+$background-color: #ffffff;
 
 // Main colors
 $primary-color: #3b99fc !default;
