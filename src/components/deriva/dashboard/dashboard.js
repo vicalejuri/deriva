@@ -4,6 +4,13 @@ import {  Link } from 'react-router';
 import _ from 'lodash';
 import classNames from 'classnames';
 
+/*
+ * A dashboard is a two columns layout
+ * with a let menu controlling the main page
+ * used by child admin pages
+ *
+ * props( sidebar, main, [righbar])
+ */
 require('styles/deriva/dashboard/dashboard.scss');
 let DashboardComponent = React.createClass({
 
@@ -23,12 +30,12 @@ let DashboardComponent = React.createClass({
     let shouldShow = this.isViewportBigEnough();
     return {navs: {
             collections: shouldShow,            profile: shouldShow,
-            settings: shouldShow,
+            settings: shouldShow
           }};
   },
 
   componentWillMount(){
-    this.props.actions.set_ui('header.floated', false );
+    this.props.actions.set_ui_property('header.floated', false );
   },
 
   toggleNavGroup( nav_ref ){

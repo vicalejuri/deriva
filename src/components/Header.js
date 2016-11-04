@@ -8,7 +8,8 @@ import _ from 'lodash';
 import LoginComponent from 'components/deriva/user/inline/login.js';
 import LoggedInComponent from 'components/deriva/user/inline/loggedin.js';
 
-import {ChannelSelect} from 'components/deriva/channels/_select.js';
+import {ChannelSelect} from 'components/deriva/channels/ChannelSelect.js';
+import Emoji from 'components/ui/Emoji.js';
 
 require('styles/deriva/Header.scss');
 
@@ -61,19 +62,18 @@ let HeaderComponent = React.createClass({
         <header className={classNames('toolbar','toolbar-header','header-nav', header_float)}>
           <div className="logo" side="left">
             <Link to={`/`} >
-              🉑deriva
+              <Emoji>🉑deriva</Emoji>
             </Link>
           </div>
 
           <div className="featured">
-            #⃣<ChannelSelect ref='channel_select' className="btn" />
-
+            <ChannelSelect ref='channel_select' />
           </div>
 
           <div className="nav toolbar-actions" side="right">
 
-            <a onClick={this.toggleLogin} className="btn-dropdown pull-right">
-              <span className="icon">👴</span>
+            <a onClick={this.toggleLogin} className="btn btn-large btn-default btn-dropdown pull-right">
+              <span className="icon"><Emoji>👴</Emoji></span>
             </a>
 
 

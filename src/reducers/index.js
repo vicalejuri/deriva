@@ -17,7 +17,7 @@ const deriva = combineReducers({
   data: combineReducers({
     user,
     docs,
-    channels,
+    channels
   }),
 
   /*
@@ -29,7 +29,9 @@ const deriva = combineReducers({
       channel_filter_enabled: false
     },
     docs: {}
-  })
+  }),
+
+  db: remotedb({})
 });
 
 export default deriva;

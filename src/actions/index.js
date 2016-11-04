@@ -14,7 +14,9 @@ const actions = _.extend({},
   userActions, derivaActions,
   channelActions, docsActions,
 
-  oembedActions, uiActions
+  oembedActions, uiActions,
+
+  pouchActions
 );
 
 export default actions;

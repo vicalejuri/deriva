@@ -1,7 +1,12 @@
 // Photon UI KIT
 @import "~styles/photon/photon.scss";
 @import "~styles/photon/variables.scss";
+@import "~styles/ui/utils.scss";
 
+
+/*
+ * Fonts
+ */
 @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700,300);
 @font-face {
   font-family:"Source Code Pro",Courier, monospace;
@@ -105,6 +110,7 @@ h1,h2,h3,h4,h5,h6 {
 
 
 .window-content {
+  height: 100vh;
   background-color: $chrome-color;
 }
 
@@ -121,7 +127,7 @@ h1,h2,h3,h4,h5,h6 {
 
 
 /*
- * Mobile viewport
+ * mobile viewport = full
  */
 @-ms-viewport {
     width: device-width;

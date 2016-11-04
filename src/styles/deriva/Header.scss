@@ -51,6 +51,7 @@
 .header-nav .featured {
   align-self: center;
   margin: 0 auto;
+  flex-grow: 0.5;
 }
 
 // Right nav
@@ -62,6 +63,7 @@
   margin-right: $padding;
   height: 100%;
 
+  /*
   a {
     color: $default-color;
     padding: 10px;
@@ -76,6 +78,7 @@
       // color: #000;
     }
   }
+  */
 }
 
 

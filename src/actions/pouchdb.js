@@ -5,6 +5,10 @@ export const REMOTEDB_READY = 'REMOTEDB_READY';
 export function remotedbReady( db ){
   return {type: REMOTEDB_READY, db };
 }
+export const REMOTEDB_ERROR = 'REMOTEDB_ERROR';
+export function remotedbError( db ){
+  return {type: REMOTEDB_ERROR, db };
+}
 
 export const REMOTEDB_PULL = 'REMOTEDB_PULL';
 export const REMOTEDB_PULL_SUCCESS = 'REMOTEDB_PULL_SUCCESS';

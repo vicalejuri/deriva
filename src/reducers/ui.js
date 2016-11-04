@@ -5,7 +5,7 @@ import _ from 'lodash';
  * A simple Object Reducer.
  * Responds to SET_UI actions
  *
- * dispatch( set_ui('header.visible',false) )
+ * dispatch( set_ui_property('header.visible',false) )
  */
 const uiReducer = ( initialState ) => {
   return (state = initialState, action) => {

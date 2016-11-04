@@ -6,6 +6,7 @@ const dfltPort = 8000;
 var webpack = require('webpack');
 var postcssImport = require('postcss-import');
 var autoPrefixer = require('autoprefixer');
+var precss = require('precss');
 
 function getDefaultModules() {
   return {
@@ -33,15 +34,15 @@ function getDefaultModules() {
         loader: 'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&sourceMap'
       },
       {
-          test   : /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+          test   : /\.(ttf|eot|woff(2)?)(\?[a-z0-9=&.]+)?$/,
           loader : 'file-loader'
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         loader: 'url-loader?limit=8192'
       },
       {
-        test: /\.(mp4|ogg|svg)$/,
+        test: /\.(mp4|ogg)$/,
         loader: 'file-loader'
       }
     ]
@@ -53,7 +54,8 @@ module.exports = {
   port: dfltPort,
   getDefaultModules: getDefaultModules,
   postcss: function () {
-    return [postcssImport({ addDependencyTo: webpack}),
-            autoprefixer({   browsers: ['last 2 versions', 'ie >= 8' ]}) ]
+    return [precss(),
+            postcssImport({ addDependencyTo: webpack}),
+            autoprefixer({   browsers: ['last 2 versions', 'ie >= 8' ]}), ]
   }
 };

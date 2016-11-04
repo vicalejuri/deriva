@@ -41,7 +41,7 @@ let PlayerComponent = React.createClass({
 
   componentDidMount(){
     this.player = plyr.setup( this.refs.player.firstChild , {
-      iconUrl: plyrsvg,
+      // iconUrl: plyrsvg,
       disableContextMenu: false,
       tooltips: { controls: true, seek: true}
     })[0].plyr;

@@ -15,7 +15,7 @@ let config = {
   OEMBED_API_KEY:   '123456789',
 
   // Pouchdb remote database
-  POUCHDB_OFFLINE_ENABLED: true,
+  POUCHDB_OFFLINE_ENABLED: false,
   POUCHDB_SERVER:   'http://localhost:3001/deriva-test',
 
   //POUCHDB_SERVER: 'ws://localhost:3001',

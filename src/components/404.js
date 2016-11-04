@@ -11,7 +11,7 @@ export let NotFoundComponent = React.createClass({
   render() {
     return (
       <div className="notfound-component">
-      <h1>404</h1><h3>Bro ain't here</h3>
+        <h1>404</h1><h3>Bro ain't here</h3>
       </div>
     );
   }

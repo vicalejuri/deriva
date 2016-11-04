@@ -12,6 +12,9 @@ $font-path: '../fonts/' !default;
 $font-family-default: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
 
 $font-size-default: 14px !default;
+$font-size-large: 18px;
+$font-size-header: 32px;
+
 $font-weight: 500 !default;
 $font-weight-bold: 700 !default;
 $font-weight-light: 300 !default;
@@ -116,3 +119,4 @@ $color-c23: rgb(198, 0, 18);
 
 // Default IOS easing
 $easing-default: cubic-bezier( 0.420, 0.0,  0.58, 1.0);
+$perspective-default: 500px;

@@ -24,12 +24,41 @@
   }
 }
 
+
+// Icons in buttons
+.btn .icon {
+  color: #737475;
+  line-height: 1;
+}
+
+// Add the margin next to the icon if there is text in the button too
+.btn .icon-text {
+  margin-right: 5px;
+}
+
+// This utility class add a down arrow icon to the button
+.btn-dropdown:after {
+  font-family: "photon-entypo";
+  margin-left: 5px;
+  content: '\e873';
+  color: inherit;
+}
+
+
+
+
+/*
+ * Modifiers
+ */
 .btn-mini {
   padding: 2px 6px;
 }
 
 .btn-large {
   padding: 6px 12px;
+  & .icon {
+    font-size: $font-size-large;
+  }
 }
 
 .btn-form {
@@ -103,28 +132,4 @@
   &:active {
     @include linear-gradient($warning-color, darken($warning-color, 15%));
   }
-}
-
-// Icons in buttons
-.btn .icon {
-  float: left;
-  width: 14px;
-  height: 14px;
-  margin-top: 1px;
-  margin-bottom: 1px;
-  color: #737475;
-  font-size: 14px;
-  line-height: 1;
-}
-
-// Add the margin next to the icon if there is text in the button too
-.btn .icon-text {
-  margin-right: 5px;
-}
-
-// This utility class add a down arrow icon to the button
-.btn-dropdown:after {
-  font-family: "photon-entypo";
-  margin-left: 5px;
-  content: '\e873';
 }
