@@ -1,0 +1,9 @@
+/*
+ * This will make sure emoji derive their width and height from the font-size of the text they're shown with.
+ */
+img.emoji {
+   height: 1em;
+   width: 1em;
+   margin: 0 .05em 0 .1em;
+   vertical-align: -0.1em;
+}
