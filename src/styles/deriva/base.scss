@@ -95,12 +95,11 @@ h1,h2,h3,h4,h5,h6 {
  * General box styles
  */
 .box {
-    border: 1px solid $dark-border-color;
     background-color: $chrome-color;
-    height: 100%;
 
-    border-radius: $default-border-radius;
-    box-shadow: 0px 2px 5px 2px $shadow-color;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
 
     transition: all $timing $easing-default;
 }
@@ -119,7 +118,6 @@ h1,h2,h3,h4,h5,h6 {
 
 
 .window-content {
-  height: 100vh;
   background-color: $chrome-color;
 }
 

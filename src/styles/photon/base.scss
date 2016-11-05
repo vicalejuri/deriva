@@ -47,6 +47,9 @@ h4 { font-size: 18px; }
 h5 { font-size: 14px; }
 h6 { font-size: 12px; }
 
+
+
+
 // Basic app structure
 .window {
   position: absolute;
@@ -60,7 +63,6 @@ h6 { font-size: 12px; }
 }
 
 .window-content {
-  position: relative;
   overflow-y: auto;
 	display: flex;
   flex: 1;

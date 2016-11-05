@@ -11,14 +11,16 @@ import LoggedInComponent from 'components/deriva/user/inline/loggedin.js';
 import {ChannelSelect} from 'components/deriva/channels/ChannelSelect.js';
 import Emoji from 'components/ui/Emoji.js';
 
-require('styles/deriva/Header.scss');
-
 /*
  * The header with support for popover
  */
 let HeaderComponent = React.createClass({
   getInitialState() {
     return {popover_link: false, login_popover_active: false}
+  },
+
+  componentDidMount(){
+    require('styles/deriva/Header.scss');
   },
 
   toggleLogin(ev) {

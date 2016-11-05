@@ -11,6 +11,8 @@ let defaultSettings = require('./defaults');
 let BowerWebpackPlugin = require('bower-webpack-plugin');
 var AssetsPlugin = require('assets-webpack-plugin');
 
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let config = Object.assign({}, baseConfig, {
@@ -28,6 +30,7 @@ let config = Object.assign({}, baseConfig, {
       filename: baseConfig.output.path + '/index.html',
       template: path.join(__dirname , '../src/index.ejs')
     }),
+    new ExtractTextPlugin('main.css',{ allChunks: true}),
     new webpack.optimize.CommonsChunkPlugin("lib1","lib1.bundle.js"),
     new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({

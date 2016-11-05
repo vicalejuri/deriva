@@ -33,12 +33,16 @@ $font-header-size: 24px;
 // --------------------------------------------------
 
 $background-color: #ffffff;
+$background-front-color: #333;
 
 // Main colors
 $primary-color: #3b99fc !default;
 $chrome-color:  #efefef !default;
 $shadow-color: rgba(0,0,0,0.3);
 $sidebar-color: #1f1f1f;
+
+$invert-color: #090909;
+$invert-front-color: #f9f9f9;
 
 // Copy
 $gray-color: #333 !default;
@@ -66,7 +70,7 @@ $focus-input-color: lighten($primary-color, 10%)  !default;
 // --------------------------------------------------
 
 // Border radius
-$default-border-radius: 4px;
+$default-border-radius: 2px;
 
 // Padding
 $padding: 10px;

@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="shortcut icon" href="favicon.ico?v=3" />
+  <!-- <link rel="shortcut icon" href="favicon.ico?v=3" /> -->
 
   <meta name="description" content="Deriva is an documentary aggregator in portuguese.">
   <meta property="og:image" content="https://snapdrop.net/images/touch/chrome-splashscreen-icon-384x384.png" />
@@ -65,6 +65,7 @@
     var Loader = window.Loader = {
       start: function(){
         var self   = this;
+        var styles = window.manifest.files.css;
         var vendor = window.manifest.files.chunks.lib1;
         var app    = [window.manifest.files.chunks.lib2, window.manifest.files.chunks.app];
 
@@ -72,17 +73,18 @@
         this.loading_bar_el = loading_bar_el;
 
         // get total file size in MB
+        this.styles = styles;
         this.scripts = {vendor: vendor, app: app};
         this.loaded_bytes = 0;
-        this.total_size = [vendor, app[0], app[1]].map( function(chunk){ return chunk.size } )
+        this.total_size = [vendor, app[0], app[1], styles[0]].map( function(chunk){ return chunk.size } )
                               .reduce( function(chunk1, chunk2){ return chunk1+chunk2; } );
         console.log('Loading ',this.total_size/(1024*1024),' MB in javascript in ', window.manifest.files.js.length, ' files');
 
-        /* Load vendor, then app */
-        this.appendScripts( [this.createScript( vendor.entry, function(){
+        /* Load vendor */
+        this.appendScripts( [this.createScript( vendor.entry, 'text-javascript',function(){
           self.loaded( vendor );
           var scripts = app.map( function(chunk) {
-            return self.createScript( chunk.entry, function(){
+            return self.create( chunk.entry, 'text/javascript', function(){
               self.loaded( chunk );
             });
           });
@@ -107,12 +109,14 @@
       },
 
       // Create a shadow DOM script tag
-      createScript: function(src , on_load_cb) {
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
+      loadAsset: function(src , type, on_load_cb) {
+        var script = document.createElement( (type == 'text/javascript' ? 'script' : 'style') ));
+        script.type = type || 'text/javascript';
         script.src  = src;
         script.async = true;
-        script.onload = on_load_cb;
+        script.onload = function( e ){
+          this.loaded( e.target );
+        };
         return script;
       },
 

@@ -8,6 +8,10 @@ var postcssImport = require('postcss-import');
 var autoPrefixer = require('autoprefixer');
 var precss = require('precss');
 
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+//loaders: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap&modules&importLoaders=1!postcss-loader')
+
 function getDefaultModules() {
   return {
     noParse: /node_modules\/json-schema\/lib\/validate\.js/,
@@ -23,15 +27,17 @@ function getDefaultModules() {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader!postcss-loader?sourceMap'
+        //loader: 'style-loader!css-loader!postcss-loader?sourceMap'
+        loader: ExtractTextPlugin.extract('style-loader?insertAt=top&-singleton','!css-loader?sourceMapimportLoaders=1!postcss-loader!sass-loader')
       },
       {
         test: /\.sass/,
-        loader: 'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&indentedSyntax&sourceMap'
+        loader: ExtractTextPlugin.extract('style-loader?insertAt=top&-singleton','!css-loader?sourceMap&importLoaders=1!postcss-loader!sass-loader')
       },
       {
         test: /\.scss/,
-        loader: 'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&sourceMap'
+        loader: ExtractTextPlugin.extract('style-loader?insertAt=top&-singleton','!css-loader?sourceMap&importLoaders=1!postcss-loader!sass-loader')
+                                          // fallbackLoader: 'css-loader!postcss-loader?sourceMap&modules&importLoaders=1'})
       },
       {
           test   : /\.(ttf|eot|woff(2)?)(\?[a-z0-9=&.]+)?$/,
@@ -54,7 +60,7 @@ module.exports = {
   port: dfltPort,
   getDefaultModules: getDefaultModules,
   postcss: function () {
-    return [precss(),
+    return [
             postcssImport({ addDependencyTo: webpack}),
             autoprefixer({   browsers: ['last 2 versions', 'ie >= 8' ]}), ]
   }

@@ -7,11 +7,13 @@ import classNames from 'classnames';
 import nacl from 'tweetnacl';
 import util from 'tweetnacl-util';
 
-require('styles/deriva/user/signup.scss');
-
 let SignupComponent = React.createClass({
   getInitialState() {
     return { success: false, failed: false, message: false, invite: 'empty'}
+  },
+
+  ComponentDidMount(){
+    require('styles/deriva/user/signup.scss');
   },
 
   isValidInvite( ev ){

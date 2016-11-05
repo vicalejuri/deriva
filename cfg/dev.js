@@ -10,6 +10,8 @@ let packjson = require('../package.json');
 let BowerWebpackPlugin = require('bower-webpack-plugin');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 let config = Object.assign({}, baseConfig, {
   entry: {
     'lib1': ['lodash'],
@@ -29,6 +31,7 @@ let config = Object.assign({}, baseConfig, {
       inject: false,
       template: path.join(__dirname , '../src/index.ejs')
     }),
+    new ExtractTextPlugin('main.css', { allChunks: true}),
     new webpack.optimize.CommonsChunkPlugin("lib1","vendor.bundle.js"),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
