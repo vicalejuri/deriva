@@ -14,13 +14,25 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 function getDefaultModules() {
   return {
-    noParse: /node_modules\/json-schema\/lib\/validate\.js/,
+    noParse: [
+      /node_modules\/json-schema\/lib\/validate\.js/
+    ],
     preLoaders: [{
         test: /\.(js|jsx)$/,
         include: srcPath,
         loader: 'eslint-loader'
       }],
     loaders: [
+      /*
+       * Expose React to be imported
+      {
+        test: /(react|react-dom|react-router)\.js$/,
+        loader: 'imports?React=react'
+      },
+      {
+        test: /(pouchdb)\.js$/,
+        loader: 'imports?Pouchdb=pouchdb'
+      }, */
       {
         test: /\.json$/,
         loader: 'json'

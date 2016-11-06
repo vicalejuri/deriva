@@ -18,7 +18,7 @@
     "mocha": true
   },
   "rules": {
-    "comma-dangle": 1,
+    "comma-dangle": 0,
     "quotes":  0,
     "no-undef": 1,
     "global-strict": 0,
@@ -26,7 +26,7 @@
     "no-underscore-dangle": 0,
     "no-console": 0,
     "no-unused-vars": 0,
-    "no-trailing-spaces": [1, { "skipBlankLines": true }],
+    "no-trailing-spaces": [0, { "skipBlankLines": true }],
     "no-unreachable": 1,
     "no-alert": 0,
     "react/jsx-uses-react": 1,

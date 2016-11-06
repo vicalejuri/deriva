@@ -1,22 +1,22 @@
-import * as userActions from './user.js'
-import * as derivaActions from './deriva.js'
+import * as user from './user.js'
+import * as deriva from './deriva.js'
 
-import * as channelActions from './channels.js'
-import * as docsActions from './docs.js'
-import * as pouchActions from './pouchdb.js'
+import * as channels from './channels.js'
+import * as docs from './docs.js'
+import * as pouch from './pouchdb.js'
 
-import * as uiActions from './ui.js'
-import * as oembedActions from './oembed.js'
+import * as ui from './ui.js'
+import * as oembed from './oembed.js'
 
 import _ from 'lodash';
 
-const actions = _.extend({},
-  userActions, derivaActions,
-  channelActions, docsActions,
+let actions = {
+  user, deriva,
+  channels, docs,
 
-  oembedActions, uiActions,
+  oembed, ui,
 
-  pouchActions
-);
+  pouch
+};
 
 export default actions;

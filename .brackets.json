@@ -1,0 +1,9 @@
+{
+    "dimitrk.exclude-indexing-filetree.excludeList": [
+        ".git(?!ignore)",
+        "bower_components"
+    ],
+    "jscodehints.detectedExclusions": [
+        "/media/coral/Data/Codes/deriva/test/components/deriva/WatchComponentTest.js"
+    ]
+}

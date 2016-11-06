@@ -6,7 +6,7 @@
 label {
   display: inline-block;
   font-size: $font-size-default;
-  margin-bottom: 5px;
+  text-transform: uppercase;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -22,21 +22,26 @@ input[type="checkbox"] {
   line-height: normal;
 }
 
+// Form without label
 .form-control {
   display: inline-block;
   width: 100%;
   min-height: 25px;
+  margin: $padding 0px;
   padding: $padding-less $padding;
   font-size: $font-size-default;
   line-height: $line-height-default;
   background-color: $chrome-color;
-  border: 3px solid $border-color;
+  border: 3px solid transparent;
   border-radius: $default-border-radius;
   outline: none;
 
+  &.bordered { border: 3px solid $border-color; }
+
   &:focus {
-    border-color: $focus-input-color;
-    box-shadow: 0 0 0 3px $focus-input-color;
+    border: 3px solid transparent;
+    background-color: $invert-color;
+    color: $invert-front-color;
   }
 }
 
@@ -51,7 +56,11 @@ textarea {
 // horizontal forms, use the predefined grid classes.
 
 .form-group {
-  margin-bottom: 10px;
+  
+  .form-control {
+    margin-top: 0;
+    margin-bottom: $padding-more;    
+  }
 }
 
 // Checkboxes and radios

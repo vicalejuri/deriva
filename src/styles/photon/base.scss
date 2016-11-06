@@ -47,23 +47,3 @@ h4 { font-size: 18px; }
 h5 { font-size: 14px; }
 h6 { font-size: 12px; }
 
-
-
-
-// Basic app structure
-.window {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-	display: flex;
-  flex-direction: column;
-  background-color: $chrome-color;
-}
-
-.window-content {
-  overflow-y: auto;
-	display: flex;
-  flex: 1;
-}

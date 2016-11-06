@@ -71,18 +71,26 @@ let SignupComponent = React.createClass({
 
   render() {
     let signup_classes = {success: this.state.success, failed: this.state.failed };
-    return (<div className={classNames("signup-component box", signup_classes)}>
+    return (<div className={classNames("signup-component page-column box", signup_classes)}>
             <form onSubmit={this.signUp}>
               <div className="title">
                 <h1>DERIVA</h1>
-                <input id="invite" ref="invite" type="text" onBlur={this.isValidInvite}
-                className={classNames("form-control", this.state.invite)} placeholder="Invite password" />
-                <p>Only invited users</p>
+                <div className="sub-box">
+                  <p>Only invited users</p>
+                  <input id="invite" ref="invite" type="text" onBlur={this.isValidInvite}
+                  className={classNames("form-control","bordered", this.state.invite)} placeholder="Invite password" />
+                </div>
               </div>
-              <div> <input type="text" className="form-control" ref="username" autocomplete="username" id="username" placeholder="Usuário"/>
+            <div className="flex-column form-group signup">
+              <div>
+                <label for="username">Usuário</label>
+                <input type="text" className="form-control bordered" ref="username" autocomplete="username" id="username" placeholder="Usuário"/>
               </div>
-              <div><input type="password" className="form-control" ref="password" autocomplete="password" id="password" placeholder="Senha"/>
+              <div>
+                <label for="password">Senha</label>
+                <input type="password" className="form-control bordered" ref="password" autocomplete="password" id="password" placeholder="Senha"/>
               </div>
+            </div>
               <div className="terms checkbox">
               { this.state.message ? (<p>{this.state.message}</p>) :
                 (<label>
@@ -91,9 +99,15 @@ let SignupComponent = React.createClass({
               }
               </div>
               <div className="submit">
-                <button ref="signup" value="Criar conta" className="btn btn-form btn-primary">Criar conta</button>
+                <button ref="signup" value="Criar conta" className="btn btn-rounded btn-primary">Criar conta</button>
               </div>
             </form>
+
+            <div className="useful-actions">
+              <h6>OR</h6>
+              <Link to={`/users/login`} className="btn btn-primary btn-rounded">Login</Link>
+            </div>
+
             </div>
     );
   }

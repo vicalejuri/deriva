@@ -1,0 +1,10 @@
+{
+  "libs": [ "browser", ],
+  "plugins": {
+    "es_modules": { }
+    "requirejs": {
+      "baseURL": "./",
+      "paths": {}
+    }
+  }
+}

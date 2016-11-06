@@ -53,81 +53,11 @@
   </div>
 
   <script type="text/javascript">
+  /* Chunks for loading */
     window.manifest = {
       version: "<%= htmlWebpackPlugin.options.version %>",
       files: JSON.parse('<%= JSON.stringify(htmlWebpackPlugin.files) %>')
     }
-
-
-    /*
-     * Load all assets with a progress bar
-     */
-    var Loader = window.Loader = {
-      start: function(){
-        var self   = this;
-        var styles = window.manifest.files.css;
-        var vendor = window.manifest.files.chunks.lib1;
-        var app    = [window.manifest.files.chunks.lib2, window.manifest.files.chunks.app];
-
-        var loading_bar_el = document.querySelector('#loading-bar');
-        this.loading_bar_el = loading_bar_el;
-
-        // get total file size in MB
-        this.styles = styles;
-        this.scripts = {vendor: vendor, app: app};
-        this.loaded_bytes = 0;
-        this.total_size = [vendor, app[0], app[1], styles[0]].map( function(chunk){ return chunk.size } )
-                              .reduce( function(chunk1, chunk2){ return chunk1+chunk2; } );
-        console.log('Loading ',this.total_size/(1024*1024),' MB in javascript in ', window.manifest.files.js.length, ' files');
-
-        /* Load vendor */
-        this.appendScripts( [this.createScript( vendor.entry, 'text-javascript',function(){
-          self.loaded( vendor );
-          var scripts = app.map( function(chunk) {
-            return self.create( chunk.entry, 'text/javascript', function(){
-              self.loaded( chunk );
-            });
-          });
-          self.appendScripts( scripts );
-
-        })]);
-
-      },
-
-      loaded: function( chunk ){
-        this.loaded_bytes += chunk.size;
-        var pct = Math.trunc((this.loaded_bytes / this.total_size)*100);
-
-        this.loading_bar_el.style.width = pct+'%';
-        this.loading_bar_el.offsetWidth;   // reflow necessary;
-
-        if(pct == 100){ this.complete(); }
-      },
-
-      complete: function( ){
-        window.start();
-      },
-
-      // Create a shadow DOM script tag
-      loadAsset: function(src , type, on_load_cb) {
-        var script = document.createElement( (type == 'text/javascript' ? 'script' : 'style') ));
-        script.type = type || 'text/javascript';
-        script.src  = src;
-        script.async = true;
-        script.onload = function( e ){
-          this.loaded( e.target );
-        };
-        return script;
-      },
-
-      // Append multiple scripts in a single DOM operation
-      appendScripts: function( scripts ){
-        var scriptsFrag = document.createDocumentFragment();
-        for(var i=0; i < scripts.length; i++){ scriptsFrag.appendChild( scripts[i] ); }
-        document.body.appendChild( scriptsFrag );
-      }
-    };
-    Loader.start();
   </script>
 </body>
 </html>

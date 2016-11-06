@@ -6,7 +6,6 @@
   min-width: 280px;
   padding: 10px;
   margin: 0px auto;
-  border: 1px solid $border-color;
   border-top: 0px;
 
   & > div {
@@ -15,7 +14,7 @@
     margin-top: 10px;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 
     &:first-child { margin-top: 0px; }

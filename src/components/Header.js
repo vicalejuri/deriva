@@ -11,6 +11,8 @@ import LoggedInComponent from 'components/deriva/user/inline/loggedin.js';
 import {ChannelSelect} from 'components/deriva/channels/ChannelSelect.js';
 import Emoji from 'components/ui/Emoji.js';
 
+import actions from 'actions'
+
 /*
  * The header with support for popover
  */
@@ -74,10 +76,6 @@ let HeaderComponent = React.createClass({
 
           <div className="nav toolbar-actions">
 
-            <a onClick={this.toggleLogin} className="pull-right">
-              Login
-            </a>
-
 
             {/*
             <div className="btn-group" onClick={this.goTo}>
@@ -87,22 +85,23 @@ let HeaderComponent = React.createClass({
               </button>
             </div>
             */}
-          </div>
 
-
-          <div onMouseLeave={this.togglePopoverLinks} className={classNames('anim-fadeIn',menu_popover_classes)}>
             {(this.props.user.authenticated ?
-              (<LoggedInComponent ref="loggedin_popover" active={menu_popover_classes.active} />) :
-              (<LoginComponent ref="login_popover" active={menu_popover_classes.active} />) )}
-          </div>
+                (
+                  <div onMouseLeave={this.togglePopoverLinks} className={classNames('anim-fadeIn',menu_popover_classes)}>
+                    <LoggedInComponent ref="loggedin_popover" active={menu_popover_classes.active} />
+                  </div>
+                ) :
+                (<Link to='/users/login' className="pull-right">Login</Link>)
+             )}
 
+          </div>
         </header>
     );
   }
 });
 
 // Connect to redux store
-import actions from 'actions'
 import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
@@ -110,8 +109,6 @@ import { connect } from 'react-redux'
 HeaderComponent = connect( (state) => {
   return {user: state.data.user,
           ui_header: state.ui.header}
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
 })(HeaderComponent);
 
 export default HeaderComponent;

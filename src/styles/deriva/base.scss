@@ -3,7 +3,6 @@
 @import "~styles/photon/variables.scss";
 @import "~styles/ui/utils.scss";
 
-
 /*
  * Fonts
  *
@@ -16,7 +15,7 @@
 }
 */
 
-/* latin */
+/* latin
 @import url(//fonts.googleapis.com/css?family=Share+Tech+Mono);
 @font-face {
   font-family: 'Inconsolata';
@@ -30,6 +29,7 @@
   font-family: Agency;
   src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/agency-fb-bold.woff);
 }
+*/
 
 /* Abel */
 @font-face {
@@ -77,7 +77,6 @@ input[type="button"] , button{
 
 h1,h2,h3,h4,h5,h6 {
   font-family: $font-header;
-  font-size: $font-size-header;
   text-transform: uppercase;
 
   a {
@@ -91,43 +90,6 @@ h1,h2,h3,h4,h5,h6 {
 
 
 
-/*
- * General box styles
- */
-.box {
-    background-color: $chrome-color;
-
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-
-    transition: all $timing $easing-default;
-}
-.subarea {
-  background-color: $toolbar-border-color;
-  color: $default-color;
-}
-
-
-
-
-
-
-
-
-
-
-.window-content {
-  background-color: $chrome-color;
-}
-
-
-
-
-.blur{
-  -webkit-backdrop-filter: blur(50px);
-  backdrop-filter: blur(50px);
-}
 
 
 

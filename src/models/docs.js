@@ -1,7 +1,6 @@
 /*
  * DataSources from parse-server
  */
-import PouchDB from 'pouchdb'
 import _ from 'lodash'
 
 /*
@@ -21,6 +20,9 @@ export class Doc {
 
 }
 Doc.schema = (db) => {
+  if(db){
+      //db.createIndex({index: {fields: ['type','data.title']}});
+  }
   return {
     singular: 'deriva/doc',
     plural:   'deriva/docs',
@@ -28,7 +30,6 @@ Doc.schema = (db) => {
       'channels': {hasMany: 'deriva/channel'}
     }
   }
-  //db.createIndex({index: {fields: ['type','data.title']}});
 }
 
 /*
@@ -57,14 +58,17 @@ export class Channel {
 }
 
 Channel.schema = (db) => {
-  return {
+  if(db){
+      //db.createIndex({index: {fields: ['type','data.title']}});
+  }
+
+   return {
     singular: 'deriva/channel',
     plural:   'deriva/channels',
     relations: {
       'docs': {hasMany: 'deriva/doc'}
     }
   }
-  //db.createIndex({index: {fields: ['type','data.title']}})
 }
 
-export default Doc;
+export default { Doc , Channel };

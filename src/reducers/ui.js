@@ -10,7 +10,7 @@ import _ from 'lodash';
 const uiReducer = ( initialState ) => {
   return (state = initialState, action) => {
     switch(action.type){
-      case actions.SET_UI:
+      case actions.ui.SET_UI:
         let ui = _.cloneDeep( state )
         _.set( ui, action.data.key, action.data.value );
         return ui;

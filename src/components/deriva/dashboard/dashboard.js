@@ -35,7 +35,7 @@ let DashboardComponent = React.createClass({
   },
 
   componentWillMount(){
-    this.props.actions.set_ui_property('header.floated', false );
+    this.props.actions.ui.set_ui_property('header.floated', false );
   },
 
   toggleNavGroup( nav_ref ){

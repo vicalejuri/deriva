@@ -4,7 +4,8 @@ let usersRoute = {
   getChildRoutes( location, cb ) {
     require.ensure([], (require) => {
       cb(null, [
-        require('./signup')
+        require('./signup'),
+        require('./login')
       ])
     },'users')
   }

@@ -8,6 +8,7 @@ import classNames from 'classnames';
 let Isotope = require('isotope-layout')
 import Gallery from './docs/Gallery.js';
 
+import actions from 'actions'
 
 /*
  * Home Page
@@ -18,8 +19,8 @@ let Home = React.createClass({
   },
 
   componentWillMount( ) {
-    this.props.actions.set_ui_property('header.floated', false );
-    this.props.actions.list_all_channel();
+    this.props.dispatch( actions.ui.set_ui_property('header.floated', false ) );
+    this.props.dispatch( actions.channels.list_all_channels() );
     /*
     this.props.actions.list_all_doc().then( (docs) => {
       console.log('list_all_doc', docs, docs.length);
@@ -57,15 +58,12 @@ let Home = React.createClass({
 Home.displayName = 'Deriva.Home';
 
 // Connect to redux store
-import actions from 'actions'
 import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
 
 Home = connect( (state) => {
   return {docs: state.data.docs }
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
 })(Home);
 
 

@@ -3,7 +3,7 @@ logs
 *.log
 
 # database
-db
+db/
 
 # Runtime data
 pids

@@ -8,8 +8,13 @@ require('styles/deriva/user/login.scss');
 let LoginComponent = React.createClass({
   propTypes: {
     user: PropTypes.object.isRequired,
-    active: PropTypes.bool.isRequired
+    active: PropTypes.bool.isRequired,
+    classNames: PropTypes.string
   },
+
+//  getDefaultProps(){
+//    return {active: false}
+//  },
 
   focus() {
     ReactDOM.findDOMNode(this.refs.username).focus();
@@ -19,7 +24,7 @@ let LoginComponent = React.createClass({
     let credentials = {u: this.refs.username.value, p: this.refs.password.value};
 
     ev.preventDefault();
-    this.props.actions.login(credentials);
+    this.props.actions.user.login(credentials);
   },
 
   componentDidUpdate() {
@@ -29,7 +34,8 @@ let LoginComponent = React.createClass({
   },
 
   componentDidMount() {
-    this.props.actions.rememberme();
+    console.log( this.props, this.props );
+    this.props.dispatch( actions.user.rememberme() );
   },
 
   render() {
@@ -38,16 +44,22 @@ let LoginComponent = React.createClass({
     let login_classes = {'success': login_success, 'failed': login_failed};
 
     return (<form ref="form" className={classNames('login-component box',login_classes)} onSubmit={this.login}>
-             <div className="message">{this.props.user.message}</div>
-             <div className="form-group">
-                  <input type="text" ref="username" className="form-control" id="username" placeholder="Usuário" autoFocus={true} />
+              <div className="title">
+                <h1>LOGIN</h1>
+              </div>
+              <div className="sub-box flex-column">
+               <div className="form-group">
+                    <label htmlFor="username">username</label>
+                    <input type="text" ref="username" className="form-control" id="username" placeholder="Usuário" autoFocus={true} />
+               </div>
+               <div className="form-group">
+                  <label htmlFor="password">password</label>
+                  <input type="password" ref="password" className="form-control" id="password" placeholder="Senha"/>
+               </div>
+               <div className="message">{this.props.user.message}</div>
              </div>
-             <div className="form-group">
-              <input type="password" ref="password" className="form-control" id="password" placeholder="Senha"/>
-             </div>
-             <div className="submit">
-                <Link to={`/users/signup`} >Signup</Link>
-                <button type="submit" ref="submit" value="Acessar" className="btn btn-primary left" >OK</button>
+              <div className="submit">
+                <button type="submit" ref="submit" value="Acessar" className="btn btn-primary btn-rounded left" >OK</button>
              </div>
             </form>);
   }
@@ -65,8 +77,6 @@ import { login as Login } from 'actions';
 
 LoginComponent = connect( (state) => {
   return {user: state.data.user}
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
 })(LoginComponent);
 
 

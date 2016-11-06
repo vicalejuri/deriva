@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import _ from 'lodash'
 
 import {  Link , browserHistory} from 'react-router';
@@ -7,6 +6,8 @@ import classNames from 'classnames';
 
 let Isotope = require('isotope-layout')
 let defaultBg = require('assets/components/docs/defaultDocThumb.png')
+
+import actions from 'actions';
 
 require('styles/deriva/docs/gallery.scss');
 
@@ -19,7 +20,7 @@ let GalleryComponent = React.createClass({
   },
 
   componentDidMount( ) {
-    this.props.actions.list_all_doc().then( (docs) => {
+    this.props.dispatch( actions.docs.list_all_doc() ).then( (docs) => {
       console.log('list_all_doc', docs, docs.length);
     });
   },
@@ -99,15 +100,12 @@ let GalleryComponent = React.createClass({
 GalleryComponent.displayName = 'Deriva.GalleryComponent';
 
 // Connect to redux store
-import actions from 'actions'
 import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
 
 GalleryComponent = connect( (state) => {
   return {docs: state.data.docs}
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
 })(GalleryComponent);
 
 

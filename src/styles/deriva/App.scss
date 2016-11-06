@@ -1,9 +1,84 @@
 @import "base.scss";
 @import "Animation.scss";
+@import "~styles/photon/variables.scss";
 
-#app {
-  width: auto;
-  display: flex;
+// Basic app structure
+.window {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+	display: flex;
   flex-direction: column;
-  overflow: auto;
+  background-color: $chrome-color;
+}
+
+.window-content {
+  min-height: 100vh;
+  overflow-y: auto;
+	display: flex;
+  flex: 1;
+  background-color: $chrome-color;  
+}
+
+
+/*
+ * Page column layout
+ * 
+ */
+.page-column {
+  display: flex;
+  min-width: 300px;
+  max-width: 100%;
+  padding: 10px 30px 20px 30px;
+  margin: 40px auto 30px auto;
+}
+
+
+/*
+ * Bigger layouts
+ */
+@media (min-width: $smalltablet-size){
+  .page-column {
+    flex-direction: row;
+    justify-content: flex-end;
+    
+    .useful-actions {
+      margin-left: 120px;
+    }
+  }
+}
+
+
+/*
+ * Tablet / small window
+ */
+@media (max-width: $smalltablet-size){
+  .page-column {
+    flex-direction: row;
+    justify-content: center;
+    .useful-actions {
+      margin-left: 0;
+    }
+  }
+}
+
+
+/*
+ * General box styles
+ */
+.box {
+    background-color: $chrome-color;
+
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    transition: all $timing $easing-default;
+}
+
+.sub-box {
+  background-color: white;
+  padding: 0 $padding $padding $padding;
 }

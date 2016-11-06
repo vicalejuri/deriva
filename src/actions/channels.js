@@ -4,7 +4,7 @@ export const LIST_CHANNEL = 'LIST_CHANNEL';
 export const LIST_CHANNEL_SUCCESS = 'LIST_CHANNEL_SUCCESS';
 export const LIST_CHANNEL_ERROR  = 'LIST_CHANNEL_ERROR';
 
-export const list_all_channel = () => {
+export const list_all_channels = () => {
   return (dispatch) => {
 
     dispatch({type: LIST_CHANNEL});

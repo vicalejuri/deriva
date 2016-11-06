@@ -4,9 +4,11 @@
 
 .btn {
   display: inline-block;
-  padding: 3px 8px;
+  padding: $padding-mini 8px;
   margin-bottom: 0;
-  font-size: 12px;
+  min-width: 140px;
+  text-transform: uppercase;
+  font-size: 16px;
   line-height: 1.4;
   text-align: center;
   white-space: nowrap;
@@ -14,7 +16,7 @@
   cursor: pointer !important;
   background-image: none;
   border: 1px solid transparent;
-  border-radius: $default-border-radius;
+  border-radius: 0px;
   box-shadow: 0 1px 1px rgba(0,0,0,.06);
   -webkit-app-region: no-drag;
 
@@ -29,6 +31,11 @@
 .btn .icon {
   color: #737475;
   line-height: 1;
+}
+
+/* Rounded btn */
+.btn-rounded {
+  border-radius: 20px;
 }
 
 // Add the margin next to the icon if there is text in the button too
@@ -92,12 +99,16 @@
 
 // For primary buttons
 .btn-primary {
-  border-color: #388df8;
-  border-bottom-color: darken(#388df8, 15%);
-  @include linear-gradient(#6eb4f7, #1a82fb);
+  background-color: darken( #5c5c5c, 15% );
+  border-color: #5c5c5c;
+  border-bottom-color: darken(#5c5c5c, 15%);
 
   &:active {
-    @include linear-gradient(darken(#6eb4f7, 10%), darken(#1a82fb, 10%));
+    background-color: $primary-color;
+  }
+  &:hover {
+    border-color: transparent;
+    background-color: $primary-color;
   }
 }
 

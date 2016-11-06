@@ -1,38 +1,69 @@
 @import "~styles/photon/variables.scss";
-@import "~styles/ui/utils.scss";
 
 .signup-component {
-  min-width: 300px;
-  max-width: 100%;
-  padding: 10px 30px 20px 30px;
-  margin: 40px auto 30px auto;
-
   > form {
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    > div {
-        flex: auto;
-        margin: 0px auto;
-        margin-bottom: 10px;
-        width: 100%;
-        text-align: center;
-
-        display: flex;
-        transition: all 0.3s $easing-default;
-
-        &.title , &.terms { display: block; }
-        &.terms { margin-top: 20px; }
+    > .title, &.terms { display: block; }
+    > .terms { margin-top: 20px; }
+    > .signup { 
+      margin: 2*$padding-more 0px; 
+      text-align: left; 
+      width: 100%;
     }
+    > .title {
+      width: 80%;
 
-    > div.submit {
+      /*
+       * Invite sucess/error
+       */
+      #invite {
+        transition: background-color 0.3s $easing-default;
+
+        &.empty {}
+        &.error {
+          border: 3px solid transparent;
+          background-color: $warning-color;
+          color: $invert-front-color;
+          animation: shake 0.5s $easing-default;
+        }
+        &.success {
+          border: 3px solid transparent;
+          color: $invert-front-color;
+          background-color: $positive-color;
+        }
+      }
+        
+    }
+    > .submit {
       width: auto;
       align-self: center;
     }
+    
+  }
+  
+  .useful-actions {
+    width: 300px;
+    flex-grow: 0.5;
+    float: right;
+    text-align: center;
+  }
+  
 
+  &.failed {
+    form > .terms {
+      color: $warning-color;
+    }
+  }
+  &.success {
+    form > .terms {
+      color: $positive-color;
+    }    
   }
 }
+
 
 /*
 .signup-component #username,
@@ -40,7 +71,6 @@
 .signup-component #email {
   min-width: 300px;
 }
-*/
 .signup-component .title {
   width: 80%;
   #invite {
@@ -48,6 +78,7 @@
     font-size: 16px;
   }
 }
+*/
 .signup-component input[type="submit"] {
   background: #37a893;
   color: #efefef;
@@ -64,36 +95,5 @@
 }
 
 
-/*
- * Invite sucess/error
- */
-#invite {
-  transition: background-color 0.3s $easing-default;
-
-  &.empty {}
-  &.error {
-    background-color: $warning-color;
-    animation: shake 0.5s $easing-default;
-  }
-  &.success {
-    background-color: $positive-color;
-  }
-}
 
 
-
-/*
- * Sign up success / error
- */
-.signup-component.failed {
-  form > div.terms {
-    color: $warning-color;
-  }
-}
-
-
-.signup-component.success {
-  form > div.terms {
-    color: $positive-color;
-  }
-}

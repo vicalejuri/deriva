@@ -1,7 +1,13 @@
 'use strict';
 let path = require('path');
+
 let defaultSettings = require('./defaults');
+
+let node_modules = path.join(__dirname, '../node_modules');
+let dist = path.join( __dirname, '../dist/');
+
 let webpack = require('webpack');
+
 
 // Additional npm or bower modules to include in builds
 // Add all foreign plugins you may need into this array
@@ -16,7 +22,7 @@ module.exports = {
   debug: true,
   devtool: 'eval',
   output: {
-    path: path.join(__dirname, '/../dist/'),
+    path: dist ,
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
     publicPath: defaultSettings.publicPath + 'assets/'
@@ -33,7 +39,15 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
     alias: {
       masonry: 'masonry-layout',
-      isotope: 'isotope-layout',
+
+      /* Just include this libraries already compiled */
+      'react$':         `react-lite`,
+      'react-dom$':     `react-lite`,
+      /*
+      'react-router$':  `${node_modules}/react-router/umd/ReactRouter.js`,
+      'pouchdb$':       `${node_modules}/pouchdb/dist/pouchdb.js`,
+      'isotope$':       `${node_modules}/isotope-layout/dist/isotope.pkgd.js`,
+      */
 
       libs: `${defaultSettings.srcPath}/libs/`,
       actions: `${defaultSettings.srcPath}/actions/`,
