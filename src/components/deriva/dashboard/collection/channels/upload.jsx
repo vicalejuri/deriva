@@ -5,10 +5,10 @@ import _ from 'lodash';
 import {  Link } from 'react-router';
 import classNames from 'classnames';
 
+import actions from 'actions'
 import utils from 'utils/index.js';
 
 require('styles/deriva/dashboard/collection/channels/upload.scss');
-
 let UploadComponent = React.createClass({
   getInitialState() {
     return { success: false, failed: false, message: false};
@@ -28,11 +28,11 @@ let UploadComponent = React.createClass({
                     }
 
     //let newChannel = new dataModels.Channel( doc_props );
-    this.props.actions.insert_channel( channel_props ).then( (response) => {
+    this.props.dispatch( actions.channels.insert_channel( channel_props ).then( (response) => {
       console.log('insert_doc success', response);
     }).catch( (err) => {
       console.error(err);
-    });
+    }) );
   },
 
 
@@ -88,14 +88,10 @@ let UploadComponent = React.createClass({
 UploadComponent.displayName = 'Deriva.dashboard.collection.channels.UploadComponent';
 
 // redux
-import actions from 'actions'
-import { bindActionCreators } from 'redux'
-
 import { connect } from 'react-redux'
+
 UploadComponent = connect( (state) => {
   return {upload: state.upload}
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
 })(UploadComponent);
 
 export default UploadComponent;

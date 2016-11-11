@@ -19,7 +19,7 @@ import { Router, match, Route, Link, browserHistory } from 'react-router';
 export default {
 
       path: '/',
-      component: require('components/Main'),
+      component: require('components/main.jsx'),
 
       childRoutes: [
         require('./deriva/docs/index.js'),

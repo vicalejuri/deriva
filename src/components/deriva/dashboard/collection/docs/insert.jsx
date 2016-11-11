@@ -9,7 +9,7 @@ import TagsInput from 'react-tagsinput'
 import Autosuggest from 'react-autosuggest'
 
 import utils from 'utils/index.js';
-import ItemBox from 'components/ui/ItemBox.js';
+import ItemBox from 'components/ui/item-box.jsx';
 
 import actions from 'actions'
 

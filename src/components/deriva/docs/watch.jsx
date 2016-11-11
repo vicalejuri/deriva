@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 
-import Player from '../player/Player';
+import Player from '../player/player.jsx';
 import actions from 'actions'
 
 require('styles/deriva/docs/Watch.scss');

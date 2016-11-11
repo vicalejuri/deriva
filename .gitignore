@@ -1,6 +1,7 @@
 # Logs
 logs
 *.log
+log.txt
 
 # database
 db/
@@ -34,3 +35,6 @@ bower_components/
 
 # dist/
 dist/
+
+# tests
+tests/doxx-dump

@@ -7,13 +7,16 @@ import classNames from 'classnames';
 require('styles/ui/ItemBox.scss');
 
 let ItemBoxComponent = React.createClass({
+  /*
+   * A modal component with a header and
+   *  main content. Useful for dialog box.
+   */
   propTypes: {
     title: React.PropTypes.string.isRequired,
     className: React.PropTypes.string
   },
 
   componentWillMount(){
-    console.log( 'rendering video: ' );
   },
 
   render() {

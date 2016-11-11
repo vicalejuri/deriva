@@ -5,7 +5,7 @@ import _ from 'lodash';
 import {  Link } from 'react-router';
 import classNames from 'classnames';
 
-import ItemBox from 'components/ui/ItemBox.js';
+import ItemBox from 'components/ui/item-box.jsx';
 import actions from 'actions'
 
 require('styles/deriva/dashboard/collection/docs/_import.scss');
@@ -138,8 +138,6 @@ let ImportDocComponent = React.createClass({
 ImportDocComponent.displayName = 'Deriva.dashboard.collection.docs.ImportDocComponent';
 
 // redux
-import { bindActionCreators } from 'redux'
-
 import { connect } from 'react-redux'
 
 ImportDocComponent = connect( (state) => {

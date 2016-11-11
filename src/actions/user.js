@@ -113,10 +113,10 @@ export const SIGNUP_ERROR = "SIGNUP_ERROR";
 
 export const signup = (credentials, metadata) => {
   let full_metadata = Object.assign({}, metadata,
-                        { roles: ['user',] ,
+                        { verified: false,
                           banned: false ,
                           points: 10.0,
-                          email: 'none@gmail.com'});
+                          email: 'none@anonymous.com'});
 
   return (dispatch) => {
     dispatch({type: SIGNUP_REQUEST, credentials});

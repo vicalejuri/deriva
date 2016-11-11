@@ -5,7 +5,7 @@ let signupRoute = {
 
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      cb(null, require('components/deriva/user/signup'))
+      cb(null, require('components/deriva/user/signup.jsx'))
     })
   }
 }

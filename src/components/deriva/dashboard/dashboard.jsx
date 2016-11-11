@@ -4,7 +4,7 @@ import {  Link } from 'react-router';
 import _ from 'lodash';
 import classNames from 'classnames';
 
-import actions from 'actions'
+import actions from 'actions';
 
 /*
  * A dashboard is a two columns layout
@@ -129,8 +129,6 @@ let DashboardComponent = React.createClass({
 DashboardComponent.displayName = 'Deriva.dashboard.DashboardComponent';
 
 // Connect to redux store
-import { bindActionCreators } from 'redux'
-
 import { connect } from 'react-redux'
 
 DashboardComponent = connect( (state) => {

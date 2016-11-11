@@ -7,8 +7,8 @@ import classNames from 'classnames';
 require('styles/deriva/App.scss');
 
 /* App */
-import HeaderComponent from 'components/Header.js';
-import OfflineComponent from 'components/Offline.jsx';
+import HeaderComponent from 'components/header.jsx';
+import OfflineComponent from 'components/offline.jsx';
 
 let AppComponent = React.createClass({
   render() {

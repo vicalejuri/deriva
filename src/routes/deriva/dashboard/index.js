@@ -5,7 +5,7 @@ let dashboardRoute = {
 
   getComponent( nextState, cb) {
     require.ensure([], (require) => {
-      let dashboard = require('components/deriva/dashboard/dashboard');
+      let dashboard = require('components/deriva/dashboard/dashboard.jsx');
       cb(null, dashboard  )
     },'dashboard')
   },

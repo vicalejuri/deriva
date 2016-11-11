@@ -6,7 +6,7 @@ import classNames from 'classnames';
 /*
  * A channel selection component
  */
-import SelectComponent from 'components/ui/_select.js';
+import SelectComponent from 'components/ui/_select.jsx';
 
 SelectComponent.displayName = 'Deriva.channels.ChannelsSelect';
 export default SelectComponent;

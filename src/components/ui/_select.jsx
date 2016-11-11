@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-import Emoji from './Emoji.js';
+import Emoji from './emoji.jsx';
 
 /*
  * A nice select
@@ -31,15 +31,6 @@ let SelectComponent = React.createClass({
               noResultsText={<Emoji>🚧 Offline</Emoji>}
               {...otherProps} >
             </Select>
-            /*
-
-            {(this.props.options.length > 0 ?
-              (this.props.options.map( (opt, i) =>
-                <option key={i} label={opt.label} value={opt.value}><Emoji>{opt.label}</Emoji></option>
-              )) :
-              (<option key="Empty" value="empty"><Emoji>🚧 Offline</Emoji></option>)
-            )}
-            */
     );
   }
 });

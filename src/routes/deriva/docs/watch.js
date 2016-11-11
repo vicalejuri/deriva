@@ -4,7 +4,7 @@ let watchRoute = {
 
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      cb(null, require('components/deriva/docs/Watch'))
+      cb(null, require('components/deriva/docs/watch.jsx'))
     })
   }
 }

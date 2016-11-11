@@ -4,7 +4,7 @@ import React from 'react';
 import classNames from 'classnames';
 import _ from 'lodash';
 
-import Emoji from 'components/ui/Emoji.js';
+import Emoji from 'components/ui/emoji.jsx';
 require('styles/deriva/Offline.scss');
 
 /*

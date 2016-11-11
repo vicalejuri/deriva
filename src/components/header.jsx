@@ -5,10 +5,10 @@ import classNames from 'classnames';
 import _ from 'lodash';
 
 /* App */
-import LoggedInMenu from 'components/deriva/user/inline/loggedin_menu.js';
+import LoggedInMenu from 'components/deriva/user/inline/loggedin_menu.jsx';
 
-import {ChannelSelect} from 'components/deriva/channels/ChannelSelect.js';
-import Emoji from 'components/ui/Emoji.js';
+import {ChannelSelect} from 'components/deriva/channels/channel-select.jsx';
+import Emoji from 'components/ui/emoji.jsx';
 
 import actions from 'actions'
 

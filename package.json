@@ -11,7 +11,7 @@
     "posttest": "npm run lint",
     "serve": "node server.js --env=dev",
     "serve:dist": " node server.js --env=dist",
-    "pouchdb": "pouchdb-server -p 3001 -d ./db/  --level-backend sqldown --level-prefix ./db/ ",
+    "pouchdb": "pouchdb-server -p 3001 -c ./db/config.json -d ./db/database/  --sqlite --level-prefix ./db/database/ ",
     "www": "http-server -o -p 8888 --cors -P http://localhost:8000/ dist/",
     "dist": "webpack --env=dist",
     "bundle": "rsync -avzh ./dist/* /home/frangossauro/Documents/Sites/deriva",

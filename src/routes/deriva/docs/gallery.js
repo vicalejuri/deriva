@@ -4,7 +4,7 @@ let listRoute = {
 
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      cb(null, require('components/deriva/docs/Gallery'))
+      cb(null, require('components/deriva/docs/gallery.jsx'))
     },'components:deriva:docs:gallery')
   }
 

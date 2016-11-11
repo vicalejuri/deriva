@@ -11,8 +11,16 @@ import actions from 'actions'
 
 require('styles/deriva/dashboard/profile.scss');
 let ProfileComponent = React.createClass({
+  /*
+   * Render a user profile given it userName.
+   *
+   * if editable is true, data will be rendered
+   * as a form, ready to edit.
+   *  Otherwise, render as a public view of profile.
+   */
   propTypes: {
-    userName: React.PropTypes.string
+    userName: React.PropTypes.string,
+    editable: React.PropTypes.bool
   },
 
   getInitialState() {

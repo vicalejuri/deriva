@@ -5,7 +5,7 @@ let loginRoute = {
 
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      cb(null, require('components/deriva/user/login'))
+      cb(null, require('components/deriva/user/login.jsx'))
     })
   }
 }

@@ -6,7 +6,7 @@ import {  Link , browserHistory} from 'react-router';
 import classNames from 'classnames';
 
 let Isotope = require('isotope-layout')
-import Gallery from './docs/Gallery.js';
+import Gallery from './docs/gallery.jsx';
 
 import actions from 'actions'
 
@@ -55,8 +55,6 @@ let Home = React.createClass({
 Home.displayName = 'Deriva.Home';
 
 // Connect to redux store
-import { bindActionCreators } from 'redux'
-
 import { connect } from 'react-redux'
 
 Home = connect( (state) => {
