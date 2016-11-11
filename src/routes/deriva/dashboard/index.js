@@ -13,7 +13,6 @@ let dashboardRoute = {
   getChildRoutes( location, cb ) {
     require.ensure([], (require) => {
       cb(null, [
-        require('./profile'),
         require('./collection/index.js')
       ])
     },'dashboard')

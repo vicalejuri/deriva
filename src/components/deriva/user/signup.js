@@ -7,13 +7,16 @@ import classNames from 'classnames';
 import nacl from 'tweetnacl';
 import util from 'tweetnacl-util';
 
+import actions from 'actions';
+
 let SignupComponent = React.createClass({
   getInitialState() {
     return { success: false, failed: false, message: false, invite: 'empty'}
   },
 
-  ComponentDidMount(){
+  componentWillMount(){
     require('styles/deriva/user/signup.scss');
+    this.props.dispatch( actions.ui.set_ui_property('header.floated', false) );
   },
 
   isValidInvite( ev ){
@@ -44,59 +47,59 @@ let SignupComponent = React.createClass({
     let credentials = {username: this.refs.username.value,
                        password: this.refs.password.value }
     let metadata = {};
-    //let metadata = {email: this.refs.email.value};
 
-    window.remote_db.signup(credentials.username, credentials.password, {metadata},
-       (err, response) => {
-         if(err){
-           let usernameConflict = (err.name === 'conflict');
-           let invalidUsername = (err.name === 'forbidden');
+    this.props.dispatch( actions.user.signup( credentials, metadata) )
+    .then( (res) => {
+       this.setState({success: true, failed: false, message:
+                      `Welcome ${credentials.username}`});
 
-           let msg = (usernameConflict ? 'Username already taken' :
-                      invalidUsername ? 'Invalid username' :
-                      'Cosmic rays are too strong!');
+     })
+    .catch( (err) => {
+       let usernameConflict = (err.name === 'conflict');
+       let invalidUsername = (err.name === 'forbidden');
 
-           console.log('signup','error',err);
-           this.setState({success: false, failed: true, message: msg});
-         } else {
-           console.log('signup','success');
-           this.setState({success: true, failed: false, message:
-                          `Welcome ${credentials.username}`});
-           // todo: Dispatch login
-         }
+       let msg = (usernameConflict ? 'Username already taken' :
+                  invalidUsername ? 'Invalid username' :
+                  err.message );
+
+       console.log('signup','error',err);
+       this.setState({success: false, failed: true, message: msg});
     });
+
   },
 
 
 
   render() {
     let signup_classes = {success: this.state.success, failed: this.state.failed };
-    return (<div className={classNames("signup-component page-column box", signup_classes)}>
+    return (<div className={classNames("signup-component page-column","box")}>
             <form onSubmit={this.signUp}>
               <div className="title">
                 <h1>DERIVA</h1>
-                <div className="sub-box">
-                  <p>Only invited users</p>
+                <div className={classNames("sub-box", "white", this.state.invite )} >
+                  <p>* Only for invited users</p>
                   <input id="invite" ref="invite" type="text" onBlur={this.isValidInvite}
-                  className={classNames("form-control","bordered", this.state.invite)} placeholder="Invite password" />
+                  className={classNames("form-control")} placeholder="Invite password" />
                 </div>
               </div>
-            <div className="flex-column form-group signup">
-              <div>
+            <div className={classNames("sub-box","flex-column","signup", signup_classes)}>
+              <div className="form-group">
                 <label for="username">Usuário</label>
-                <input type="text" className="form-control bordered" ref="username" autocomplete="username" id="username" placeholder="Usuário"/>
+                <input type="text" className="form-control" ref="username" autocomplete="username" id="username" placeholder="Usuário"/>
               </div>
-              <div>
+              <div className="form-group">
                 <label for="password">Senha</label>
-                <input type="password" className="form-control bordered" ref="password" autocomplete="password" id="password" placeholder="Senha"/>
+                <input type="password" className="form-control" ref="password" autocomplete="password" id="password" placeholder="Senha"/>
+              </div>
+              <div className="message">
+                {this.state.message}
               </div>
             </div>
               <div className="terms checkbox">
-              { this.state.message ? (<p>{this.state.message}</p>) :
                 (<label>
-                    Nós não fazemos <a href="#">tracking</a>, nem guardamos informações pessoais.
+                    <input type="checkbox" value="terms"></input>
+                    Eu aceito os  <a href="#">termos d uso</a>. Nós guardamos seus dados criptografados e não temos acesso.
                 </label>)
-              }
               </div>
               <div className="submit">
                 <button ref="signup" value="Criar conta" className="btn btn-rounded btn-primary">Criar conta</button>
@@ -115,9 +118,11 @@ let SignupComponent = React.createClass({
 
 SignupComponent.displayName = 'Deriva.user.SignupComponent';
 
-// Uncomment properties you need
-// WatchComponent.propTypes = {};
-// WatchComponent.defaultProps = {};
+
+import { connect } from 'react-redux';
+SignupComponent = connect( (state) => {
+  return {}
+})(SignupComponent);
 
 export default SignupComponent;
 module.exports = SignupComponent;

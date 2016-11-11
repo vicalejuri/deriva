@@ -9,7 +9,7 @@
 $font-path: '../fonts/' !default;
 
 // Try to use the system's font on whatever platform the user is on.
-$font-family-default: 'Abel', monospace, serif;
+$font-family-default: 'Abel', helvetica, serif;
 
 $font-size-default: 14px !default;
 $font-size-large: 18px;
@@ -21,8 +21,8 @@ $font-weight-light: 300 !default;
 $line-height-default: inherit;
 
 //$font-header: 'Inconsolata', monospace;
-$font-body: 'Abel';
-$font-textarea: 'Inconsolata', monospace;
+$font-body: 'Space Mono', monospace;
+$font-textarea: 'Space Mono', monospace;
 $font-header: 'Abel';
 $font-subheader: 'Abel';
 
@@ -38,14 +38,14 @@ $background-front-color: #333;
 // Main colors
 $primary-color: #ff823f !default;
 $chrome-color:  #efefef !default;
-$shadow-color: rgba(0,0,0,0.3);
+$form-color: #f5f5f5 !default;
+
+$shadow-color: rgba(#000000,0.3) !default;
 $sidebar-color: #1f1f1f;
 
 $invert-color: #090909;
 $invert-front-color: #f9f9f9;
 
-// Copy
-$gray-color: #333 !default;
 
 // Borders
 $border-color: #ddd !default;
@@ -53,14 +53,17 @@ $dark-border-color: #c2c0c2 !default;
 $darker-bottom-border-color: #a19fa1 !default;
 $toolbar-border-color: #939293 !default;
 
+
 // Action colors
 $default-color:  #fff !default;
 $positive-color: #34c84a !default;
 $negative-color: #fc605b !default;
-$warning-color: #fdbc40 !default;
+//$warning-color: #fdbc40 !default;
+$warning-color: #f44336 !default;
 
 // Shades
 $dark-color: #57acf5 !default;
+$gray-color: #333 !default;
 
 // Focus and active colors
 $active-color: #116cd6;

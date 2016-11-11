@@ -31,7 +31,7 @@ input[type="checkbox"] {
   padding: $padding-less $padding;
   font-size: $font-size-default;
   line-height: $line-height-default;
-  background-color: $chrome-color;
+  background-color: $form-color;
   border: 3px solid transparent;
   border-radius: $default-border-radius;
   outline: none;
@@ -56,10 +56,9 @@ textarea {
 // horizontal forms, use the predefined grid classes.
 
 .form-group {
-  
   .form-control {
     margin-top: 0;
-    margin-bottom: $padding-more;    
+    margin-bottom: $padding-more;
   }
 }
 
@@ -107,7 +106,7 @@ textarea {
   padding: $padding-less $padding;
   font-size: $font-size-default;
   line-height: $line-height-default;
-  background-color: $chrome-color;
+  background-color: $form-color;
   border: 3px solid $border-color;
   border-radius: $default-border-radius;
   outline: none;

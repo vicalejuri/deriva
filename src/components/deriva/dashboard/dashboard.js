@@ -4,6 +4,8 @@ import {  Link } from 'react-router';
 import _ from 'lodash';
 import classNames from 'classnames';
 
+import actions from 'actions'
+
 /*
  * A dashboard is a two columns layout
  * with a let menu controlling the main page
@@ -11,7 +13,6 @@ import classNames from 'classnames';
  *
  * props( sidebar, main, [righbar])
  */
-require('styles/deriva/dashboard/dashboard.scss');
 let DashboardComponent = React.createClass({
 
   isViewportBigEnough(){
@@ -35,7 +36,9 @@ let DashboardComponent = React.createClass({
   },
 
   componentWillMount(){
-    this.props.actions.ui.set_ui_property('header.floated', false );
+    require('styles/deriva/dashboard/dashboard.scss');
+
+    this.props.dispatch( actions.ui.set_ui_property('header.floated', false ) );
   },
 
   toggleNavGroup( nav_ref ){
@@ -72,6 +75,12 @@ let DashboardComponent = React.createClass({
                     Collections
                   </Link>
                   </h5>
+                  <span className="nav-group-item" href="#">
+                    <Link to="/dashboard/collection/users">
+                      <span className="icon icon-database"></span>
+                      Users
+                    </Link>
+                  </span>
                   <span className="nav-group-item" href="#">
                     <Link to="/dashboard/collection/docs">
                       <span className="icon icon-database" ></span>
@@ -120,15 +129,12 @@ let DashboardComponent = React.createClass({
 DashboardComponent.displayName = 'Deriva.dashboard.DashboardComponent';
 
 // Connect to redux store
-import actions from 'actions'
 import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
 
 DashboardComponent = connect( (state) => {
   return {}
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
 })(DashboardComponent);
 
 export default DashboardComponent;

@@ -11,6 +11,8 @@ import Autosuggest from 'react-autosuggest'
 import utils from 'utils/index.js';
 import ItemBox from 'components/ui/ItemBox.js';
 
+import actions from 'actions'
+
 require('styles/deriva/dashboard/collection/docs/insert.scss');
 
 let InsertDocComponent = React.createClass({
@@ -48,14 +50,14 @@ let InsertDocComponent = React.createClass({
                      provider_name: this.state.oembed.provider_name,
                      oembed: this.state.oembed }
 
-    this.props.actions.insert_doc( doc_props )
+    this.props.dispatch( actions.docs.insert_doc( doc_props )
                       .then( (doc) => {
                         console.log('Created', doc)
                         this.setState({error: false, message: `Created ${doc.id}`});
                       })
                       .catch( (err) => {
                         this.setState({error: true, message: `Error: ${err.error}`})
-                      })
+                      }) );
   },
 
 
@@ -64,7 +66,7 @@ let InsertDocComponent = React.createClass({
   },
 
   componentDidMount( ) {
-    this.props.actions.list_all_channel();
+    this.props.dispatch( actions.channels.list_all_channels() );
   },
 
   /*
@@ -143,14 +145,11 @@ let InsertDocComponent = React.createClass({
 InsertDocComponent.displayName = 'Deriva.docs.InsertDocComponent';
 
 // redux
-import actions from 'actions'
 import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
 InsertDocComponent = connect( (state) => {
   return { channels: state.data.channels}
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
 })(InsertDocComponent);
 
 export default InsertDocComponent;

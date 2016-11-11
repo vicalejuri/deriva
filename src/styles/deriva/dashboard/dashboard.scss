@@ -1,13 +1,14 @@
 @import "~styles/photon/variables.scss";
 
 .dashboard {
+  position: relative;
   width: 100%;
-  background-color: #F5F5F5;
+  background-color: $chrome-color;
   overflow: hidden;
 
   > .sidebar {
     z-index: $zmenu;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    box-shadow: 0 0 20px $shadow-color;
 
     .nav-group-title ,
     .nav-group-item {
@@ -72,6 +73,7 @@
 /*
  * Large screens have 3 columns
  *
+ */
 @media (min-width: $desktop-size){
   .dashboard {
     > .main {
@@ -97,13 +99,13 @@
       }
     }
   }
-}*/
+}
 
 
 /*
  * Tablet / small window
  */
-@media (min-width: $smalltablet-size){
+@media (max-width: $smalltablet-size){
   .dashboard {
 
     > .main {
@@ -136,6 +138,7 @@
     &.has_rightbar {
       > .rightbar {
         width: 40%;
+        transform: translate3d(0,0,0);
       }
 
       > .main {

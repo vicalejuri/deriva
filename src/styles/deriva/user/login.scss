@@ -31,14 +31,14 @@
  * Login failed
  */
 .login-component.failed {
-  > div.message {
-    color: #f00;
+  .sub-box {
+    background-color: $warning-color;
   }
 }
 
 
 .login-component.success {
-  > div.message {
-    color: #0fb3d0;
+  .sub-box {
+    background-color: $positive-color;
   }
 }

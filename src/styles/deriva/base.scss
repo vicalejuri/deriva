@@ -5,31 +5,7 @@
 
 /*
  * Fonts
- *
-@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700,300);
-@font-face {
-  font-family:"Source Code Pro",Courier, monospace;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-}
-*/
-
-/* latin
-@import url(//fonts.googleapis.com/css?family=Share+Tech+Mono);
-@font-face {
-  font-family: 'Inconsolata';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Inconsolata'), url(http://fonts.gstatic.com/s/inconsolata/v12/BjAYBlHtW3CJxDcjzrnZCI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
-
-@font-face {
-  font-family: Agency;
-  src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/agency-fb-bold.woff);
-}
-*/
+ */
 
 /* Abel */
 @font-face {
@@ -41,6 +17,8 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
 
+/* Space mono */
+@import url('https://fonts.googleapis.com/css?family=Space+Mono:400,700');
 
 
 /* Base Application Styles */

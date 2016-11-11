@@ -6,6 +6,7 @@ import {  Link , browserHistory } from 'react-router';
 import classNames from 'classnames';
 
 import ImportDocComponent from './_import.js';
+import actions from 'actions';
 
 require('styles/deriva/dashboard/list.scss');
 /*
@@ -52,7 +53,7 @@ let ListDocsComponent = React.createClass({
   },
 
   componentDidMount( ) {
-    this.props.actions.list_all_doc();
+    this.props.dispatch( actions.docs.list_all_doc() );
   },
 
   myremove( ){
@@ -64,7 +65,7 @@ let ListDocsComponent = React.createClass({
     console.log(checked_rows);
     checked_rows.forEach( (doc,i) => {
       console.log('Checked: ',doc);
-      this.props.actions.delete_doc( doc );
+      this.props.dispatch( actions.docs.delete_doc( doc ) );
     })
   },
 
@@ -151,15 +152,12 @@ let ListDocsComponent = React.createClass({
 ListDocsComponent.displayName = 'Deriva.ListDocsComponent';
 
 // Connect to redux store
-import actions from 'actions'
 import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
 
 ListDocsComponent = connect( (state) => {
   return {docs: state.data.docs}
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
 })(ListDocsComponent);
 
 

@@ -8,15 +8,17 @@ import nacl from 'tweetnacl';
 import util from 'tweetnacl-util';
 
 import LoginComponent from './inline/login.js';
+import actions from 'actions';
 
 let LoginPageComponent = React.createClass({
-  ComponentDidMount(){
+  componentWillMount(){
+    this.props.dispatch( actions.ui.set_ui_property('header.floated', false));
   },
 
   render() {
     return (<div className={classNames("page-column box")}>
               <LoginComponent></LoginComponent>
-  
+
               <div className="useful-actions">
                 <h6>OR</h6>
                 <Link to={`/users/signup`} className="btn btn-primary btn-rounded">Signup</Link>
@@ -29,9 +31,11 @@ let LoginPageComponent = React.createClass({
 
 LoginPageComponent.displayName = 'Deriva.user.LoginPageComponent';
 
-// Uncomment properties you need
-// WatchComponent.propTypes = {};
-// WatchComponent.defaultProps = {};
+// Add dispatch/state from redux
+import { connect } from 'react-redux';
+LoginPageComponent = connect( (state) => {
+  return {};
+})(LoginPageComponent)
 
 export default LoginPageComponent;
 module.exports = LoginPageComponent;

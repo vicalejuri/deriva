@@ -6,9 +6,9 @@ let profileRoute = {
 
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      let profileComponent = require('components/deriva/dashboard/profile');
+      let profileComponent = require('components/deriva/dashboard/collection/users/profile');
       cb(null, { main: profileComponent })
-    },'components:deriva:dashboard:profile')
+    },'components:deriva:dashboard:collection:users:profile')
   }
 
 }

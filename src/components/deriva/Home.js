@@ -19,13 +19,8 @@ let Home = React.createClass({
   },
 
   componentWillMount( ) {
-    this.props.dispatch( actions.ui.set_ui_property('header.floated', false ) );
+    this.props.dispatch( actions.ui.set_ui_property('header.floated', true ) );
     this.props.dispatch( actions.channels.list_all_channels() );
-    /*
-    this.props.actions.list_all_doc().then( (docs) => {
-      console.log('list_all_doc', docs, docs.length);
-    });
-    */
   },
 
 
@@ -37,14 +32,16 @@ let Home = React.createClass({
 
     return (<div className="home-page">
               <section className="theather">
-                <div className="player">
-                  <h3>STAFF PICKS</h3>
+                <div className="info">
+                  <h1>STAFF PICKS</h1>
+                </div>
+                <div className="background"
+                  style={{"background-image":  "url(http://www.filippobello.com/assets/images/portfolio/joebrush/hero.jpg)" }} >
                 </div>
               </section>
 
               <div className="page">
                 <section className="subscribed">
-                  subscribed...
                 </section>
                 <section className="channels">
                   <Gallery/>

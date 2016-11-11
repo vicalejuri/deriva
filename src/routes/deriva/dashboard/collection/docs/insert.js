@@ -4,7 +4,7 @@ let uploadRoute = {
 
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      cb(null,  { main: require('components/deriva/dashboard/collection/docs/docs'),
+      cb(null,  { main: require('components/deriva/dashboard/collection/docs/list'),
                   rightbar: require('components/deriva/dashboard/collection/docs/insert')});
     },'components:deriva:dashboard:collection:docs:insert')
   }

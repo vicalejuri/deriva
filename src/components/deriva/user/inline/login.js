@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import {  Link } from 'react-router';
 import classNames from 'classnames';
 
+import { browserHistory } from 'react-router';
+
 require('styles/deriva/user/login.scss');
 let LoginComponent = React.createClass({
   propTypes: {
@@ -21,10 +23,14 @@ let LoginComponent = React.createClass({
   },
 
   login(ev) {
-    let credentials = {u: this.refs.username.value, p: this.refs.password.value};
+    let credentials = {username: this.refs.username.value,
+                       password: this.refs.password.value};
 
     ev.preventDefault();
-    this.props.actions.user.login(credentials);
+    this.props.dispatch( actions.user.login(credentials) )
+        .then( (user) => {
+          browserHistory.push('/dashboard/collection/users/profile');
+        });
   },
 
   componentDidUpdate() {
@@ -34,8 +40,7 @@ let LoginComponent = React.createClass({
   },
 
   componentDidMount() {
-    console.log( this.props, this.props );
-    this.props.dispatch( actions.user.rememberme() );
+    //this.props.dispatch( actions.user.rememberme() );
   },
 
   render() {
@@ -43,11 +48,11 @@ let LoginComponent = React.createClass({
     let login_success = this.props.user.authenticated;
     let login_classes = {'success': login_success, 'failed': login_failed};
 
-    return (<form ref="form" className={classNames('login-component box',login_classes)} onSubmit={this.login}>
+    return (<form ref="form" className={classNames('login-component box')} onSubmit={this.login}>
               <div className="title">
                 <h1>LOGIN</h1>
               </div>
-              <div className="sub-box flex-column">
+              <div className={classNames("sub-box","flex-column","credentials",login_classes)}>
                <div className="form-group">
                     <label htmlFor="username">username</label>
                     <input type="text" ref="username" className="form-control" id="username" placeholder="Usuário" autoFocus={true} />

@@ -18,6 +18,7 @@ export default {
   // Pouchdb remote database
   POUCHDB_OFFLINE_ENABLED: true,
   POUCHDB_SERVER:   'http://localhost:3001/deriva-test',
+  POUCHDB_USERS:    'http://localhost:3001/_users',
 
   //POUCHDB_SERVER: 'ws://localhost:3001',
 

@@ -5,6 +5,7 @@ import _ from 'lodash'
 import {  Link , browserHistory} from 'react-router';
 import classNames from 'classnames';
 
+import actions from 'actions'
 require('styles/deriva/dashboard/list.scss');
 
 /*
@@ -40,7 +41,7 @@ let ChannelRow = React.createClass({
 
 let ListChannelsComponent = React.createClass({
   componentDidMount( ) {
-    this.props.actions.list_all_channel();
+    this.props.dispatch( actions.channels.list_all_channels() );
   },
 
   remove( ){
@@ -50,7 +51,7 @@ let ListChannelsComponent = React.createClass({
     }));
     checked_rows.forEach( (channel,i) => {
       console.log(channel);
-      this.props.actions.delete_channel( channel );
+      this.props.dispatch( actions.channel.delete_channel( channel ) );
     })
   },
 
@@ -101,15 +102,12 @@ let ListChannelsComponent = React.createClass({
 ListChannelsComponent.displayName = 'Deriva.ListChannelsComponent';
 
 // Connect to redux store
-import actions from 'actions'
 import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
 
 ListChannelsComponent = connect( (state) => {
   return {channels: state.data.channels}
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
 })(ListChannelsComponent);
 
 

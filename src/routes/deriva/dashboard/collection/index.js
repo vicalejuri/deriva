@@ -6,7 +6,8 @@ let collectionRoute = {
     require.ensure([], (require) => {
       cb(null, [
         require('./docs/index.js'),
-        require('./channels/index.js')
+        require('./channels/index.js'),
+        require('./users/index.js')
       ])
     },'collection')
   }

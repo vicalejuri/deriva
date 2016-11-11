@@ -17,7 +17,7 @@ PouchDB.plugin( PouchRelational );
 PouchDB.debug.enable('pouchdb:http');
 
 // db sync
-let remote_db = new PouchDB( config.POUCHDB_SERVER )
+let remote_db = new PouchDB( config.POUCHDB_SERVER , {skip_setup: true } );
 let local_db = undefined;
 
 // Offline first
@@ -46,11 +46,10 @@ if(config.POUCHDB_OFFLINE_FIRST){
 let db = local_db;
 models.setDbSchema( db );
 
-
 window.PouchDB = PouchDB
 window.remote_db = remote_db;
 window.db = db;
-
+window.users_db = new PouchDB( config.POUCHDB_USERS, {skip_setup: true });
 
 window.start = function(){
 

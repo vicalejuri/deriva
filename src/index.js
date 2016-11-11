@@ -24,9 +24,6 @@ import actions from './actions';
 window.store = store;
 window.actions = actions;
 
-console.log("Store at -> ", store);
-console.log("Available actions are ->", actions);
-
 // Render app routes
 match({routes, location}, () => {
 ReactDOM.render(

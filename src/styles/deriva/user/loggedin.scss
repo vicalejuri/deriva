@@ -1,26 +1,27 @@
 @import "~styles/photon/variables.scss";
 
-.loggedin-component {
-  display: flex;
-  flex-direction: column;
-  min-width: 280px;
-  margin: 0px auto;
-  border: 1px solid $border-color;
+.user-menu {
+  .sub-box {
+    display: flex;
+    flex-direction: column;
+    min-width: 280px;
+    margin: 0px auto;
 
-  padding: 0;
-  text-align: right;
+    padding: 0;
+    text-align: right;
 
-  .list-group-header {
-    .media-body {
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-    }
-    
-    a {
-      display: flex;
-      align-items: center;
-      flex-direction: row;
+    .list-group-header {
+      .media-body {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+      }
     }
   }
 }

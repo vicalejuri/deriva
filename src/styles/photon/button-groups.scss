@@ -5,9 +5,11 @@
 
 // Button groups
 .btn-group {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle; // match .btn alignment given font-size hack above
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   -webkit-app-region: no-drag;
 
   .btn {

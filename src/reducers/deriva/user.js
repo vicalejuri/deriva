@@ -10,16 +10,16 @@ let AnonymousState = {
 }
 
 const user = (state = AnonymousState, action) => {
-  if(action.type == actions.LOGOUT){
+  if(action.type == actions.user.LOGOUT){
       return Object.assign({}, state, AnonymousState );
-  } else if(action.type == actions.LOGIN_ERROR){
+  } else if(action.type == actions.user.LOGIN_ERROR){
       return Object.assign({},state,{
         authenticated: false,
         message: action.data.message,
         error: true,
         data: action.data
       });
-  } else if(action.type == actions.LOGIN_SUCCESS) {
+  } else if(action.type == actions.user.LOGIN_SUCCESS) {
       return Object.assign({},state,{
         name: action.data.name,
         data: action.data,
@@ -28,13 +28,13 @@ const user = (state = AnonymousState, action) => {
         message: `Hello ${action.data.name}`,
         authenticated: true
       });
-    } else if(action.type == actions.REMEMBERME_ERROR) {
+    } else if(action.type == actions.user.REMEMBERME_ERROR) {
       return Object.assign({}, state, {
         authenticated: false,
         error: true,
         message: ""
       })
-    } else if(action.type == actions.REMEMBERME_SUCCESS) {
+    } else if(action.type == actions.user.REMEMBERME_SUCCESS) {
       return Object.assign({}, state, {
         name: action.data.userCtx.name,
         data: action.data.userCtx,

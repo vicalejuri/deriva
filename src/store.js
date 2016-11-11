@@ -1,7 +1,9 @@
 import { createStore , applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import promise from 'redux-promise';
+
 import createLogger from 'redux-logger'
+import persistState from 'redux-localstorage'
 
 // import PouchMiddleware from 'pouch-redux-middleware'
 import actions from './actions';
@@ -18,6 +20,7 @@ let store = createStore(deriva, compose(
     promise,
     logger
   ),
+  persistState(),
   ( window.devToolsExtension ? window.devToolsExtension() : f => f )
 ));
 

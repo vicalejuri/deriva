@@ -4,12 +4,13 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import React, {PropTypes} from 'react';
 import _ from 'lodash';
 
+import actions from 'actions';
 import classNames from 'classnames';
 
 require('styles/deriva/user/loggedin.scss');
 let avatarImg = require('assets/components/user/avatar.jpg');
 
-let LoggedInComponent = React.createClass({
+let LoggedInMenu = React.createClass({
   propTypes: {
     user: PropTypes.object.isRequired
   },
@@ -17,13 +18,13 @@ let LoggedInComponent = React.createClass({
   logout(ev) {
     ev.preventDefault();
 
-    this.props.actions.logout();
+    this.props.dispatch( actions.user.logout() );
     browserHistory.replace('/');
   },
 
   render() {
     //let signup_classes = {success: this.state.success, failed: this.state.failed };
-    return (<div className={classNames("loggedin-component box")}>
+    return (<div className={classNames("sub-box sub-box-invert")}>
             <ul className="list-group">
               <li className="list-group-header">
                 <div className="media-body">
@@ -45,20 +46,17 @@ let LoggedInComponent = React.createClass({
   }
 });
 
-LoggedInComponent.displayName = 'Deriva.user.LoggedInComponent';
+LoggedInMenu.displayName = 'Deriva.user.LoggedInMenu';
 
 // Connect to redux store
-import actions from 'actions';
 import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-LoggedInComponent = connect( (state) => {
+LoggedInMenu = connect( (state) => {
   return {user: state.data.user}
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
-})(LoggedInComponent);
+})(LoggedInMenu);
 
 
 
-export default LoggedInComponent;
+export default LoggedInMenu;

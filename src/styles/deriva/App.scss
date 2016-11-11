@@ -19,13 +19,13 @@
   overflow-y: auto;
 	display: flex;
   flex: 1;
-  background-color: $chrome-color;  
+  background-color: $chrome-color;
 }
 
 
 /*
  * Page column layout
- * 
+ *
  */
 .page-column {
   display: flex;
@@ -43,7 +43,7 @@
   .page-column {
     flex-direction: row;
     justify-content: flex-end;
-    
+
     .useful-actions {
       margin-left: 120px;
     }
@@ -65,6 +65,8 @@
 }
 
 
+
+
 /*
  * General box styles
  */
@@ -76,9 +78,62 @@
     box-shadow: none;
 
     transition: all $timing $easing-default;
+
+
+    &.failed , &.error {
+      background-color: $warning-color;
+    }
+    &.success , &.success {
+      background-color: $positive-color;
+    }
 }
 
 .sub-box {
-  background-color: white;
   padding: 0 $padding $padding $padding;
+
+  &.white, &-white {
+    background-color: $background-color;
+    color: $background-front-color;
+   }
+
+  &.invert, &-invert {
+    background-color: $background-front-color;
+    color: $background-color;
+  }
+
+  &.failed , &.error {
+      background-color: $warning-color;
+  }
+  &.success {
+      background-color: $positive-color;
+  }
+}
+
+
+
+/*
+ * Popover
+ */
+.popover {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  z-index: $zmenu - 1;
+
+  // triangle
+  &:before {
+    content: " ";
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent $background-front-color transparent;
+    position: absolute;
+    right: 30px;
+    top: -10px;
+  }
+
+  &.active {
+    pointer-events: all;
+    visibility: visible;
+  }
 }

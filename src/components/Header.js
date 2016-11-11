@@ -5,8 +5,7 @@ import classNames from 'classnames';
 import _ from 'lodash';
 
 /* App */
-import LoginComponent from 'components/deriva/user/inline/login.js';
-import LoggedInComponent from 'components/deriva/user/inline/loggedin.js';
+import LoggedInMenu from 'components/deriva/user/inline/loggedin_menu.js';
 
 import {ChannelSelect} from 'components/deriva/channels/ChannelSelect.js';
 import Emoji from 'components/ui/Emoji.js';
@@ -59,9 +58,12 @@ let HeaderComponent = React.createClass({
   },
 
   render() {
-    let menu_popover_classes  = { 'menu-popover': true,
+    let menu_popover_classes  = { 'popover': true,
+                                  'menu-popover': true,
                                   'active': this.state.login_popover_active };
     let header_float = {'floated': this.props.ui_header.floated}
+    let avatarImg = require('assets/components/user/avatar.jpg');
+
     return (
         <header className={classNames('toolbar','toolbar-header','header-nav', header_float)}>
           <div className="logo">
@@ -87,10 +89,15 @@ let HeaderComponent = React.createClass({
             */}
 
             {(this.props.user.authenticated ?
-                (
-                  <div onMouseLeave={this.togglePopoverLinks} className={classNames('anim-fadeIn',menu_popover_classes)}>
-                    <LoggedInComponent ref="loggedin_popover" active={menu_popover_classes.active} />
+                (<div className="user-menu-link">
+                  <Link onClick={this.toggleLogin} className="btn-group pull-right">              <img className="img-circle media-object avatar" src={avatarImg} width="32" height="32" />
+                        {this.props.user.name}
+                  </Link>
+
+                  <div onMouseLeave={this.togglePopoverLinks} className={classNames('user-menu','anim-fadeIn', menu_popover_classes)}>
+                    <LoggedInMenu ref="loggedin_popover" active={menu_popover_classes.active} />
                   </div>
+                </div>
                 ) :
                 (<Link to='/users/login' className="pull-right">Login</Link>)
              )}
