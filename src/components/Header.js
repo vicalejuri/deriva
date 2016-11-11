@@ -90,8 +90,9 @@ let HeaderComponent = React.createClass({
 
             {(this.props.user.authenticated ?
                 (<div className="user-menu-link">
-                  <Link onClick={this.toggleLogin} className="btn-group pull-right">              <img className="img-circle media-object avatar" src={avatarImg} width="32" height="32" />
-                        {this.props.user.name}
+                  <Link onClick={this.toggleLogin} className="btn-group pull-right">
+                    <img className="img-circle media-object avatar" src={avatarImg} width="32" height="32" />
+                    {this.props.user.name}
                   </Link>
 
                   <div onMouseLeave={this.togglePopoverLinks} className={classNames('user-menu','anim-fadeIn', menu_popover_classes)}>

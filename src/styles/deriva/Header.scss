@@ -60,12 +60,12 @@
   margin-right: $padding;
   height: 100%;
 
-  a {
+  > a {
     color: $gray-color;
     padding: 10px;
   }
 
-  .user-menu {
+  .user-menu-link {
     a {
       .avatar { margin-right: $padding; }
     }

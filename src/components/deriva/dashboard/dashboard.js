@@ -98,7 +98,7 @@ let DashboardComponent = React.createClass({
 
                 <nav className={classNames("nav-group", this.state.navs.settings)}>
                   <h5 className="nav-group-title" >
-                    <Link to="/dashboard/" onClick={this.toggleNavGroup('settings')}>
+                    <Link to="/dashboard/settings">
                       <span className="icon icon-record" style={{"color":"#fc605b"}}> </span>
                       Settings
                     </Link>
@@ -108,11 +108,11 @@ let DashboardComponent = React.createClass({
                     <span className="icon icon-record" style={{"color":"#fc605b"}}></span>
                     Theme
                   </span>
-                  */}
                   <span className="nav-group-item" href="#">
                     <span className="icon icon-record" style={{"color":"#fdbc40"}}></span>
                     Engine
                   </span>
+                  */}
                 </nav>
               </section>
               <section className="pane main">

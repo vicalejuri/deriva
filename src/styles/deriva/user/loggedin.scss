@@ -1,7 +1,7 @@
 @import "~styles/photon/variables.scss";
 
 .user-menu {
-  .sub-box {
+  .user-menu {
     display: flex;
     flex-direction: column;
     min-width: 280px;
@@ -10,18 +10,14 @@
     padding: 0;
     text-align: right;
 
-    .list-group-header {
-      .media-body {
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-      }
+    a {
+      color: $default-color;
+    }
 
-      a {
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-      }
+    .media-body {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
     }
   }
 }

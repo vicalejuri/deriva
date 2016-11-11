@@ -24,20 +24,21 @@ let LoggedInMenu = React.createClass({
 
   render() {
     //let signup_classes = {success: this.state.success, failed: this.state.failed };
-    return (<div className={classNames("sub-box sub-box-invert")}>
+    return (<div className={classNames("sub-box sub-box-invert user-menu")}>
             <ul className="list-group">
               <li className="list-group-header">
                 <div className="media-body">
                   <Link to="/dashboard/profile">
-                    <img className="img-circle media-object pull-left" src={avatarImg} width="32" height="32" />
-                    <strong> Hello {this.props.user.name} </strong>
+                    <b> Hello {this.props.user.name} </b>
                   </Link>
                 </div>
               </li>
               <li className="list-group-item">
-                <div onClick={this.logout} className="media-body btn">
-                  <span className="icon icon-users icon-text"></span>
-                  Logout
+                <div className="media-body">
+                  <Link to="/users/logout" onClick={this.logout} className="btn">
+                    <span className="icon icon-users icon-text"></span>
+                    Logout
+                  </Link>
                 </div>
               </li>
             </ul>
