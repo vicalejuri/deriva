@@ -33,7 +33,7 @@ let UserRow = React.createClass({
 
     return (<tr className={classNames(this.state)} onClick={this.check} ref="tr">
       <td><input type="checkbox" ref="checkbox" className="checkbox" onClick={this.check} checked={this.state.checked}/></td>
-      <td><Link to={`/dashboard/users/${user.name}`} >{user._id}</Link></td>
+      <td><Link to={`/dashboard/collection/users/profile/${user.name}`} >{user._id}</Link></td>
       <td>{user.name}</td>
       <td>{user.roles.length > 0 && user.roles || 'Anonymous'}</td>
       <td>{user.email || 'no email'}</td>
@@ -49,7 +49,7 @@ let UserRow = React.createClass({
 let ListUsersComponent = React.createClass({
   getInitialState() {
     return {actions: {active: false,
-                      default_url: '/dashboard/users/list',
+                      default_url: '/dashboard/collection/users/list',
                       url: location.pathname},
             users: []}
   },
@@ -101,22 +101,9 @@ let ListUsersComponent = React.createClass({
               <section className="actions">
                 <div className="btn-group">
                   <button className="btn btn-default" onClick={this.myremove}>
-                    <span className="icon icon-trash"></span>
+                    <span className="icon icon-trash"> </span>
                     Delete
                   </button>
-
-                  <Link to="/dashboard/collection/docs/upload" className="btn btn-default"
-                    onClick={this.toggle_actions}>
-                    <span className="icon icon-plus-circled"></span>
-                    Add New
-                  </Link>
-                </div>
-
-                <div className="btn-group">
-                  <Link to="/dashboard/collection/docs/" className="btn btn-default"
-                    onClick={this.toggle_actions}>
-                    <span className="icon icon-list"></span>
-                  </Link>
                 </div>
 
               </section>

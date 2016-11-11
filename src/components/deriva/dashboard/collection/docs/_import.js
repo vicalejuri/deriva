@@ -6,6 +6,7 @@ import {  Link } from 'react-router';
 import classNames from 'classnames';
 
 import ItemBox from 'components/ui/ItemBox.js';
+import actions from 'actions'
 
 require('styles/deriva/dashboard/collection/docs/_import.scss');
 let ImportDocComponent = React.createClass({
@@ -27,7 +28,7 @@ let ImportDocComponent = React.createClass({
                    url: (json.link || json.source),
                    description: (json.description || json.message)}
 
-      this.props.actions.oembed( props.url ).then((oembed) => {
+      this.props.dispatch( actions.oembed( props.url ) ).then((oembed) => {
         let fprops = _.merge(props, {type: oembed.type,
                                     provider_name: oembed.provider_name,
                                     oembed: oembed } );
@@ -87,7 +88,11 @@ let ImportDocComponent = React.createClass({
 
 
     let insertDocs = (documents) => {
-      return Promise.all( documents.map( this.props.actions.insert_doc) );
+      return Promise.all(
+        documents.map(
+          this.props.dispatch( actions.docs.insert_doc)
+        )
+      );
     }
 
     insertDocs(this.state.documents).done( (results) => {
@@ -133,14 +138,12 @@ let ImportDocComponent = React.createClass({
 ImportDocComponent.displayName = 'Deriva.dashboard.collection.docs.ImportDocComponent';
 
 // redux
-import actions from 'actions'
 import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
+
 ImportDocComponent = connect( (state) => {
   return {}
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
 })(ImportDocComponent);
 
 export default ImportDocComponent;

@@ -7,11 +7,38 @@ import classNames from 'classnames';
 import TagsInput from 'react-tagsinput'
 import Autosuggest from 'react-autosuggest'
 
+import actions from 'actions'
+
 require('styles/deriva/dashboard/profile.scss');
 let ProfileComponent = React.createClass({
+  propTypes: {
+    userName: React.PropTypes.string
+  },
 
   getInitialState() {
-    return {roles: []}
+    let userName =  (this.props.params.userName || 0);
+
+    return {userName,
+           roles: [], user: {roles: [], name: '', email: ''},
+           error: false}
+  },
+
+  getUser( userName ){
+    this.props.dispatch( actions.user.getUser( userName )).then( (user) => {
+      this.setState({user: user, userName})
+    }).catch( (error) => {
+      this.setState({error: true, user: {}});
+    });
+  },
+
+  componentWillReceiveProps( nextProps ) {
+    let userName = ( nextProps.params.userName || 0);
+    this.getUser( userName );
+  },
+
+  componentWillMount() {
+    console.log("profile mount", this.state.userName);
+    this.getUser( this.state.userName );
   },
 
   rolesSuggestion( props ){
@@ -38,52 +65,51 @@ let ProfileComponent = React.createClass({
   },
 
   render() {
-    return (<div className={classNames("list-page","dashboard-profile")}>
+    return (<div className={classNames("list-page","dashboard-profile", {error: this.state.error})}>
                 <section className="header">
                   <h1> Profile </h1>
                 </section>
 
-                <section className="main">
+                {(this.state.error
+                ?(<h5>User {this.state.userName} not found</h5>)
+                :(<section className="main">
                     <div className="form-group">
                       <label>Name</label>
-                      <input type="text" className="form-control" id="title" placeholder={this.props.user.name} value={this.props.user.name}/>
+                      <input type="text" className="form-control" id="title" placeholder={this.state.user.name} value={this.state.user.name}/>
                     </div>
                     <div className="form-group">
                       <label>Email</label>
-                      <input type="text" className="form-control" id="email" placeholder="Email" value={this.props.user.email}/>
+                      <input type="text" className="form-control" id="email" placeholder="Email" value={this.state.user.email}/>
                     </div>
 
-                    {(this.props.user.roles.indexOf('admin') >= 0 ?
-                    (<div className="form-group">
-                      <label>Role</label>
-                      <TagsInput ref="role" renderInput={this.rolesSuggestion} value={this.props.user.roles} onChange={this.handleRoleChange} />
-                    </div>) : ('')
+                    {(this.props.yourself.roles.indexOf('_admin') >= 0
+                      ?(<div className="form-group">
+                        <label>Role</label>
+                        <TagsInput ref="role" renderInput={this.rolesSuggestion} value={this.state.user.roles}  onChange={this.handleRoleChange}  />
+                       </div>)
+                      : false
                     )}
-                </section>
+                 </section>
+                ))}
 
-                <section className="footer">
+                 <section className="footer">
                   <button className="btn btn-large btn-primary submit">Salvar ✨</button>
-                </section>
+                 </section>
+
             </div>
     );
   }
 
 });
 
-ProfileComponent.displayName = 'Deriva.dashboard.ProfileComponent';
+ProfileComponent.displayName = 'Deriva.dashboard.collection.users.ProfileComponent';
 
 // Connect to redux store
-import actions from 'actions'
-import { bindActionCreators } from 'redux'
-
 import { connect } from 'react-redux'
 
 ProfileComponent = connect( (state) => {
-  return {user: state.data.user}
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
+  return {yourself: state.data.user}
 })(ProfileComponent);
-
 
 export default ProfileComponent;
 module.exports = ProfileComponent;

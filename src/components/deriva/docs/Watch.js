@@ -2,9 +2,9 @@ import _ from 'lodash';
 import React from 'react';
 
 import Player from '../player/Player';
+import actions from 'actions'
 
 require('styles/deriva/docs/Watch.scss');
-
 let WatchComponent = React.createClass({
   propTypes: {
     docId: React.PropTypes.string
@@ -16,7 +16,7 @@ let WatchComponent = React.createClass({
   },
 
   componentDidMount() {
-    this.props.actions.get_doc( this.state.docId ).then( (new_doc) => {
+    this.props.dispatch( actions.docs.get_doc( this.state.docId )).then( (new_doc) => {
       this.setState({doc: new_doc, loaded: true})
     }).catch( (error) => {
       console.error(error);
@@ -70,15 +70,10 @@ let WatchComponent = React.createClass({
 WatchComponent.displayName = 'Deriva.WatchComponent';
 
 // Connect to redux store
-import actions from 'actions'
-import { bindActionCreators } from 'redux'
-
 import { connect } from 'react-redux'
 
 WatchComponent = connect( (state) => {
   return {}
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
 })(WatchComponent);
 
 
