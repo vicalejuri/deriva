@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {  Link } from 'react-router';
+import {  Link , browserHistory } from 'react-router';
 import _ from 'lodash';
 import classNames from 'classnames';
 
@@ -52,7 +52,7 @@ let SignupComponent = React.createClass({
     .then( (res) => {
        this.setState({success: true, failed: false, message:
                       `Welcome ${credentials.username}`});
-
+       browserHistory.push( '/dashboard' );
      })
     .catch( (err) => {
        let usernameConflict = (err.name === 'conflict');
