@@ -1,12 +1,11 @@
-import actions from 'actions/';
-
 import _ from 'lodash';
+import * as ACTIONS from 'actions/channels.js';
 
 export const channels = (state = [], action) => {
   switch(action.type){
-    case actions.LIST_CHANNEL:
+    case ACTIONS.LIST_ALL_CHANNELS:
       return state;
-    case actions.LIST_CHANNEL_SUCCESS:
+    case ACTIONS.LIST_ALL_CHANNELS_SUCCESS:
       return action.data || [];
     default:
       return state;
@@ -14,16 +13,13 @@ export const channels = (state = [], action) => {
 }
 
 
-let defaultInsert = {
-  error: false
-}
 export const channel_insert = (state = {}, action) => {
   switch (action.type) {
-    case actions.INSERT_DOC:
-      return defaultInsert;
-    case actions.INSERT_DOC_ERROR:
+    case ACTIONS.INSERT_CHANNEL:
+      return state;
+    case ACTIONS.INSERT_CHANNEL_ERROR:
       return Object.assign( {}, action.data);
-    case actions.INSERT_DOC_SUCCESS:
+    case ACTIONS.INSERT_CHANNEL_SUCCESS:
       return Object.assign( {}, action.data);
     default:
       return state;

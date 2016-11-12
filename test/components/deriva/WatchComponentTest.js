@@ -7,7 +7,7 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import WatchComponent from 'components/deriva/WatchComponent.js';
+import WatchComponent from 'components/deriva/docs/watch.jsx';
 
 describe('WatchComponent', () => {
   let component;

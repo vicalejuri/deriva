@@ -8,7 +8,7 @@ let baseConfig = require('./base');
 // Add needed plugins here
 let BowerWebpackPlugin = require('bower-webpack-plugin');
 
-module.exports = {
+module.exports = Object.assign({}, baseConfig, {
   devtool: 'eval',
   module: {
     preLoaders: [
@@ -22,8 +22,12 @@ module.exports = {
     ],
     loaders: [
       {
-        test: /\.(png|jpg|gif|woff|woff2|css|sass|scss|less|styl)$/,
+        test: /\.(png|jpg|gif|svg|woff|woff2|css|sass|scss|less|styl)$/,
         loader: 'null-loader'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
       },
       {
         test: /\.(js|jsx)$/,
@@ -40,19 +44,13 @@ module.exports = {
   },
   resolve: {
     extensions: [ '', '.js', '.jsx' ],
-    alias: {
-      actions: srcPath + 'actions/',
+    alias: Object.assign({}, baseConfig.resolve.alias , {
       helpers: path.join(__dirname, '/../test/helpers'),
-      components: srcPath + 'components/',
-      sources: srcPath + 'sources/',
-      stores: srcPath + 'stores/',
-      styles: srcPath + 'styles/',
-      config: srcPath + 'config/' + process.env.ENV
-    }
+    })
   },
   plugins: [
     new BowerWebpackPlugin({
       searchResolveModulesDirectories: false
     })
   ]
-};
+});

@@ -2,7 +2,7 @@ let channelsRoute = {
   path: 'channels',
   // component: profileDoc
   childRoutes: [
-    require('./upload.js')
+    require('./edit.js')
   ],
 
   indexRoute: [

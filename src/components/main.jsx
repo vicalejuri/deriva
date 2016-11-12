@@ -13,7 +13,7 @@ import OfflineComponent from 'components/offline.jsx';
 let AppComponent = React.createClass({
   render() {
     return (
-      <div>
+      <div className="viewport">
         <HeaderComponent />
         <div className="window-content">
           {(this.props.db.status != 0 ?
@@ -35,8 +35,6 @@ import { connect } from 'react-redux'
 
 AppComponent = connect( (state) => {
   return {db: state.db }
-}, (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
 })(AppComponent);
 
 

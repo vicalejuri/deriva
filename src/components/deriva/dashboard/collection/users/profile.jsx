@@ -45,7 +45,6 @@ let ProfileComponent = React.createClass({
   },
 
   componentWillMount() {
-    console.log("profile mount", this.state.userName);
     this.getUser( this.state.userName );
   },
 

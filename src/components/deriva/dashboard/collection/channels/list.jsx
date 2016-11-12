@@ -32,7 +32,7 @@ let ChannelRow = React.createClass({
 
     return (<tr className={classNames(this.state)} onClick={this.check} ref="tr">
       <td><input type="checkbox" ref="checkbox" className="checkbox" onClick={this.check} checked={this.state.checked}/></td>
-      <td><Link to={`/channel/edit/${channel._id}`} >{channel.id}</Link></td>
+      <td><Link to={`/dashboard/collection/channels/edit/${channel.id}`} >{channel.id}</Link></td>
       <td>{channel.title} - {channel.subtitle}</td>
       <td>{channel.description}</td>
     </tr>);
@@ -41,7 +41,7 @@ let ChannelRow = React.createClass({
 
 let ListChannelsComponent = React.createClass({
   componentDidMount( ) {
-    this.props.dispatch( actions.channels.list_all_channels() );
+    this.props.dispatch( actions.channels.find_all() );
   },
 
   remove( ){
@@ -50,8 +50,7 @@ let ListChannelsComponent = React.createClass({
       return (dom_el.state.checked == true);
     }));
     checked_rows.forEach( (channel,i) => {
-      console.log(channel);
-      this.props.dispatch( actions.channel.delete_channel( channel ) );
+      this.props.dispatch( actions.channel.delete( channel ) );
     })
   },
 
@@ -66,17 +65,9 @@ let ListChannelsComponent = React.createClass({
                     Delete
                   </button>
 
-                  <Link to="/dashboard/collection/channels/upload" className="btn btn-default">
+                  <Link to="/dashboard/collection/channels/edit/" className="btn btn-default">
                     <span className="icon icon-plus-circled"> </span>
                      Add new
-                  </Link>
-                </div>
-
-                <div className="btn-group">
-
-                  <Link to="/dashboard/collection/channels/import" className="btn btn-default btn-warning" onClick={this.toggle_toolsImport}>
-                    <span className="icon icon-facebook"></span>
-                    Import json
                   </Link>
                 </div>
 
@@ -99,11 +90,9 @@ let ListChannelsComponent = React.createClass({
   }
 });
 
-ListChannelsComponent.displayName = 'Deriva.ListChannelsComponent';
+ListChannelsComponent.displayName = 'Deriva.dashboard.collection.channels.ListComponent';
 
 // Connect to redux store
-import { bindActionCreators } from 'redux'
-
 import { connect } from 'react-redux'
 
 ListChannelsComponent = connect( (state) => {

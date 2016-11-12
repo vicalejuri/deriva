@@ -17,17 +17,23 @@ let SelectComponent = React.createClass({
   },
 
   getInitialState(){
-    return {selected: ''}
+    return {value: ''}
+  },
+
+  onChange( val ) {
+    this.setState({value: val});
   },
 
   render() {
     let { options , className, ...otherProps} = this.props;
-    let { emojified_options } = options.map( (opt,i) => {
+    let emojified_options  = options.map( (opt,i) => {
       return {label: <Emoji>{opt.label}</Emoji>, value: opt.value}
     });
 
     return (<Select className={classNames('select-component', className)}
               options={emojified_options}
+              onChange={this.onChange}
+              value={this.state.value}
               noResultsText={<Emoji>🚧 Offline</Emoji>}
               {...otherProps} >
             </Select>

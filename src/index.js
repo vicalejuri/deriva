@@ -26,10 +26,15 @@ window.actions = actions;
 
 // Render app routes
 match({routes, location}, () => {
-ReactDOM.render(
-  <Provider store={store}>
-    <Router routes={routes} history={browserHistory} />
-  </Provider>,
-  document.getElementById('container')
-)
+  try {
+    ReactDOM.render(
+      <Provider store={store}>
+        <Router routes={routes} history={browserHistory} />
+      </Provider>,
+      document.getElementById('container')
+    )
+  } catch( e ){
+    console.error("Oh snap!", e.message);
+    console.trace(e.stack);
+  }
 });

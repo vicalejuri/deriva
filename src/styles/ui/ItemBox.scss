@@ -49,3 +49,38 @@
     background-color: $color-c11;
   }
 }
+
+
+/*
+ * success / error
+ */
+.item-box.failed , .item-box.error {
+  div.terms , div.message {
+    color: $warning-color;
+  }
+}
+
+
+.item-box.success {
+  div.terms , div.message {
+    color: $positive-color;
+  }
+}
+
+
+
+
+/*
+ * media queries
+ */
+@media (max-width: $smalltablet-size) {
+
+  .item-box {
+    min-width: 320px;
+
+    input[type="text"], {
+      min-width: auto;
+    }
+  }
+
+}

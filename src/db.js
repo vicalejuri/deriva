@@ -45,6 +45,7 @@ if(config.POUCHDB_OFFLINE_FIRST){
 // strict schema
 let db = local_db;
 models.setDbSchema( db );
+window.models = models;
 
 window.PouchDB = PouchDB
 window.remote_db = remote_db;
@@ -59,10 +60,10 @@ window.start = function(){
   window.db.info().then( () => {
     // db successfully ready
     console.info('pouchdb is ready to rock');
-    store.dispatch( actions.pouch.remotedbReady(window.db) );
+    store.dispatch( actions.pouch.dbReady(window.db) );
   }).catch( (err) => {
     console.error("Could not connect at the moment to our database servers...", err);
-    store.dispatch( actions.pouch.remotedbError(err) );
+    store.dispatch( actions.pouch.dbError(err) );
   });
 
 };

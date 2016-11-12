@@ -17,8 +17,7 @@ let logger = createLogger();
 let store = createStore(deriva, compose(
   applyMiddleware(
     thunk,
-    promise,
-    logger
+    promise
   ),
   persistState(),
   ( window.devToolsExtension ? window.devToolsExtension() : f => f )

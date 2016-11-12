@@ -1,0 +1,48 @@
+@import "~styles/photon/variables.scss";
+
+/* edit channels css */
+.edit-component {
+  .channel-edit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .form-group , .terms {
+        flex: auto;
+        margin: 0px auto;
+        margin-bottom: 10px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        &.url {
+          input[type="button"] {
+            background: #37a893;
+            color: #efefef;
+            justify-content: center;
+            padding: 5px;
+            outline-width: 0px;
+            margin: 0px $padding;
+            border: 0px;
+            cursor: pointer;
+          }
+        }
+
+        label {
+          min-width: 50px;
+        }
+
+        &.embed-preview {
+          > div {
+            width: 100%
+          }
+        }
+
+        &.terms { margin-top: 20px; }
+    }
+
+  }
+}
+

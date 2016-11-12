@@ -8,9 +8,9 @@
 // const TestUtils = React.addons.TestUtils;
 import createComponent from 'helpers/shallowRenderHelper';
 
-import Main from 'components/Main';
+import Main from 'components/main.jsx';
 
-describe('MainComponent', () => {
+describe('AppComponent', () => {
   let MainComponent;
 
   beforeEach(() => {
@@ -18,6 +18,6 @@ describe('MainComponent', () => {
   });
 
   it('should have its component name as default className', () => {
-    expect(MainComponent.props.className).to.equal('index');
+    expect(MainComponent.props.className).to.equal('viewport');
   });
 });

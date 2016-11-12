@@ -1,8 +1,10 @@
 'use strict';
-
 import React from 'react';
 import utils from 'utils';
 import classNames from 'classnames';
+
+import _ from 'lodash';
+import {browserHistory} from 'react-router';
 
 require('styles/ui/ItemBox.scss');
 
@@ -13,17 +15,27 @@ let ItemBoxComponent = React.createClass({
    */
   propTypes: {
     title: React.PropTypes.string.isRequired,
-    className: React.PropTypes.string
+    className: React.PropTypes.string,
+    return_to: React.PropTypes.string.isRequired
   },
-
-  componentWillMount(){
+  
+  getDefaultProps() {
+    return {title: '', className: '', return_to: browserHistory.goBack}
+  },
+  
+  close(ev){
+    if(_.isFunction(this.props.return_to)){
+      this.props.return_to();
+    } else if(_.isString(this.props.return_to)){
+      browserHistory.replace(this.props.return_to);
+    }
   },
 
   render() {
     return (<section className={classNames('item-box', this.props.className)} >
               <header className="item-header">
                 <h1>{this.props.title}</h1>
-                <button className="btn btn-large btn-close">
+                <button className="btn btn-large btn-close" onClick={this.close}>
                   X
                 </button>
               </header>

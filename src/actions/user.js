@@ -38,12 +38,6 @@ export const login = (credentials) => {
  export function getUserRequest(){
    return {type: GETUSER}
  }
-
- export const GETUSER_SUCCESS = "GET_USER_SUCCESS";
- export function getUserSuccess(data){
-   return {type: GETUSER_SUCCESS, data}
- }
-
 export function getUser( username ) {
    return (dispatch) => {
      return new Promise( (resolve, reject) => {
@@ -77,9 +71,9 @@ export function remembermeError(data){
 
 export function rememberme( ) {
   return (dispatch) => {
-    window.remote_db.getSession()
-    .catch( (err) => { dispatch(remembermeError(err));    })
-    .then( (succ) => { dispatch(remembermeSuccess(succ)); })
+    return window.remote_db.getSession()
+                  .catch( (err) => { dispatch(remembermeError(err));    })
+                  .then( (succ) => { dispatch(remembermeSuccess(succ)); })
   }
 }
 

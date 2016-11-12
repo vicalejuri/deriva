@@ -6,7 +6,6 @@ let utils = {};
 
 //import ajax from 'pouchdb/extras/ajax';
 
-
 utils.oembed = (url) => {
   let url_encoded = qs.stringify({url});
   console.log(`Using ${url} -> ${url_encoded}`);

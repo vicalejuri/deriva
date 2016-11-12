@@ -66,7 +66,7 @@ let InsertDocComponent = React.createClass({
   },
 
   componentDidMount( ) {
-    this.props.dispatch( actions.channels.list_all_channels() );
+    this.props.dispatch( actions.channels.list_all() );
   },
 
   /*
