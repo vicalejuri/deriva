@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 /*
  * Pouchdb Online/offline
  */
@@ -68,6 +70,50 @@ export function find( db, action, doc_type, doc_id_params ) {
           resolve(r);
       }).catch( (err) => {
           dispatch( {type: `${action}_ERROR`, data: err} );
+          reject(err);
+      });
+    });
+  }
+}
+
+
+/*
+ * Insert a document to db
+ */
+export const insert = ( db, action, doc_type, doc_params ) => {
+  return (dispatch) => {
+    dispatch({type: action, data: doc_params});
+    return new Promise( (resolve,reject) => {
+      db.rel.save( doc_type, doc_params ).then( (response) => {
+        let r = response[doc_type];        
+        if(r.length == 1) r = r[0];
+        
+        dispatch( {type: `${action}_SUCCESS`, data: r});
+        resolve( r )
+      }).catch( (err) => {
+        dispatch( {type: `${action}_ERROR`, data: err} );
+        reject( err );
+      });
+    });
+  }
+}
+
+/*
+ * remove a document
+ */
+export const remove = (db, action, doc_type, doc_params) => {
+  return (dispatch) => {
+
+    let doc_id = ( _.isString(doc_params) ? doc_params 
+                    : db.rel.makeDocID( doc_params) );
+    
+    dispatch({type: action, data: doc_params});
+    return new Promise( (resolve,reject) => {
+      db.rel.del( doc_type, doc_params ).then( (doc) => {
+          dispatch( {type: `${action}_SUCCESS`, data: doc});
+          resolve(doc);
+      }).catch( (err) => {
+          dispatch( {type: `${action}_ERRROR`, data: err});
           reject(err);
       });
     });

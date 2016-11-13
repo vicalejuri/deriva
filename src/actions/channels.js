@@ -25,6 +25,11 @@ export const INSERT_CHANNEL = 'INSERT_CHANNEL';
 export const INSERT_CHANNEL_SUCCESS = 'INSERT_CHANNEL_SUCCESS';
 export const INSERT_CHANNEL_ERROR = 'INSERT_CHANNEL_ERROR';
 
+export const insert = _.wrap( PouchActions.insert, (action, args) => {
+  return action(window.db, INSERT_CHANNEL, 'deriva/channels', args);
+});
+
+/*
 export const insert = ( doc ) => {
   return (dispatch) => {
     dispatch({type: INSERT_CHANNEL, data: doc});
@@ -38,13 +43,21 @@ export const insert = ( doc ) => {
       });
     });
   }
-
 }
+*/
 
 
 
 
 export const REMOVE_CHANNEL = 'REMOVE_CHANNEL';
+export const REMOVE_CHANNEL_SUCCESS = 'REMOVE_CHANNEL_SUCCESS';
+export const REMOVE_CHANNEL_ERROR   = 'REMOVE_CHANNEL_ERROR';
+
+export const remove = _.wrap( PouchActions.remove, (action, args) => {
+  return action(window.db, REMOVE_CHANNEL, 'deriva/channels', args);
+});
+
+/*
 export const remove = ( doc ) => {
   return (dispatch) => {
     dispatch({type: REMOVE_CHANNEL, data: doc});
@@ -57,3 +70,4 @@ export const remove = ( doc ) => {
     });
   }
 }
+*/

@@ -52,7 +52,7 @@ let ListChannelsComponent = React.createClass({
       return (dom_el.state.checked == true);
     }));
     checked_rows.forEach( (channel,i) => {
-      this.props.dispatch( actions.channel.delete( channel ) );
+      this.props.dispatch( actions.channels.remove( channel ) );
     })
   },
 

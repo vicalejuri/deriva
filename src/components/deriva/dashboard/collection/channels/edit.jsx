@@ -36,7 +36,7 @@ let EditComponent = React.createClass({
     ev.preventDefault();
 
     let form_data = this.refs.model_form.value();
-    let new_channel = new models.Channel( form_data );;
+    let new_channel = new models.Channel( form_data );
 
     this.props.dispatch( actions.channels.insert( new_channel ) ).then( (channel_json) => {
       this.setState({channel: new models.Channel(channel_json), 

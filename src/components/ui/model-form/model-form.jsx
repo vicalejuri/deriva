@@ -90,7 +90,7 @@ let ModelFormComponent = React.createClass({
             /* Order fields */
             order: {id: 0},
             /* Type fields */
-            type: {"rev": {type: "hidden"}}
+            type: {"rev": {type: "hidden"}, "type": {type: "hidden"}}
            }
   },
   

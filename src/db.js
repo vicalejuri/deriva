@@ -21,23 +21,31 @@ let remote_db = new PouchDB( config.POUCHDB_SERVER , {skip_setup: true } );
 let local_db = undefined;
 
 // Offline first
-if(config.POUCHDB_OFFLINE_FIRST){
-  //let local_db = new PouchDB('deriva')
+if(config.POUCHDB_OFFLINE_ENABLED){
+  local_db = new PouchDB('deriva')
 
   /*
    * Enable sync with remote
-   *
+   */
   const syncEvents = ['change', 'paused', 'active', 'denied', 'complete', 'error'];
   const clientEvents = ['connect', 'disconnect', 'reconnect'];
 
-  console.log('Replicate REMOTE_DB to LOCAL_DB')
-  remote_db.replicate.to(local_db, {live: true, filter: (doc) => {
-    return doc.type === 'deriva/channel';
-  }});
-  remote_db.replicate.to(local_db, {live: true, filter: (doc) => {
-    return doc.type === 'deriva/doc';
-  }});
-  */
+  console.group('db','Replicate REMOTE_DB to LOCAL_DB');
+  remote_db.replicate.to(local_db, {live: true,})
+  .on('change', (change) => {
+    console.log(" • PouchDB change", change);
+  }).on('paused', (info) => {
+    console.log(" ‹ PouchDB sync paused ", info);
+  }).on('active', (info) => {
+    console.log(" › PouchDB sync active ", info);
+  }).on('complete', () => {
+    console.info(" ✓ PouchDB synced ");
+  }).on('error', function(err){
+    console.error(" Error syncing PouchDB from ", config.POUCHDB_SERVER);
+    console.error(err.message);
+    console.trace(err);
+    console.groupEnd('db');
+  });
 } else {
   local_db = remote_db;
 }
@@ -48,9 +56,9 @@ models.setDbSchema( db );
 window.models = models;
 
 window.PouchDB = PouchDB
-window.remote_db = remote_db;
-window.db = db;
-window.users_db = new PouchDB( config.POUCHDB_USERS, {skip_setup: true });
+window.remote_db  = remote_db;
+window.db         = db;
+window.users_db   = new PouchDB( config.POUCHDB_USERS, {skip_setup: true });
 
 window.start = function(){
 

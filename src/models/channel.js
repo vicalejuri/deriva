@@ -5,7 +5,7 @@ import _ from 'lodash'
  */
 export class Channel {
   constructor(params=new Map()){
-    this.id = _.kebabCase(params.title || '');
+    this.id = _.kebabCase(params.id || params.title || '');
     this.type = 'deriva/channel';
 
     this.title = params.title || '';
