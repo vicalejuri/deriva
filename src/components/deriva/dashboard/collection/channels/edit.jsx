@@ -10,7 +10,10 @@ import utils from 'utils/index.js';
 import models from 'models';
 
 import ItemBox from 'components/ui/item-box.jsx';
-import ModelForm from 'components/ui/model-form.jsx';
+import ModelForm from 'components/ui/model-form';
+
+
+console.log( 'modelForm', ModelForm );
 
 require('styles/deriva/dashboard/collection/channels/edit.scss');
 let EditComponent = React.createClass({

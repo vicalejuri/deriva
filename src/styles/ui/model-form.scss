@@ -3,6 +3,11 @@
   flex-direction: column;
 }
 
+.form-group.hidden {
+  display: none;  
+}
+
+
 .color-input {
   display: flex;
   flex-direction: row;
