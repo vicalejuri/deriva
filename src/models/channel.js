@@ -7,6 +7,9 @@ export class Channel {
   constructor(params=new Map()){
     this.id = _.kebabCase(params.id || params.title || '');
     this.type = 'deriva/channel';
+    if(params.rev){
+      this.rev = params.rev;
+    }
 
     this.title = params.title || '';
     this.subtitle = params.subtitle || '';

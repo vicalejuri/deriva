@@ -21,7 +21,7 @@ let EditComponent = React.createClass({
     let channel_id = ( this.props.params.channel_id || false);
 
     let empty_channel = new models.Channel();
-    return { submit: {status: 0, message: false} ,
+    return { submit: {status: 0, message: 'Mierda'} ,
              channel: empty_channel, channel_id: channel_id };
   },
 
@@ -36,6 +36,7 @@ let EditComponent = React.createClass({
     ev.preventDefault();
 
     let form_data = this.refs.model_form.value();
+    console.log("Saving", form_data);
     let new_channel = new models.Channel( form_data );
 
     this.props.dispatch( actions.channels.insert( new_channel ) ).then( (channel_json) => {
@@ -47,10 +48,21 @@ let EditComponent = React.createClass({
     });
   },
 
+  /* 
+   * Given a channel_id, retrieve it channels, 
+   * or create a new empty channel, if channel_id is false
+   */
   getChannel( channel_id ){
-    this.props.dispatch( actions.channels.find( channel_id) ).then( (channel) => {
-      this.setState({channel_id, channel});
-    });
+    let new_empty_channel = new models.Channel( );
+    let clean_message = {submit: {status: 0, message: ''}};
+    
+    if( channel_id ){
+      this.props.dispatch( actions.channels.find( channel_id) ).then( (channel) => {
+        this.setState({channel_id, channel, ...clean_message});
+      });
+    } else {
+      this.setState({channel_id, channel: new_empty_channel, ...clean_message});
+    }
   },
   
   componentWillMount(){
@@ -68,13 +80,11 @@ let EditComponent = React.createClass({
         <section className="item-content">
             
             <ModelForm ref="model_form" model={models.Channel} data={channel} >
-              <div className="terms">
-                { this.state.message ? (<p>{this.state.message}</p>) : false }
-              </div>
             </ModelForm>
              
         </section>
         <section className="item-actions">
+          <p>{this.state.submit.message}</p>
           <button className="btn btn-primary btn-large" onClick={this.createChannel}>Submit ✨</button>
         </section>
       </ItemBox>
