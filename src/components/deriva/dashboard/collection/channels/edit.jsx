@@ -12,11 +12,11 @@ import models from 'models';
 import ItemBox from 'components/ui/item-box.jsx';
 import ModelForm from 'components/ui/model-form';
 
-
-console.log( 'modelForm', ModelForm );
-
 require('styles/deriva/dashboard/collection/channels/edit.scss');
 let EditComponent = React.createClass({
+  /*
+   * A smart edit component, edit Channel Models
+   */
   getInitialState() {
     let channel_id = ( this.props.params.channel_id || false);
 
@@ -35,15 +35,8 @@ let EditComponent = React.createClass({
     // cancel form submission
     ev.preventDefault();
 
-    let new_channel = new models.Channel({
-                     title: this.refs.title.value,
-                     subtitle: this.refs.subtitle.value,
-                     description: this.refs.description.value,
-                     category: this.refs.category.value,
-                     tags: this.refs.tags.value,
-                     order: this.refs.order.value,
-                     docs: []
-                    });
+    let form_data = this.refs.model_form.value();
+    let new_channel = new models.Channel( form_data );;
 
     this.props.dispatch( actions.channels.insert( new_channel ) ).then( (channel_json) => {
       this.setState({channel: new models.Channel(channel_json), 
@@ -72,44 +65,12 @@ let EditComponent = React.createClass({
       <ItemBox className={classNames("box edit-component", (is_edit ? 'edit' : 'new'))}
                title={(is_edit ? `Edit #${channel.id}` : "Create new Channel")}
                return_to="/dashboard/collection/channels/" >
-          <section className="item-content">
-          
-          {/*
-            <form className="channel-edit-form">
-              <div className="form-group">
-                <label for="title">Title</label>
-                <input type="text" className="form-control" ref="title" value={channel.title} id="title" placeholder="Título" />
-              </div>
-              <div className="form-group">
-                <label for="title">subtitle</label>
-                <input type="text" className="form-control" ref="subtitle" value={channel.subtitle} id="subtitle" placeholder="SubTítulo"/>
-              </div>
-              <div className="form-group">
-                <label for="title">Category</label>
-                <Select ref="category" className="form-control" options={models.Channel._options.category} value={channel.category}/>
-              </div>
-              <div className="form-group">
-                <label for="title">Description</label>
-                <textarea rows="4" cols="4" className="form-control" ref="description" value={channel.description} id="description" placeholder="Descrição" >
-                </textarea>
-              </div>
-
-              <div className="form-group">
-                <label for="tags">Tags</label>
-                <input type="text" className="form-control" ref="tags" value={channel.tags} id="tags" placeholder="Tags"/>
-              </div>
-              <div className="form-group">
-                <label for="author">order</label>
-                <input type="range" min="0" max="100" step="1" defaultValue="0" className="form-control" ref="order" value={channel.order} />
-              </div>
-            </form>
-              
-          */}
+        <section className="item-content">
             
-            <ModelForm model={models.Channel} data={channel} >
+            <ModelForm ref="model_form" model={models.Channel} data={channel} >
               <div className="terms">
                 { this.state.message ? (<p>{this.state.message}</p>) : false }
-              </div>              
+              </div>
             </ModelForm>
              
         </section>

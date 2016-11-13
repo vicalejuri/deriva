@@ -25,6 +25,16 @@ let FormGroup = React.createClass({
     return _.filter(MODEL_FORM_TAGS, c => (c.tag == input_matches[0]))[0];
   },
   
+  value(){
+    let value = 'NONE';
+    value = this.refs.input.$cache.node.value;
+    value = value || this.refs.input.value();
+    return value;
+  },
+  
+  id(){ 
+    return this.props.fields.label;
+  },
                                 
   render(){
     let { fields, order, ...options} = this.props;
@@ -43,8 +53,9 @@ let FormGroup = React.createClass({
      */
     try {
       options = _.omit( _.merge(options, has_type), ['type'] );
-      var mprops = Object.assign({}, fields, {className: "form-control", ...options});
-      var tag = React.createElement( input_type.tag, mprops );
+      
+      var mprops = Object.assign({}, fields, {ref: 'input', className: "form-control", ...options});
+      let tag = React.createElement( input_type.tag, mprops );
     
       return (<div className={classNames("form-group", input_type.type)} style={order} >
                   <label for={fields.label}>{fields.label}</label>
@@ -56,6 +67,7 @@ let FormGroup = React.createClass({
     }
   }
 });
+FormGroup.displayName = 'Deriva.ui.FormGroup';
 
 
 
@@ -82,8 +94,14 @@ let ModelFormComponent = React.createClass({
            }
   },
   
+  /*
+   * Return a dictionary in the format
+   *      {prop1: prop1Value, prop2: prop2Value}
+   */
   value(){
-    return {};
+    return _.fromPairs(
+          _.map( this.refs , (f) => { return [f.id(), f.value()]; }  )
+    )
   },
 
   // get input order value
@@ -100,10 +118,10 @@ let ModelFormComponent = React.createClass({
   render() {
     let { model, data, exclude, className} = this.props;
     let rows = _.map( data, (value,label) => { return {label,value} } );
-    console.log(data);
     return (<form className={classNames("model-form", this.props.className)} >          
               { _.map( rows , (fields) => {
-                  return (<FormGroup type={this.getInputType(fields)} 
+                  return (<FormGroup ref={fields.label}
+                                     type={this.getInputType(fields)}                                      
                                      fields={fields} 
                                      order={this.getInputOrder(fields)}
                                       />)

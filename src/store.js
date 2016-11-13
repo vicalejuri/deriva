@@ -1,7 +1,6 @@
 import { createStore , applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import promise from 'redux-promise';
-
 import createLogger from 'redux-logger'
 import persistState from 'redux-localstorage'
 
@@ -17,7 +16,8 @@ let logger = createLogger();
 let store = createStore(deriva, compose(
   applyMiddleware(
     thunk,
-    promise
+    promise,
+    logger
   ),
   persistState(),
   ( window.devToolsExtension ? window.devToolsExtension() : f => f )
