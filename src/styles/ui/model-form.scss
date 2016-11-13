@@ -1,0 +1,12 @@
+.model-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.color-input {
+  display: flex;
+  flex-direction: row;
+  .color-picker {
+    width: 32px; height: 32px;
+  }
+}

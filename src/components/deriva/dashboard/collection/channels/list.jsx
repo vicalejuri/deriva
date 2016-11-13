@@ -5,6 +5,8 @@ import _ from 'lodash'
 import {  Link , browserHistory} from 'react-router';
 import classNames from 'classnames';
 
+import Select from 'components/ui/_select.jsx';
+
 import actions from 'actions'
 require('styles/deriva/dashboard/list.scss');
 

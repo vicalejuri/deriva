@@ -6,9 +6,11 @@ window.config = window.defaultConfig = config;
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import _ from 'lodash';
 
 window.React = React;
 window.ReactDOM = ReactDOM;
+window._ = _;
 
 import { Router, match, Route, Link, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';

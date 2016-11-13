@@ -10,7 +10,7 @@ import utils from 'utils/index.js';
 import models from 'models';
 
 import ItemBox from 'components/ui/item-box.jsx';
-import Select from 'components/ui/_select.jsx';
+import ModelForm from 'components/ui/model-form.jsx';
 
 require('styles/deriva/dashboard/collection/channels/edit.scss');
 let EditComponent = React.createClass({
@@ -70,6 +70,8 @@ let EditComponent = React.createClass({
                title={(is_edit ? `Edit #${channel.id}` : "Create new Channel")}
                return_to="/dashboard/collection/channels/" >
           <section className="item-content">
+          
+          {/*
             <form className="channel-edit-form">
               <div className="form-group">
                 <label for="title">Title</label>
@@ -97,11 +99,16 @@ let EditComponent = React.createClass({
                 <label for="author">order</label>
                 <input type="range" min="0" max="100" step="1" defaultValue="0" className="form-control" ref="order" value={channel.order} />
               </div>
-
+            </form>
+              
+          */}
+            
+            <ModelForm model={models.Channel} data={channel} >
               <div className="terms">
                 { this.state.message ? (<p>{this.state.message}</p>) : false }
-              </div>
-            </form>
+              </div>              
+            </ModelForm>
+             
         </section>
         <section className="item-actions">
           <button className="btn btn-primary btn-large" onClick={this.createChannel}>Submit ✨</button>
