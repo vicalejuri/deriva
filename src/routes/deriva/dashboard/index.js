@@ -1,24 +1,18 @@
 
 let dashboardRoute = {
   path: 'dashboard',
-  component: require('components/deriva/dashboard/dashboard'),
 
-  /*
-  getComponent( nextState, cb) {
+  getComponent( location, next){
     require.ensure([], (require) => {
-      let dashboard = require('components/deriva/dashboard/dashboard.jsx');
-      cb(null, dashboard  )
-    },'dashboard')
+      next(null, [
+        require('components/deriva/dashboard/dashboard')
+      ]);
+    },'components:dashboard:index');
   },
-  */
 
-  getChildRoutes( location, cb ) {
-    require.ensure([], (require) => {
-      cb(null, [
-        require('./collection/index.js')
-      ])
-    },'dashboard')
-  }
+  childRoutes: [
+    require('./collection/index.js'),
+  ]
 }
 
 export default dashboardRoute;

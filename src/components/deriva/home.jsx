@@ -20,7 +20,7 @@ let Home = React.createClass({
 
   componentWillMount( ) {
     this.props.dispatch( actions.ui.set_ui_property('header.floated', true ) );
-    this.props.dispatch( actions.channels.list_all() );
+    this.props.dispatch( actions.channels.find_all() );
   },
 
 

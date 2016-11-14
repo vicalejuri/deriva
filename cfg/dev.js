@@ -11,13 +11,16 @@ let BowerWebpackPlugin = require('bower-webpack-plugin');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 let config = Object.assign({}, baseConfig, {
   entry: {
-    'lib1': ['react','react-dom','redux','react-redux','lodash'],
-    'lib2': [ 'tweetnacl','pouchdb','pouchdb-authentication',
-              'pouchdb-upsert', 'pouchdb-find','relational-pouch' ],
+    'vendor': [
+      'lodash','react','react-dom','redux','react-router',
+      'redux','react-redux','redux-localstorage','redux-logger',
+    ],
     'app': ['webpack-dev-server/client?http://127.0.0.1:' + defaultSettings.port,
            'webpack/hot/only-dev-server',
            './src/index'],
@@ -35,8 +38,12 @@ let config = Object.assign({}, baseConfig, {
     new HtmlWebpackHarddiskPlugin(),
 
     new ExtractTextPlugin('main.css', { allChunks: true}),
-    new webpack.optimize.CommonsChunkPlugin("lib1","vendor.bundle.js"),
     new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+       name: "vendor",
+       chunks: ["vendor","app","db"],
+       minChunks: 3
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),

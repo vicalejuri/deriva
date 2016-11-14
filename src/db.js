@@ -3,6 +3,8 @@ import store from './store';
 import actions from './actions';
 import models from './models';
 
+import tweetnacl from 'tweetnacl'
+
 // Start Pouchdb API
 import PouchDB from 'pouchdb'
 import PouchDBAuth from 'pouchdb-authentication'
@@ -26,7 +28,6 @@ if(config.POUCHDB_OFFLINE_ENABLED){
 
   /*
    * Enable sync with remote
-   */
   const syncEvents = ['change', 'paused', 'active', 'denied', 'complete', 'error'];
   const clientEvents = ['connect', 'disconnect', 'reconnect'];
 
@@ -46,7 +47,7 @@ if(config.POUCHDB_OFFLINE_ENABLED){
     console.trace(err);
     console.groupEnd('db');
   });
-  
+
   var changes = local_db.changes({
     since: 'now',
     live: true,
@@ -60,7 +61,7 @@ if(config.POUCHDB_OFFLINE_ENABLED){
   }).on('error', function (err) {
     console.log(err);
   });
-  
+  */
 } else {
   local_db = remote_db;
 }
@@ -90,4 +91,4 @@ window.start = function(){
   });
 
 };
-window.start();
+//window.start();

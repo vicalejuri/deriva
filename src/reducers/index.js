@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import remotedb from './remotedb';
 import uiReducer from './ui';
 
 import user from './deriva/user.js';
@@ -31,7 +30,6 @@ const deriva = combineReducers({
     docs: {}
   }),
 
-  db: remotedb({})
 });
 
 export default deriva;

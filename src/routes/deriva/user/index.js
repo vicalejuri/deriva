@@ -1,14 +1,10 @@
 
 let usersRoute = {
   path: 'users',
-  getChildRoutes( location, cb ) {
-    require.ensure([], (require) => {
-      cb(null, [
-        require('./signup'),
-        require('./login')
-      ])
-    },'users')
-  }
+  childRoutes: [
+    require('./signup'),
+    require('./login')
+  ]
 }
 
 export default usersRoute;

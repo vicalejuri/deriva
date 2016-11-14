@@ -24,8 +24,8 @@ export default {
       childRoutes: [
         require('./deriva/docs/index.js'),
         require('./deriva/user/index.js'),
-        require('./deriva/dashboard/index.js')
+        require('./deriva/dashboard/index.js'),
       ],
 
       indexRoute: require('./deriva/home.js')
-}
+};

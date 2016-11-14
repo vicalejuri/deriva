@@ -2,14 +2,10 @@
 let docsRoute = {
   path: 'docs',
 
-  getChildRoutes( location, cb ) {
-    require.ensure([], (require) => {
-      cb(null, [
-        require('./gallery.js'),
-        require('./watch.js')
-      ])
-    }, 'docs');
-  }
+  childRoutes: [
+    require('./gallery.js'),
+    require('./watch.js')
+  ]
 
 }
 

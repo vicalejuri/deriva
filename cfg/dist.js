@@ -12,15 +12,17 @@ let BowerWebpackPlugin = require('bower-webpack-plugin');
 var AssetsPlugin = require('assets-webpack-plugin');
 
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 let HtmlWebpackPlugin = require('html-webpack-plugin');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 let config = Object.assign({}, baseConfig, {
   entry: {
+    'vendor': [
+      'lodash','react','react-dom','redux','react-router',
+      'redux','react-redux','redux-localstorage','redux-logger',
+    ],
     'app':    path.join(__dirname, '../src/index' ),
-    'lib1': ['lodash','react','react-dom','redux','react-redux'],
-    'lib2': ['tweetnacl','pouchdb','pouchdb-authentication',
-             'pouchdb-upsert', 'pouchdb-find','relational-pouch']
+    'db':     ['./src/db','tweetnacl']
   },
   cache: true,
   devtool: 'sourcemap',
@@ -31,8 +33,12 @@ let config = Object.assign({}, baseConfig, {
       template: path.join(__dirname , '../src/index.ejs')
     }),
     new ExtractTextPlugin('main.css',{ allChunks: true}),
-    new webpack.optimize.CommonsChunkPlugin("lib1","lib1.bundle.js"),
     new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+       name: "vendor",
+       chunks: ["vendor","app","db"],
+       minChunks: 3
+     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     }),
@@ -49,12 +55,14 @@ let config = Object.assign({}, baseConfig, {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.NoErrorsPlugin(),
+
+    new BundleAnalyzerPlugin()
   ],
   module: defaultSettings.getDefaultModules(),
   output: {
     path: baseConfig.output.path + 'assets/v'+packjson.version+ '/',
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].js',
+    filename: '[name].js',
+    chunkFilename: '[name].js',
     update: true,
     publicPath: '/assets/v'+ packjson.version + '/'
   },

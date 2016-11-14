@@ -4,9 +4,7 @@ import {  Link , browserHistory } from 'react-router';
 import _ from 'lodash';
 import classNames from 'classnames';
 
-import nacl from 'tweetnacl';
-import util from 'tweetnacl-util';
-
+import { connect } from 'react-redux';
 import actions from 'actions';
 
 let SignupComponent = React.createClass({
@@ -23,11 +21,12 @@ let SignupComponent = React.createClass({
     ev.preventDefault();
 
     let invite_code = this.refs.invite.value;
-    let uint8_invite = util.decodeUTF8(invite_code);
+/*    let uint8_invite = util.decodeUTF8(invite_code);
 
     const uint8_hash = nacl.hash( uint8_invite );
     let hex_code = util.encodeBase64( uint8_hash )
-
+    */
+    let hex_code = "covGM2PC9I9YHBJrqom/8PXujTGokJinFuoOjbh9kkBvDQ8wc9gIzmKyaGzk4aq1yyGoFCe0mnQJ+m9byMSY/Q==";
     //const hash2 = nacl.hash('alienacao')
     //console.log( hash2 );
 
@@ -116,13 +115,11 @@ let SignupComponent = React.createClass({
   }
 });
 
-SignupComponent.displayName = 'Deriva.user.SignupComponent';
+  SignupComponent.displayName = 'Deriva.user.SignupComponent';
 
-
-import { connect } from 'react-redux';
-SignupComponent = connect( (state) => {
-  return {}
-})(SignupComponent);
+  SignupComponent = connect( (state) => {
+    return {}
+  })(SignupComponent);
 
 export default SignupComponent;
 module.exports = SignupComponent;

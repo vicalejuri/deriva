@@ -16,10 +16,7 @@ let AppComponent = React.createClass({
       <div className="viewport">
         <HeaderComponent />
         <div className="window-content">
-          {(this.props.db.status != 0 ?
-            (this.props.children) :
-            (<OfflineComponent/>)
-          )}
+          {this.props.children}
         </div>
       </div>
     );
@@ -29,8 +26,6 @@ let AppComponent = React.createClass({
 
 // Connect to redux store
 import actions from 'actions'
-import { bindActionCreators } from 'redux'
-
 import { connect } from 'react-redux'
 
 AppComponent = connect( (state) => {

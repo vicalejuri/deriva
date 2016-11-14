@@ -1,4 +1,3 @@
-import PouchDB from 'pouchdb';
 import qs from 'querystring';
 import config from 'config';
 

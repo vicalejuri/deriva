@@ -4,9 +4,6 @@ import {  Link } from 'react-router';
 import _ from 'lodash';
 import classNames from 'classnames';
 
-import nacl from 'tweetnacl';
-import util from 'tweetnacl-util';
-
 import LoginComponent from './inline/login.jsx';
 import actions from 'actions';
 
