@@ -46,6 +46,21 @@ if(config.POUCHDB_OFFLINE_ENABLED){
     console.trace(err);
     console.groupEnd('db');
   });
+  
+  var changes = local_db.changes({
+    since: 'now',
+    live: true,
+    include_docs: true
+  }).on('change', function(change) {
+    // handle change
+    console.log('change', change)
+  }).on('complete', function(info) {
+    // changes() was canceled
+    console.log('complete', info)
+  }).on('error', function (err) {
+    console.log(err);
+  });
+  
 } else {
   local_db = remote_db;
 }

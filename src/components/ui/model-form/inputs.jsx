@@ -36,9 +36,11 @@ let SelectInput = React.createClass({
   statics: {match(l,v) { return false; }},
   getInitialState(){ return {value: this.props.value}; },
   onChange(v2){ this.setState({value: v2})},
-  value(){ return this.state.value; },
+  componentWillReceiveProps(nextProps){ this.setState({value: nextProps.value}); },  
+  value(){ return this.state.value.map( (c) => c.value); },
   render(){
     let { label , value, className, ...options} = this.props;
+    console.log('Select re-render', this.props.value, this.state.value);
     return <Select id={label} className={className} value={this.state.value} onChange={this.onChange} multi={true} joinValues={true} {...options}/>;
   }
 });
@@ -47,6 +49,7 @@ let TagsInput = React.createClass({
   getInitialState(){ return {value: this.props.value}; },
   onChange(v2){ this.setState({value: v2}); },
   value(){ return this.state.value; },  
+  componentWillReceiveProps(nextProps){ this.setState({value: nextProps.value}); },
   render(){
     let { label, value , className, ...options} = this.props;
     return <ReactTagsInput id={label} className={classNames("tags",className)} value={this.state.value} onChange={this.onChange} {...options}/>

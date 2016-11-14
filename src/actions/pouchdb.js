@@ -109,9 +109,10 @@ export const remove = (db, action, doc_type, doc_params) => {
     
     dispatch({type: action, data: doc_params});
     return new Promise( (resolve,reject) => {
-      db.rel.del( doc_type, doc_params ).then( (doc) => {
-          dispatch( {type: `${action}_SUCCESS`, data: doc});
-          resolve(doc);
+      db.rel.del( doc_type, doc_params ).then( (remove_data) => {
+          let doc_data = _.merge( doc_params, remove_data );
+          dispatch( {type: `${action}_SUCCESS`, data: doc_data });
+          resolve(doc_data);
       }).catch( (err) => {
           dispatch( {type: `${action}_ERRROR`, data: err});
           reject(err);
