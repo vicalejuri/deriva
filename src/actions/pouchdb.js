@@ -20,9 +20,16 @@ export const POUCHDB_PUSH          = 'POUCHDB_PUSH';
 export const POUCHDB_PUSH_SUCCESS  = 'POUCHDB_PUSH_SUCCESS'
 export const POUCHDB_PUSH_ERROR    = 'POUCHDB_PUSH_ERROR'
 
-export const REMOVE_ERROR = 'POUCHDB_REMOVE_ERROR';
+export const QUERY_REMOVE = 'POUCHDB_REMOVE';
+export const QUERY_REMOVE_ERROR = 'POUCHDB_REMOVE_ERROR';
+
+export const INSERT = 'POUCHDB_INSERT';
 export const INSERT_ERROR = 'POUCHDB_INSERT_ERROR';
+
+export const FIND = 'POUCHDB_FIND';
 export const FIND_ERROR    = 'POUCHDB_FIND_ERROR';
+
+export const QUERY = 'POUCHDB_QUERY';
 export const QUERY_ERROR  = 'POUCHDB_QUERY_ERROR';
 
 export const SET_SYNC_STATE = 'SET_SYNC_STATE';
@@ -31,7 +38,7 @@ export const SET_SYNC_STATE = 'SET_SYNC_STATE';
 /*
  * A redux action for getting all documents of type doc_type
  * from PouchDB 'db'.
- * 
+ *
  * dispatch redux 'ACTION' multiple times,
  *    'ACTION' on request
  *    'ACTION_SUCCESS' on sucess
@@ -65,7 +72,7 @@ export function find( db, action, doc_type, doc_id_params ) {
         .then( (results) => {
           let r = results[doc_type];
           if(r.length == 1) r = r[0];
-        
+
           dispatch( {type: `${action}_SUCCESS`, data: r});
           resolve(r);
       }).catch( (err) => {
@@ -85,9 +92,9 @@ export const insert = ( db, action, doc_type, doc_params ) => {
     dispatch({type: action, data: doc_params});
     return new Promise( (resolve,reject) => {
       db.rel.save( doc_type, doc_params ).then( (response) => {
-        let r = response[doc_type];        
+        let r = response[doc_type];
         if(r.length == 1) r = r[0];
-        
+
         dispatch( {type: `${action}_SUCCESS`, data: r});
         resolve( r )
       }).catch( (err) => {
@@ -104,9 +111,9 @@ export const insert = ( db, action, doc_type, doc_params ) => {
 export const remove = (db, action, doc_type, doc_params) => {
   return (dispatch) => {
 
-    let doc_id = ( _.isString(doc_params) ? doc_params 
+    let doc_id = ( _.isString(doc_params) ? doc_params
                     : db.rel.makeDocID( doc_params) );
-    
+
     dispatch({type: action, data: doc_params});
     return new Promise( (resolve,reject) => {
       db.rel.del( doc_type, doc_params ).then( (remove_data) => {

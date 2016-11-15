@@ -6,7 +6,7 @@ import _ from 'lodash'
 export class Channel {
   constructor(params=new Map()){
     this.id = _.kebabCase(params.id || params.title || '');
-    this.type = 'deriva/channel';
+    this.type = 'channel';
     if(params.rev){
       this.rev = params.rev;
     }
@@ -31,10 +31,10 @@ Channel._schema = (db) => {
   }
 
    return {
-    singular: 'deriva/channel',
-    plural:   'deriva/channels',
+    singular: 'channel',
+    plural:   'channels',
     relations: {
-      'docs': {hasMany: 'deriva/doc'}
+      'docs': {hasMany: 'doc'}
     }
   }
 }

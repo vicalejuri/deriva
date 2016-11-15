@@ -2,9 +2,9 @@
 let collectionRoute = {
   path: 'collection',
   childRoutes: [
-        require('./docs/index.js'),
-        require('./channels/index.js'),
-        require('./users/index.js')
+        require('./docs'),
+        require('./channels'),
+        require('./users')
   ]
 }
 

@@ -75,20 +75,24 @@ let DashboardComponent = React.createClass({
                     Collections
                   </Link>
                   </h5>
+                  {(this.props.user.authenticated &&
+                    this.props.user.roles.indexOf('_admin') !== -1
+                  ? (<span className="nav-group-item" href="#">
+                      <Link to="/dashboard/collection/users">
+                        <span className="icon icon-database"></span>
+                        Users
+                      </Link>
+                    </span> )
+                    : false
+                   )}
                   <span className="nav-group-item" href="#">
-                    <Link to="/dashboard/collection/users">
-                      <span className="icon icon-database"></span>
-                      Users
-                    </Link>
-                  </span>
-                  <span className="nav-group-item" href="#">
-                    <Link to="/dashboard/collection/docs">
+                    <Link to="/dashboard/collection/doc">
                       <span className="icon icon-database" ></span>
                       Docs
                     </Link>
                   </span>
                   <span className="nav-group-item" href="#">
-                    <Link to="/dashboard/collection/channels">
+                    <Link to="/dashboard/collection/channel">
                     <span className="icon icon-database" ></span>
                       Channels
                     </Link>
@@ -132,7 +136,7 @@ DashboardComponent.displayName = 'Deriva.dashboard.DashboardComponent';
 import { connect } from 'react-redux'
 
 DashboardComponent = connect( (state) => {
-  return {}
+  return {user: state.data.user}
 })(DashboardComponent);
 
 export default DashboardComponent;

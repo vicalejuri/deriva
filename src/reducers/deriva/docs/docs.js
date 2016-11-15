@@ -1,17 +1,13 @@
-import actions from 'actions/';
+import * as actions from 'actions/docs';
 
 import _ from 'lodash';
 
 export const docs = (state = [], action) => {
   switch(action.type){
-    case actions.LIST_DOC:
-      return state;
     case actions.LIST_DOC_SUCCESS:
       return action.data || [];
     case actions.INSERT_DOC_SUCCESS:
-      //return _.union( state, [action.data] );
       return _.unionBy( [action.data],  state, 'id' );
-      
     case actions.DELETE_DOC_SUCCESS:
       return _.without( state , action.data );
     default:

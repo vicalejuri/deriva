@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 import actions from 'actions';
 
-require('styles/deriva/dashboard/list.scss');
+require('styles/deriva/dashboard/collection/list.scss');
 
 /*
  * Single rows
