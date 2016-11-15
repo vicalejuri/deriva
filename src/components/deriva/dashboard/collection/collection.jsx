@@ -18,7 +18,7 @@ require('styles/deriva/dashboard/collection/list.scss');
  *    doc_type: document type string eg: 'deriva/doc',
  *    model:    a reference to the model class
  *
- *    actions_hook: Actions Creators to be called on INSERT, FIND, REMOVE calls
+ *    actions: Actions Creators to be called on INSERT, FIND, REMOVE calls
  *
  *        eg: {INSERT: tal, REMOVE: tal, FIND: tal}
  *
@@ -29,8 +29,8 @@ require('styles/deriva/dashboard/collection/list.scss');
 let CollectionComponent = React.createClass({
   getDefaultProps(){
     return {doc_type: 'deriva/doc', model: function(){ return {id: 0, type: 'notype',title: 'no model'}},
-            filter: {'id': true}, exclude: [],
-            actions_hook: {INSERT: _.wrap( actions.pouch.insert , (action, args) => {
+            filter: {'id': true}, exclude: [], tools: [],
+            actions: {INSERT: _.wrap( actions.pouch.insert , (action, args) => {
                                         action(window.db, actions.pouch.INSERT,  'deriva/doc',...args);
                            }),
                            REMOVE: _.wrap( actions.pouch.remove , (action, args) => {
@@ -49,12 +49,12 @@ let CollectionComponent = React.createClass({
       return (dom_el.state.checked == true);
     }));
     checked_rows.forEach( (doc,i) => {
-      this.props.dispatch( this.props.actions_hook.REMOVE( doc ) );
+      this.props.dispatch( this.props.actions.REMOVE( doc ) );
     });
   },
 
   find_all(){
-    this.props.dispatch( this.props.actions_hook.FIND() ).then( (docs) => {
+    this.props.dispatch( this.props.actions.FIND() ).then( (docs) => {
       this.setState({document_list: docs});
     }).catch( (err)=> {
       console.error("Could not FIND documents of type ", this.props.doc_type);
@@ -83,6 +83,8 @@ let CollectionComponent = React.createClass({
     }
     fields = _.reject( fields, (f) => { return exclude.indexOf(f[0]) !== -1 } );
 
+    console.log( this.props.tools );
+
     return (<div className={classNames("dashboard-page list",this.props.doc_type)}>
 
               <h1>COLLECTION : {this.props.doc_type}</h1>
@@ -99,7 +101,12 @@ let CollectionComponent = React.createClass({
                   </Link>
                 </div>
 
+                <section className="tools">
+                  {this.props.tools}
+                </section>
+
               </section>
+
               <table className="list-component table-striped" ref="table">
               <thead><tr>
                   <th><input type="checkbox" onClick={this.checkAll}/> </th>

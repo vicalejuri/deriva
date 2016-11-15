@@ -21,7 +21,7 @@ let EditComponent = React.createClass({
   getDefaultProps(){
     return {doc_type: 'deriva/doc', model: function(){ return {id: 0, type: 'notype',title: 'no model'}},
             filter: {'id': true}, exclude: [],
-            actions_hook: {INSERT: _.wrap( actions.pouch.insert , (action, args) => {
+            actions: {INSERT: _.wrap( actions.pouch.insert , (action, args) => {
                                         action(window.db, actions.pouch.INSERT,  'deriva/doc',...args);
                            }),
                            REMOVE: _.wrap( actions.pouch.remove , (action, args) => {
@@ -56,7 +56,7 @@ let EditComponent = React.createClass({
     console.log("Saving", form_data);
     let new_doc = new this.props.model( form_data );
 
-    this.props.dispatch( this.props.actions_hook.INSERT( new_doc ) ).then( (new_doc) => {
+    this.props.dispatch( this.props.actions.INSERT( new_doc ) ).then( (new_doc) => {
       this.setState({doc: new this.props.model( new_doc ),
                      doc_id: new_doc.id,
                      submit: {status: 1, message: `Saved '${new_doc.id} !`}});
@@ -73,7 +73,7 @@ let EditComponent = React.createClass({
     let clean_message = {submit: {status: 0, message: ''}};
 
     if( doc_id ){
-      this.props.dispatch( this.props.actions_hook.FIND( doc_id) ).then( (doc) => {
+      this.props.dispatch( this.props.actions.FIND( doc_id) ).then( (doc) => {
         this.setState({doc_id, doc, ...clean_message});
       });
     } else {

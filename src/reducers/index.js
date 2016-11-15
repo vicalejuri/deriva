@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import uiReducer from './ui';
+import uiReducer , { historyReducer} from './ui';
 
 import user from './deriva/user.js';
-import { docs , watch, insert } from './deriva/docs/docs.js';
-import { channels } from './deriva/channel/channel.js';
+import { docs , watch, insert } from './deriva/docs.js';
+import { channels } from './deriva/channel.js';
 
 const deriva = combineReducers({
   /*
@@ -30,6 +30,7 @@ const deriva = combineReducers({
     docs: {}
   }),
 
+  history: historyReducer()
 });
 
 export default deriva;

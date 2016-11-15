@@ -11,9 +11,13 @@ let DocCollection = connect( (state) => {
           model:      models.Doc ,
 
           // Action Creators for the given doc_type/model
-          actions_hook: { 'INSERT': actions.docs.insert,
-                         'REMOVE': actions.docs.remove,
-                         'FIND':   actions.docs.find_all },
+          actions: {  'INSERT': actions.docs.insert,
+                      'REMOVE': actions.docs.remove,
+                      'FIND':   actions.docs.find_all },
+
+          tools: [<div className="btn btn-warning" onClick={() => {
+                    window.store.dispatch( actions.ui.navigate('/dashboard/collection/doc/import'));
+                  }}>Import</div>,],
 
           filter: {
             'id': true,
@@ -30,9 +34,9 @@ let DocEdit = connect( (state) => {
           model:    models.Doc,
 
           // Action Creators for the given doc_type/model
-          actions_hook: { 'INSERT': actions.docs.insert,
-                         'REMOVE': actions.docs.remove,
-                         'FIND':   actions.docs.find },
+          actions: { 'INSERT': actions.docs.insert,
+                     'REMOVE': actions.docs.remove,
+                     'FIND':   actions.docs.find },
 
          }
 })(EditComponent);
@@ -47,7 +51,11 @@ let docsRoute = {
       component: { main: DocCollection,
                    rightbar: DocEdit }
     },
-    require('./import.js')
+    {
+      path: 'import',
+      component: { main:      DocCollection,
+                   rightbar:  require('components/deriva/dashboard/collection/docs/_import.jsx') }
+    }
   ],
 
   indexRoute: [{

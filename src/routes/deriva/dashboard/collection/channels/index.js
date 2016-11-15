@@ -11,7 +11,7 @@ let ChannelCollection = connect( (state) => {
           model:      models.Channel ,
 
           // Action Creators for the given doc_type/model
-          actions_hook: { 'INSERT': actions.channels.insert,
+          actions: { 'INSERT': actions.channels.insert,
                          'REMOVE': actions.channels.remove,
                          'FIND':   actions.channels.find_all },
 
@@ -30,7 +30,7 @@ let ChannelEdit = connect( (state) => {
           model:    models.Channel,
 
           // Action Creators for the given doc_type/model
-          actions_hook: { 'INSERT': actions.channels.insert,
+          actions: { 'INSERT': actions.channels.insert,
                          'REMOVE': actions.channels.remove,
                          'FIND':   actions.channels.find },
 

@@ -7,7 +7,6 @@ import _ from 'lodash';
 /* App */
 import LoggedInMenu from 'components/deriva/user/inline/loggedin_menu.jsx';
 
-import {ChannelSelect} from 'components/deriva/channels/channel-select.jsx';
 import Emoji from 'components/ui/emoji.jsx';
 
 import actions from 'actions'
@@ -73,7 +72,6 @@ let HeaderComponent = React.createClass({
           </div>
 
           <div className="featured">
-            {/* <ChannelSelect ref='channel_select' /> */}
           </div>
 
           <div className="nav toolbar-actions">

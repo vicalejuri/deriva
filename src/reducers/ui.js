@@ -7,7 +7,7 @@ import _ from 'lodash';
  *
  * dispatch( set_ui_property('header.visible',false) )
  */
-const uiReducer = ( initialState ) => {
+export const uiReducer = ( initialState ) => {
   return (state = initialState, action) => {
     switch(action.type){
       case actions.ui.SET_UI:
@@ -18,6 +18,17 @@ const uiReducer = ( initialState ) => {
         return state;
     }
   }
-}
+};
+
+export const historyReducer = ( ) => {
+  return (state = '', action) => {
+    switch( action.type ){
+      case actions.ui.NAVIGATE_TO:
+        return action.data;
+      default:
+        return state;
+    }
+  }
+};
 
 export default  uiReducer;
