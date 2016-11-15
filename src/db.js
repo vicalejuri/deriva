@@ -28,11 +28,14 @@ if(config.POUCHDB_OFFLINE_ENABLED){
 
   /*
    * Enable sync with remote
+   */
   const syncEvents = ['change', 'paused', 'active', 'denied', 'complete', 'error'];
   const clientEvents = ['connect', 'disconnect', 'reconnect'];
 
   console.group('db','Replicate REMOTE_DB to LOCAL_DB');
-  remote_db.replicate.to(local_db, {live: true,})
+  remote_db.replicate.to(local_db, {live: true,});
+
+  /*
   .on('change', (change) => {
     console.log(" • PouchDB change", change);
   }).on('paused', (info) => {
@@ -47,6 +50,7 @@ if(config.POUCHDB_OFFLINE_ENABLED){
     console.trace(err);
     console.groupEnd('db');
   });
+  */
 
   var changes = local_db.changes({
     since: 'now',
@@ -61,7 +65,6 @@ if(config.POUCHDB_OFFLINE_ENABLED){
   }).on('error', function (err) {
     console.log(err);
   });
-  */
 } else {
   local_db = remote_db;
 }

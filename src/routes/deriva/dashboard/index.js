@@ -1,14 +1,7 @@
 
 let dashboardRoute = {
   path: 'dashboard',
-
-  getComponent( location, next){
-    require.ensure([], (require) => {
-      next(null, [
-        require('components/deriva/dashboard/dashboard')
-      ]);
-    },'components:dashboard:index');
-  },
+  component: require('components/deriva/dashboard/dashboard.jsx'),
 
   childRoutes: [
     require('./collection/index.js'),

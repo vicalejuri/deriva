@@ -1,14 +1,6 @@
 let channelsRoute = {
   path: 'channels',
-  // component: profileDoc
-
-  getComponent(nextState, cb) {
-    require.ensure([], (require) => {
-      let listDocsComponent = require('components/deriva/dashboard/collection/channels/list.jsx');
-      cb(null, { main: listDocsComponent })
-    },'components:deriva:dashboard:collection:channels:channels')
-  }
-
+  component: {main: require('components/deriva/dashboard/collection/channels/list.jsx') }
 }
 
 module.exports = channelsRoute;

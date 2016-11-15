@@ -1,3 +1,4 @@
+import _ from 'lodash';
 
 /*
  * LOGIN_REQUEST
@@ -18,14 +19,20 @@ export function loginError( data) {
 export const login = (credentials) => {
   return (dispatch) => {
     dispatch(loginRequest(credentials))
-    return window.remote_db.login( credentials.username, credentials.password )
-      .catch( (err) => { dispatch( loginError(err)) })
+    return new Promise( (resolve, reject) => {
+      window.remote_db.login( credentials.username, credentials.password )
       .then( (user) => {
-      /* If admin, login to _users db also */
-      if(user.roles.indexOf('_admin') !== -1){
-        dispatch( adminUsersLogin(credentials) );
-      }
-      dispatch( loginSuccess(user) );
+        /* If admin, login to _users db also */
+        if(_.has(user,'roles') && user.roles.indexOf('_admin') !== -1){
+          dispatch( adminUsersLogin(credentials) );
+        }
+        dispatch( loginSuccess(user) );
+        resolve( user );
+      })
+      .catch( (err) => {
+        dispatch( loginError(err));
+        reject(err)
+      });
     });
   }
 }
@@ -136,7 +143,6 @@ export const adminUsersLogin = (credentials) => {
 /*
  * Return a list of all users
  */
-import _ from 'lodash';
 export const ADMIN_LIST_USERS = 'ADMIN_LIST_USERS';
 export const admin_list_users = () => {
   return (dispatch) => {

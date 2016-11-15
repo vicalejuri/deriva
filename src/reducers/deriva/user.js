@@ -15,7 +15,7 @@ const user = (state = AnonymousState, action) => {
   } else if(action.type == actions.user.LOGIN_ERROR){
       return Object.assign({},state,{
         authenticated: false,
-        message: action.data.message,
+        message: action.data.message || 'CouchDB is offline',
         error: true,
         data: action.data
       });

@@ -1,12 +1,6 @@
 let listDocsRoute = {
   path: 'docs',
-
-  getComponent(nextState, cb) {
-    require.ensure([], (require) => {
-      let listDocsComponent = require('components/deriva/dashboard/collection/docs/list.jsx');
-      cb(null, { main: listDocsComponent })
-    },'components:deriva:dashboard:collection:docs:docs')
-  }
+  component: require('components/deriva/dashboard/collection/docs/list.jsx'),
 }
 
 module.exports = listDocsRoute;

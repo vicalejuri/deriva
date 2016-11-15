@@ -1,6 +1,6 @@
 let channelsRoute = {
   path: 'channels',
-  // component: profileDoc
+
   childRoutes: [
     require('./edit.js')
   ],

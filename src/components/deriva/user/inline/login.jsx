@@ -28,9 +28,10 @@ let LoginComponent = React.createClass({
 
     ev.preventDefault();
     this.props.dispatch( actions.user.login(credentials) )
-        .then( (user) => {
-          browserHistory.push('/dashboard');
-        });
+              .then( (user) => {
+                  browserHistory.push('/dashboard');
+              });
+
   },
 
   componentDidUpdate() {

@@ -1,16 +1,8 @@
 
 let profileRoute = {
   path: 'profile/:userName',
-
-  getComponent(nextState, cb) {
-    require.ensure([], (require) => {
-      let listComponent = require('components/deriva/dashboard/collection/users/list.jsx');
-      let profileComponent = require('components/deriva/dashboard/collection/users/profile.jsx');
-      cb(null, { main: listComponent ,
-                 rightbar: profileComponent})
-    },'components:deriva:dashboard:collection:users:profile')
-  }
-
+  component: { main: require('components/deriva/dashboard/collection/users/list.jsx'),
+               rightbar: require('components/deriva/dashboard/collection/users/profile.jsx')}
 }
 
 module.exports = profileRoute;
