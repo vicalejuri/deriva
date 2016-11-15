@@ -9,9 +9,6 @@ import actions from 'actions';
 require('styles/deriva/dashboard/collection/list.scss');
 
 
-//         <td><Link to={`/dashboard/collection/channels/edit/${doc.id}`} >{doc.id}</Link></td>
-
-
 /*
  * Show a list , one per row of the given model.
  *
@@ -131,7 +128,7 @@ CollectionComponent.displayName = 'Deriva.dashboard.collection.collection';
 
 
 /*
- * Single row
+ * Single row with check status
  */
 let ChannelRow = React.createClass({
   propTypes: {
@@ -158,6 +155,8 @@ let ChannelRow = React.createClass({
       <tr className={classNames(this.state)} onClick={this.check}>
           <td><input type="checkbox" ref="checkbox" className="checkbox" onClick={this.check} checked={this.state.checked}/></td>
           {fields.map( ([label, attr]) =>
+            // render the field function
+            // or render doc[key]
             (<td>{ _.isFunction(attr) ? attr(doc) : doc[label] } </td>)
           )}
       </tr>);

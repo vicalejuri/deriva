@@ -78,7 +78,7 @@ let DashboardComponent = React.createClass({
                   {(this.props.user.authenticated &&
                     this.props.user.roles.indexOf('_admin') !== -1
                   ? (<span className="nav-group-item" href="#">
-                      <Link to="/dashboard/collection/users">
+                      <Link to="/dashboard/collection/user">
                         <span className="icon icon-database"></span>
                         Users
                       </Link>
